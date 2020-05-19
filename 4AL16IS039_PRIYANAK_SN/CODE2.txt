@@ -1,0 +1,359 @@
+1)INFIX TO POSTFIX CODE
+ #include <iostream>
+#include<string>
+#define sizes 100
+using namespace std;
+class stack
+{
+    string item[100];
+    int top;
+    public:
+        stack()
+        {
+            top=-1;
+        }
+        void push(string str)
+        {
+            if(top==sizes-1)
+            {
+                cout<<"stack overflow!!\n";
+                return;
+            }
+            top++;
+            item[top]=str;
+        }
+        string pop()
+        {
+            int i;
+            string temp;
+            if(top==-1)
+            {
+                cout<<"stack underflow!!\n";
+                return "abc";
+            }
+            temp = item[top];
+            top--;
+            return temp;
+        }
+};
+int main(int argc, char** argv) 
+{
+    int i,j=0;
+    stack st;
+    string postfix,infix;
+    cout<<"Enter postfix expression:\n";
+    cin>>postfix;
+    for(i=0;i<postfix.size();i++)
+    {
+        if(postfix[i]=='+' || postfix[i]=='-' || postfix[i]=='*' || postfix[i]=='/' || postfix[i]=='^')
+        {
+            string temp,op1,op2;
+            op2=st.pop();
+            op1=st.pop();
+            temp='('+op1+postfix[i]+op2+')';
+            st.push(temp);
+        }
+        else
+        {
+            string flag;
+            flag=flag+postfix[i];
+            st.push(flag);
+        }
+    }
+    cout<<"The equivalent infix expression is:\n"<<st.pop();
+    return 0;
+}
+ 
+
+2)Number Conversion from Decimal to Binary,Octal,Hexadecimal using Function and Switch Case
+
+#include<iostream.h>
+#include<conio.h>
+
+void toBinary(int num)
+{
+int n=num;
+int r,b[20],i=0;
+int d=n;
+do
+{
+r=d%2;
+b[i]=r;
+i++;
+d=d/2;
+}
+while(d!=0);
+cout<<“The binary of “<<n<<” is : “;
+do
+{
+cout<<b[i-1];
+i–;
+}
+while(i>0);
+cout<<endl;
+}
+void toOctal(int num)
+{
+int n;
+n=num;
+int i,r,o,b[20];
+o=n;
+i=0;
+do
+{
+r=o%8;
+b[i]=r;
+i++;
+o=o/8;
+}
+while(o!=0);
+cout<<“\nThe octal of “<<n<<” is : “;
+do
+{
+cout<<b[i-1];
+i–;
+}
+while(i>0);
+cout<<endl;
+}
+void toHexa(int num)
+{
+int n;
+n=num;
+int i,r,h;
+char hex[20];
+h=n;
+i=0;
+do
+{
+r=h%16;
+if(r==10) hex[i]=’A’;
+else if(r==11) hex[i]=’B’;
+else if(r==12) hex[i]=’C’;
+else if(r==13) hex[i]=’D’;
+else if(r==14) hex[i]=’E’;
+else if(r==15) hex[i]=’F’;
+else hex[i]=’0’+r;
+i++;
+h=h/16;
+}
+while(h!=0);
+cout<<“\nThe hexa of “<<n<<” is : “;
+do
+{
+cout<<hex[i-1];
+i–;
+}
+while(i>0);
+cout<<endl;
+}
+void main()
+{
+clrscr();
+int d,choice;
+char ch;
+do
+{
+cout<<“Enter Decimal number : “;
+cin>>d;
+cout<<“Enter your choice : \n”;
+cout<<“1. To Binary \n”;
+cout<<“2. To Octal \n”;
+cout<<“3. To Hexa \n”;
+cout<<“4. All \n”;
+cin>>choice;
+
+switch(choice)
+{
+case 1:binary toBinary(d);
+break;
+case 2:octal toOctal(d);
+break;
+case 3:hexa toHexa(d);
+break;
+case 4:binary toBinary(d);
+break;
+}
+
+3)Bubble Sort and Binary Search in a Single Class using C++
+
+#include <iostream.h>
+#include <conio.h>
+
+class bin_search
+{
+int num[50],s,search;
+public:
+void getdata(void);
+int searchfun(void);
+void display(void);
+void sort(int ar[], int size);
+};
+
+void bin_search :: getdata(void)
+{
+cout<<endl<<endl;
+cout<<“Enter how many Number of array you want to create:-“;
+cin>>s;
+cout<<“\nEnter “<<s<<” Integers in Ascending order\n”;
+for(int i=0;i<s;i++)
+cin>>num[i];
+
+sort(num,s);
+cout<<“The shorted array is : “;
+for(int j=0;j<s;j++)
+cout<<num[j]<<” “;
+
+cout<<“\nEnter your Search :- “;
+cin>>search;
+}
+
+void bin_search :: sort(int num[], int s)
+{
+int temp;
+for(int i = 0; i < s; i++)
+for(int j = 0; j < s – i – 1; j++)
+if(num[j] > num[j + 1])
+{
+temp = num[j];
+num[j] = num[j + 1];
+num[j + 1] = temp;
+}
+}
+
+int bin_search :: searchfun(void)
+{
+int bottom=0,top=s-1,mid;
+while(top >= bottom)
+{
+mid=(top+bottom)/2;
+if(num[mid]==search)
+return(mid+1);
+else
+{
+if(num[mid] < search)
+bottom=mid+1;
+else
+top=mid;
+}
+}
+return(-1);
+}
+
+void bin_search :: display(void)
+{
+int result;
+result=searchfun();
+if(result==-1)
+cout<<“\n\nEntered search is Invalid\n”;
+else
+cout<<“\n\nSearch is Located at “<<result<<” Postition\n”;
+}
+
+void main()
+{
+clrscr();
+bin_search o1;
+o1.getdata();
+o1.display();
+getch();
+}
+
+4)Prime Number (Using Dynamic Array)
+#include<iostream.h>
+#include<conio.h>
+void main()
+{
+clrscr();
+int n,i,count=0;
+cout<<“Enter number to check its prime or not : “;
+cin>>n;
+int *a=new int[n];        //Dynamic array to store the divisors of NON-Prime number
+for(i=1;i<=n;i++)
+{
+if(n%i==0)
+{
+a[i]=i;
+count++;
+}
+else
+a[i]=0;
+}
+if(count==2)
+cout<<n<<” is a Prime number”;
+else
+{
+cout<<n<<” is Not a prime number\n”;
+cout<<n<<” has “<< count<<” divisors.\n”;
+cout<<n<<” is Divisible by :\n”;
+for(i=1;i<=n;i++)
+{
+if(a[i]!=0)
+cout<<a[i]<<“\n”;
+else
+cout<<“”;
+}
+}
+getch();
+}
+
+5) Implement Queue using Array
+
+#include <iostream>
+using namespace std;
+int queue[100], n = 100, front = - 1, rear = - 1;
+void Insert() {
+   int val;
+   if (rear == n - 1)
+      cout<<"Queue Overflow"<<endl;
+   else {
+      if (front == - 1)
+      front = 0;
+      cout<<"Insert the element in queue : "<<endl;
+      cin>>val;
+      rear++;
+      queue[rear] = val;
+   }
+}
+void Delete() {
+   if (front == - 1 || front > rear) {
+      cout<<"Queue Underflow ";
+   return ;
+   } else {
+      cout<<"Element deleted from queue is : "<< queue[front] <<endl;
+      front++;;
+   }
+}
+void Display() {
+   if (front == - 1)
+   cout<<"Queue is empty"<<endl;
+   else {
+      cout<<"Queue elements are : ";
+      for (int i = front; i <= rear; i++)
+         cout<<queue[i]<<" ";
+      cout<<endl;
+   }
+}
+int main() {
+   int ch;
+   cout<<"1) Insert element to queue"<<endl;
+   cout<<"2) Delete element from queue"<<endl;
+   cout<<"3) Display all the elements of queue"<<endl;
+   cout<<"4) Exit"<<endl;
+do {
+   cout<<"Enter your choice : "<<endl;
+   cin<<ch;
+   switch (ch) {
+      case 1: Insert();
+         break;
+      case 2: Delete();
+         break;
+      case 3: Display();
+         break;
+      case 4: cout<<"Exit"<<endl;
+         break;
+      default: cout<<"Invalid choice"<<endl;
+   }
+} while(ch!=4);
+   return 0;
+}
