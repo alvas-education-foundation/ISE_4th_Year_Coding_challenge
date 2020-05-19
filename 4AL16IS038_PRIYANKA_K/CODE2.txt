@@ -1,0 +1,57 @@
+
+2)Find the LCM
+Write a program to find the LCM of three numbers.
+ 
+Input and Output Format:
+
+Refer sample input and output for formatting specifications.
+
+Sample Input and Output 1:
+
+[All text in bold corresponds to input and the rest corresponds to output.]
+Enter three numbers
+72 108 2100
+37800
+
+
+Sample Input and Output 2:
+
+[All text in bold corresponds to input and the rest corresponds to output.]
+
+Enter three numbers
+121 11 1331
+1331
+
+Program:
+
+#include<stdio.h>
+
+int main()
+{
+	int n1,n2,n3,lcm;
+	printf("Enter three numbers\n");
+	scanf("%d %d %d",&n1,&n2,&n3);
+	if(n1>n2)
+	{
+	    lcm=n1;
+	}
+	else if(n2>n3)
+	{
+	    lcm=n2;
+	}
+	else
+	{
+	    lcm=n3;
+	}
+	while(1)
+	{
+	    if(lcm%n1==0 && lcm%n2==0 &&lcm%n3==0)
+	    {
+	        printf("%d",lcm);
+	        break;
+	    }
+	lcm++;
+	}
+	return 0;
+}
+
