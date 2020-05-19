@@ -1,78 +1,52 @@
-Merge Sort Java –  Java program to implement merge sort using  Buffered reader.
+Java program to print X star pattern program – We have written the below print/draw X asterisk/star pattern program in four different ways with sample example and output, check it out. At the end of the program, we have added compiler so that you can execute the below codes.
+
+Print X Star Pattern – Using For Loop
+Print – Using While Loop
+print – Using Do While Loop
 
 
 
-import java.util.Scanner; 
-import java.io.*;
-public class MSort 
+
+
+
+import java.util.Scanner;
+public class  Xstar
 {
+    
  
-   public static void merge(int a[],int l,int m,int h)
-   {  
-       int i, j,c=l;
-       int b[]=new int[h+1];
+    public static void main(String[] args)
+    {
+             
+	Scanner sc=new Scanner(System.in);
+	System.out.println("Enter N : ");
+	int n=sc.nextInt();	 
+              System.out.print("Enter Symbol : ");
+	
+              char c = sc.next().charAt(0);
  
-	for(i = l,j = m+1; i<=m && j<=h; c++)
-             {
  
-                  if(a[i] <= a[j])
-                  b[c] = a[i++];
-                 else
-                 b[c] = a[j++];
-      	}
-	 while(i <= m )    
-                 b[c++] = a[i++];
  
-               while(j<=h)   
-                 b[c++] = a[j++];
-          
-   	 for(i = l ; i <= h; i++)
-                        a[i] = b[i];
-   } 
-  
-   public static void Sort(int a[],int l,int h)
-   {  
-         if(l<h)
-        {
-           int m=(l+h)/2;
-           Sort(a,l,m);
-           Sort(a,m+1,h);
-           merge(a,l,m,h);
+              int k=n*2-1;
  
-         } 
-          
-   
-   }  
+	for(int i=1;i<=k;i++)
+               {
+                    
+	        for(int j=1;j<=k;j++)
+                
+                        {      if(j==i || j==k-i+1)
+                               System.out.print(c);
+                                System.out.print(" ");
+                                 
+		 
+                    	
+                           }
+		 
+    
+	 System.out.println();
+	    
+               }            
+           
  
- public static void printarray(int a[])
-{
-       for(int i=0; i < a.length; i++)
-        {
-        
-        System.out.print(a[i]+"  ");
-        }
-       
-}
-public static void main(String[] args) throws IOException
-{
- 
-    int n,i;
-     BufferedReader b=new BufferedReader(new InputStreamReader(System.in));
- 
-  
-   System.out.println("enter N: ");
- n=Integer.parseInt(b.readLine());
-int a[] = new int[n];  
-  System.out.println("enter "+n+" elements ");
- for(i= 0; i< n; i++)
- 
-  a[i] = Integer.parseInt(b.readLine()); 
- 
-  System.out.println("elements in array ");
-        printarray(a);
-        Sort(a,0,n-1);
-         System.out.println("\nelements after sorting");
-         printarray(a);
-       
-  }
+                
+    }
 }
