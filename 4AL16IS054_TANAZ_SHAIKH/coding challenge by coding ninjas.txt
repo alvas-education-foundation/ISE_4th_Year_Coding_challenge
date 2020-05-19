@@ -1,0 +1,65 @@
+#1. Write a python Program to count the number of each vowels
+
+vowels = 'aeiou'
+
+inp_str = 'counting no of vowels'
+inp_str = inp_str.casefold()
+count = {}.fromkeys(vowels,0)
+for char in inp_str:
+   if char in count:
+       count[char] += 1
+
+print(count)
+#2.Write a python program to sort the words alphabetically in cased letters
+
+my_str = "Hi this Is an Demo With cased letters"
+words = my_str.split()
+words.sort()
+
+print("The sorted words are:")
+for word in words:
+   print(word)
+
+#3.Given the names and grades for each student in a Physics class of  students, store them in a nested list and print the name(s) of any student(s) having the second lowest grade.
+
+N = int(raw_input())
+students = []
+for i in range(2*N):
+    students.append(raw_input().split())
+grades = {}
+for j in range(0, len(students), 2):
+    grades[students[j][0]] = float(students[j + 1][0])
+result = []
+num_to_match = sorted(set(grades.values()))[1]
+for pupil in grades.keys():
+    if grades[pupil] == num_to_match:
+        result.append(pupil)
+for k in sorted(result):
+    print k
+#4.You have a record of  students. Each record contains the student's name, and their percent marks in Maths, Physics and Chemistry. The marks can be floating values. The user enters some integer  followed by the names and marks for  students. You are required to save the record in a dictionary data type. The user then enters a student's name. Output the average percentage marks obtained by that student, correct to two decimal places.
+
+N = int(raw_input())
+results = {}
+for i in range(N):
+    a = raw_input().split(' ')
+    results[a[0]] = [float(x) for x in a[1:]]
+student = raw_input()
+print "%.2f" %(sum(results[student])/len(results[student]))
+
+#5.  To write a function to check if the year is leap or not.
+
+def is_leap(year):
+    leap = False
+    
+    # Write your logic here
+    if year % 400 == 0:
+        leap = True
+    elif year % 100 == 0:
+        leap = False
+    elif year % 4 == 0:
+        leap = True
+    
+    return leap
+
+year = int(raw_input())
+print is_leap(year)
