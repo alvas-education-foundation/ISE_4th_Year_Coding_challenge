@@ -1,0 +1,102 @@
+1)SELECTION SORT
+
+
+Its the first day for the students at school and the students enter the class and get seated at random places without any height order. So the students who are short and sitting back are not able to see the board since they sit behind taller students.
+
+ 
+
+Understanding this difficulty, the teacher decides to make the students sit in height order.
+
+ Suppose there are n students in the class. She makes all the students to stand in a line and compares the first student's height with the remaining (n-1) students. If the first student's height is greater than the ith student, then the taller person goes to the ith place and ith student comes to the first place. Again the new first student's height is compared with remaining students and if his height is greater than ith student the first student goes to ith place and ith place student comes to first place and this goes on till the end.
+
+This process continues for all the students. Finally the students are in height order.
+
+ 
+
+Write a program to perform selection sort on an array of n elements.
+
+Input Format:
+Input consists of n+1 integers. The first integer corresponds to n, the number of elements in the array.
+The next n integers correspond to the elements in the array.
+Output Format:
+Refer sample output for formatting specs.
+
+Sample Input and Output:
+[All text in bold corresponds to input and the rest corresponds to output]
+
+Enter the total number of students in class
+6
+Enter the height of student 1
+480
+Enter the height of student 2
+160
+Enter the height of student 3
+250
+Enter the height of student 4
+130
+Enter the height of student 5
+80
+Enter the height of student 6
+50
+Student's height order before sorting:
+480 160 250 130 80 50
+Height order of students after iteration 1
+50 480 250 160 130 80
+Height order of students after iteration 2
+50 80 480 250 160 130
+Height order of students after iteration 3
+50 80 130 480 250 160
+Height order of students after iteration 4
+50 80 130 160 480 250
+Height order of students after iteration 5
+50 80 130 160 250 480
+Height order of students after iteration 6
+50 80 130 160 250 480
+After final comparison of all students, the height order becomes:
+50 80 130 160 250 480
+
+
+Program:
+
+#include <stdio.h> 
+int main()
+{
+  int array[10], n, i, d,c, e,swap;
+ 
+  printf("Enter the total number of students in class\n");
+  scanf("%d", &n);
+ 
+    for (i = 1; i <= n; i++)
+    {
+        printf("Enter the height of student %d\n",i);
+        scanf("%d", &array[i]);
+    }
+    printf("Student's height order before sorting:\n");
+    {
+      for(i=1;i<=n;i++)
+        printf("%d ",array[i]);
+    }
+   
+    for (c = 1; c <= n; c++)
+    {
+        for (d = c+1 ; d <=n; d++)
+        {
+            if (array[c] >array[d])
+            {
+                swap = array[c];
+             array[c] = array[d];
+             array[d] = swap;
+            }
+        }
+        printf("\nHeight order of students after iteration %d\n",c);
+        for(e=1;e<=n;e++)
+            printf("%d ",array[e]);
+    }
+   
+   
+    printf("\nAfter final comparison of all students, the height order becomes:\n");
+    for (c = 1; c <= n; c++)
+        printf("%d ", array[c]);
+ 
+  return 0;
+}
