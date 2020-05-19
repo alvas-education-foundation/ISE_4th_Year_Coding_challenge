@@ -1,0 +1,800 @@
+Question 1) Write a C program to find the maximum element in a linked list.
+ 
+Define a structure
+ 
+struct node
+{
+int data;
+struct node * link;
+}
+ 
+Include functions
+append --- to add data at the end of the linked list.
+findmax --- to find the maximum element in the linked list.
+display --- to display all the data in the linked list.
+ 
+Refer function specifications for further details.
+[Note: The stmt. 'Elements in the linked list are' should be in the main function.]
+ 
+Input and Output Format:
+Refer sample input and output for formatting specifications.
+ 
+Sample Input and Output:
+[All text in bold corresponds to input and the rest corresponds to output.]
+Enter the value
+5
+Do you want to add another node? Type Yes/No
+Yes
+Enter the value
+9
+Do you want to add another node? Type Yes/No
+Yes
+Enter the value
+2
+Do you want to add another node? Type Yes/No
+Yes
+Enter the value
+8
+Do you want to add another node? Type Yes/No
+No
+The elements in the linked list are 5 9 2 8
+The maximum element in the linked list is 9
+
+Answer :-
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct node {
+	int data;
+	struct node * link;
+};
+void append ( struct node **, int ) ;
+void display ( struct node * ) ;
+int findmax (struct node *);
+
+int main() {
+	struct node *p ;
+	p=NULL;
+	int n;
+	char ch[10];
+	do {
+		printf("Enter the value\n");
+		scanf("%d",&n);
+		append(&p,n);
+		printf("Do you want to add another node? Type Yes/No\n");
+		scanf("%s",ch);
+	} while(!strcmp(ch,"Yes"));
+	printf("The elements in the linked list are");
+	display(p);
+	printf("\n");
+	printf("The maximum element in the linked list is %d\n", findmax(p));
+	return 0;
+}
+
+
+void append ( struct node **q, int num ) {
+    struct node *new_node=(struct node*)malloc(sizeof(struct node));
+    struct node *last=NULL;
+    new_node->data=num;
+    new_node->link=NULL;
+    if(*q==NULL)
+    {
+    *q=new_node;
+   
+    }
+    else
+    {
+        last=*q;
+    while(last->link)
+    last=last->link;
+    last->link=new_node;
+    }
+   
+    
+
+}
+
+void display ( struct node *q ) {
+   while(q!=NULL)
+   {
+       printf(" %d",q->data);
+       q=q->link;
+   }
+	
+}
+
+int findmax ( struct node *q ) {
+    int max=q->data;
+    if(q!=NULL)
+    {
+        
+        while(q!=NULL)
+        {
+            if(max < q->data)
+            {
+                max=q->data;
+            }
+            q=q->link;
+        }
+        
+	
+}return max;
+}
+
+===============================================================================================================================================================
+
+
+
+Question 2) Stack 2 : Array Implementation : Push and Pop
+
+ 
+
+Consider implementing a dynamically sized stack using an array.
+
+ 
+
+Create a structure
+
+ 
+
+struct stack
+
+{
+
+    int * a;
+
+    int top;
+
+    int maxSize;
+
+};
+
+ 
+
+The structure stack has a pointer 'a' to a dynamically allocated array (used to hold the contents of the stack), an integer 'maxSize' that holds the size of this array (i.e the maximum number of data that can be held in this array) and an integer 'top' which stores the array index of the top element in the stack.
+
+ 
+
+Write a program to implement push and pop operation on stack and to display the contents of the stack.
+
+ 
+
+In the initstack function intialize the value of top to -1 and initialize the value of maxSize.
+
+Print the message “Stack is full” in the push function when an attempt is made to push a data into a full stack.
+
+Print the message “Stack is empty” in the pop function and return the value -1000 when an attempt is made to pop data from an empty stack.
+
+
+Function specifications:
+
+
+void initstack(struct stack * p, int maxSize)
+void push(struct stack * p, int item)
+int pop(struct stack * p)
+void display(struct stack p)
+ 
+
+Input and Output Format:
+
+Refer sample input and output for formatting specifications.
+
+ 
+
+Note that the statement “The contents of the stack are” is in the main function. In the display function, if the stack is empty, print “ {}”.
+
+ 
+
+[All text in bold corresponds to input and the rest corresponds to output]
+
+Sample Input and Output:
+
+ 
+
+Enter the maximum size of the stack
+
+3
+
+Choice 1 : Push
+
+Choice 2 : Pop
+
+Choice 3 : Display
+
+Any other choice : Exit
+
+Enter your choice
+
+1
+
+Enter the element to be pushed
+
+1
+
+Choice 1 : Push
+
+Choice 2 : Pop
+
+Choice 3 : Display
+
+Any other choice : Exit
+
+Enter your choice
+
+1
+
+Enter the element to be pushed
+
+2
+
+Choice 1 : Push
+
+Choice 2 : Pop
+
+Choice 3 : Display
+
+Any other choice : Exit
+
+Enter your choice
+
+1
+
+Enter the element to be pushed
+
+3
+
+Choice 1 : Push
+
+Choice 2 : Pop
+
+Choice 3 : Display
+
+Any other choice : Exit
+
+Enter your choice
+
+1
+
+Enter the element to be pushed
+
+4
+
+Stack is full
+
+Choice 1 : Push
+
+Choice 2 : Pop
+
+Choice 3 : Display
+
+Any other choice : Exit
+
+Enter your choice
+
+3
+
+The contents of the stack are 1 2 3
+
+Choice 1 : Push
+
+Choice 2 : Pop
+
+Choice 3 : Display
+
+Any other choice : Exit
+
+Enter your choice
+
+2
+
+The popped element is 3
+
+Choice 1 : Push
+
+Choice 2 : Pop
+
+Choice 3 : Display
+
+Any other choice : Exit
+
+Enter your choice
+
+2
+
+The popped element is 2
+
+Choice 1 : Push
+
+Choice 2 : Pop
+
+Choice 3 : Display
+
+Any other choice : Exit
+
+Enter your choice
+
+2
+
+The popped element is 1
+
+Choice 1 : Push
+
+Choice 2 : Pop
+
+Choice 3 : Display
+
+Any other choice : Exit
+
+Enter your choice
+
+2
+
+Stack is empty
+
+Choice 1 : Push
+
+Choice 2 : Pop
+
+Choice 3 : Display
+
+Any other choice : Exit
+
+Enter your choice
+
+3
+
+The contents of the stack are {}
+
+Choice 1 : Push
+
+Choice 2 : Pop
+
+Choice 3 : Display
+
+Any other choice : Exit
+
+Enter your choice
+
+4
+
+Answer:-
+
+#include<stdio.h>
+#include<stdlib.h>
+struct stack {
+	int * a;
+	int top;
+	int maxSize;
+};
+void initstack(struct stack * p, int maxSize);
+void push(struct stack * p, int item);
+void display(struct stack p);
+int pop(struct stack * p);
+void printMenu();
+
+int main()  {
+	struct stack p;
+	int data,ch, data1, m;
+	printf("Enter the maximum size of the stack\n");
+	scanf("%d",&m);
+	initstack(&p,m);
+	do {
+	printMenu();	
+	printf("Enter your choice\n");
+	scanf("%d",&ch);
+	switch(ch) {
+	  case 1:
+		printf("Enter the element to be pushed\n");
+		scanf("%d",&data);
+		push(&p, data);
+		break;
+	  case 2:
+		data1 = pop(&p);
+		if(data1 != -1000)
+		printf("The popped element is %d\n",data1);
+		break;
+	  case 3:
+		printf("The contents of the stack are");
+		display(p);
+		printf("\n");
+		break;
+	  default:
+		return 0;
+	}
+	} while(1);
+	return 0;
+}
+
+void printMenu()
+{
+	printf("Choice 1 : Push\n");
+	printf("Choice 2 : Pop\n");
+	printf("Choice 3 : Display\n");
+	printf("Any other choice : Exit\n");
+}
+
+void initstack(struct stack * p, int maxSize) {
+    p->a=(int *)malloc(sizeof(int)*maxSize);
+p->top=-1;
+p->maxSize=maxSize;
+	
+ 
+}
+
+void push(struct stack * p, int item) {
+	if(p->top==p->maxSize-1)
+	{
+	    printf("Stack is full\n");
+	}
+else
+{       p->top++;
+	    p->a[p->top]=item;
+}
+}
+
+void display(struct stack p) {
+    int i;
+    if(p.top==-1)
+    {
+        printf(" {}");
+    }
+    else
+    {
+for(i=0;i<=p.top;i++)	
+ {
+     printf(" %d",p.a[i]);
+ }
+}
+}
+
+int pop(struct stack * p) {
+if(p->top==-1)
+{
+    printf("Stack is empty\n");
+   return -1000; 
+}
+return p->a[p->top--];
+}
+
+===============================================================================================================================================================
+
+
+Question 3) 
+
+Huffman coding assigns variable length codewords to fixed length input characters based on their frequencies. More frequent characters are assigned shorter codewords and less frequent characters are assigned longer codewords. All edges along the path to a character contain a code digit. If they are on the left side of the tree, they will be a 0 (zero). If on the right, they'll be a 1 (one). Only the leaves will contain a letter and its frequency count. All other nodes will contain a null instead of a character, and the count of the frequency of all of it and its descendant characters.
+
+For instance, consider the string ABRACADABRA. There are a total of  characters in the string. This number should match the count in the ultimately determined root of the tree. Our frequencies are  and . The two smallest frequencies are for  and , both equal to , so we'll create a tree with them. The root node will contain the sum of the counts of its descendants, in this case . The left node will be the first character encountered, , and the right will contain . Next we have  items with a character count of : the tree we just created, the character  and the character . The tree came first, so it will go on the left of our new root node.
+Input Format
+
+There is one line of input containing the plain string, . Background code creates the Huffman tree then passes the head node and the encoded string to the function.
+
+Constraints
+
+
+Output Format
+
+Output the decoded string on a single line.
+
+Sample Input
+
+image
+s="1001011"
+Sample Output
+
+ABACA
+
+
+Answer :-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef struct node {
+    int freq;
+    char data;
+    node * left;
+    node * right;
+} node;
+
+struct deref:public binary_function<node*, node*, bool> {
+  	bool operator()(const node * a, const node * b)const {
+        return a->freq > b->freq;
+    }
+};
+
+typedef priority_queue<node *, vector<node*>, deref> spq;
+
+node * huffman_hidden(string s) {
+
+    spq pq;
+    vector<int>count(256,0);
+  
+    for(int i = 0; i < s.length(); i++ ) {
+        count[s[i]]++;
+    }
+    
+    for(int i=0; i < 256; i++) {
+        
+        node * n_node = new node;
+        n_node->left = NULL;
+        n_node->right = NULL;
+        n_node->data = (char)i;
+        n_node->freq = count[i];
+      
+        if( count[i] != 0 )
+        	pq.push(n_node);
+      
+    }
+    
+    while( pq.size() != 1 ) {
+      
+        node * left = pq.top();
+        pq.pop();
+        node * right = pq.top();
+        pq.pop();
+        node * comb = new node;
+        comb->freq = left->freq + right->freq;
+        comb->data = '\0';
+        comb->left = left;
+        comb->right = right;
+        pq.push(comb);
+      
+    }
+    
+    return pq.top();
+    
+}
+
+void print_codes_hidden(node * root, string code, map<char, string>&mp) {
+    
+  	if(root == NULL)
+        return;
+    
+  	if(root->data != '\0') {
+        mp[root->data] = code;
+    }
+  
+    print_codes_hidden(root->left, code+'0', mp);
+    print_codes_hidden(root->right, code+'1', mp);
+        
+}
+
+/* 
+The structure of the node is
+
+typedef struct node {
+
+	int freq;
+    char data;
+    node * left;
+    node * right;
+    
+} node;
+
+*/
+
+
+void decode_huff(node * root, string s) {
+        node*temp=root;
+       int i=0;
+        for(i=0;i<=s.size();i++)
+            {
+               if(temp->right==NULL && temp->left==NULL) 
+                {
+                cout<<temp->data;
+                  temp=root;
+            }
+            if(s[i]=='0')
+                temp=temp->left;
+            else if(s[i]=='1')
+                temp=temp->right;
+            }
+}
+
+int main() {
+  
+    string s;
+    std::cin >> s;
+  
+    node * tree = huffman_hidden(s);
+    string code = "";
+    map<char, string>mp;
+  
+    print_codes_hidden(tree, code, mp);
+    
+    string coded;
+  
+    for( int i = 0; i < s.length(); i++ ) {
+        coded += mp[s[i]];
+    }
+    
+    decode_huff(tree,coded);
+  
+    return 0;
+}
+
+===============================================================================================================================================================
+
+
+
+Question 4)
+   For the purposes of this challenge, we define a binary tree to be a binary search tree with the following ordering requirements:
+
+The  value of every node in a node's left subtree is less than the data value of that node.
+The  value of every node in a node's right subtree is greater than the data value of that node.
+Given the root node of a binary tree, can you determine if it's also a binary search tree?
+
+Complete the function in your editor below, which has  parameter: a pointer to the root of a binary tree. It must return a boolean denoting whether or not the binary tree is a binary search tree. You may have to write one or more helper functions to complete this challenge.
+
+Input Format
+
+You are not responsible for reading any input from stdin. Hidden code stubs will assemble a binary tree and pass its root node to your function as an argument.
+
+Constraints
+
+Output Format
+
+You are not responsible for printing any output to stdout. Your function must return true if the tree is a binary search tree; otherwise, it must return false. Hidden code stubs will print this result as a Yes or No answer on a new line.
+
+Sample Input
+
+tree
+
+Sample Output
+
+No
+
+Answer:- 
+
+The Node struct is defined as follows:
+	struct Node {
+		int data;
+		Node* left;
+		Node* right;
+	}
+*/
+vector<int> nodes;
+void inOrderTraversal(Node* node) {
+        if(node == NULL) {
+            return;
+        }
+        inOrderTraversal(node->left);
+        nodes.push_back(node->data);
+        inOrderTraversal(node->right);
+    }
+
+    bool checkBST(Node* root) {
+        inOrderTraversal(root);
+        for(int i = 1; i < nodes.size(); i++) {
+            if(nodes[i] <= nodes[i-1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+===============================================================================================================================================================
+
+
+ Question 5)
+
+ A bracket is considered to be any one of the following characters: (, ), {, }, [, or ].
+
+Two brackets are considered to be a matched pair if the an opening bracket (i.e., (, [, or {) occurs to the left of a closing bracket (i.e., ), ], or }) of the exact same type. There are three types of matched pairs of brackets: [], {}, and ().
+
+A matching pair of brackets is not balanced if the set of brackets it encloses are not matched. For example, {[(])} is not balanced because the contents in between { and } are not balanced. The pair of square brackets encloses a single, unbalanced opening bracket, (, and the pair of parentheses encloses a single, unbalanced closing square bracket, ].
+
+By this logic, we say a sequence of brackets is balanced if the following conditions are met:
+
+It contains no unmatched brackets.
+The subset of brackets enclosed within the confines of a matched pair of brackets is also a matched pair of brackets.
+Given  strings of brackets, determine whether each sequence of brackets is balanced. If a string is balanced, return YES. Otherwise, return NO.
+
+Function Description
+
+Complete the function isBalanced in the editor below. It must return a string: YES if the sequence is balanced or NO if it is not.
+
+isBalanced has the following parameter(s):
+
+s: a string of brackets
+Input Format
+
+The first line contains a single integer , the number of strings.
+Each of the next  lines contains a single string , a sequence of brackets.
+
+Constraints
+
+, where  is the length of the sequence.
+All chracters in the sequences ∈ { {, }, (, ), [, ] }.
+Output Format
+
+For each string, return YES or NO.
+
+Sample Input
+
+3
+{[()]}
+{[(])}
+{{[[(())]]}}
+Sample Output
+
+YES
+NO
+YES
+
+
+Answers: 
+
+ #include <bits/stdc++.h>
+
+using namespace std;
+
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <bitset>
+#include <cstdio>
+#include <limits>
+#include <vector>
+#include <climits>
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+
+using namespace std;
+
+bool is_balanced(string expression) {
+    vector<char> s; 
+    for(int i = 0; i < expression.size(); i++) {
+        if(expression[i] == '{' || expression[i] == '[' || expression[i] == '(') {
+            s.push_back(expression[i]);
+        } else {
+            if(s.size() == 0) {
+                return false;
+            }
+            char c = s.back();
+            s.pop_back();
+            if(c == '{' && expression[i] != '}') {
+                return false;
+            }
+            if(c == '(' && expression[i] != ')') {
+                return false;
+            }
+            if(c == '[' && expression[i] != ']') {
+                return false;
+            }
+        }
+    }
+    if(s.size() == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+int main(){
+    int t;
+    cin >> t;
+    for(int a0 = 0; a0 < t; a0++){
+        string expression;
+        cin >> expression;
+        bool answer = is_balanced(expression);
+        if(answer)
+            cout << "YES\n";
+        else cout << "NO\n";
+    }
+    return 0;
+}
+
+
