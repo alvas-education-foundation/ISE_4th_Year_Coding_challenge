@@ -1,0 +1,172 @@
+1.A valid postal code  have to fullfil both below requirements:
+
+ 1. P must be a number in the range from 100000 to 999999 inclusive.
+ 2. P must not contain more than one alternating repetitive digit pair.
+Alternating repetitive digits are digits which repeat immediately after the next digit. In other words, an alternating repetitive digit pair is formed by two equal digits that have just a single digit between them.
+
+For example:
+
+121426 # Here, 1 is an alternating repetitive digit.
+523563 # Here, NO digit is an alternating repetitive digit.
+552523 # Here, both 2 and 5 are alternating repetitive digits.
+Your task is to provide two regular expressions regex_integer_in_range and regex_alternating_repetitive_digit_pair. Where:
+
+regex_integer_in_range should match only integers range from 100000 to 99999 inclusive
+
+regex_alternating_repetitive_digit_pair should find alternating repetitive digits pairs in a given string.
+
+Both these regular expressions will be used by the provided code template to check if the input string  is a valid postal code using the following expression:
+
+(bool(re.match(regex_integer_in_range, P)) 
+and len(re.findall(regex_alternating_repetitive_digit_pair, P)) < 2)
+Input Format
+
+Locked stub code in the editor reads a single string denoting  from stdin and uses provided expression and your regular expressions to validate if  is a valid postal code.
+
+Output Format
+
+You are not responsible for printing anything to stdout. Locked stub code in the editor does that.
+
+Sample Input 0
+
+110000
+Sample Output 0
+
+False
+Explanation 0
+
+1 1 0000 : (0, 0) and (0, 0) are two alternating digit pairs. Hence, it is an invalid postal code.
+
+Note:
+A score of  will be awarded for using 'if' conditions in your code.
+You have to pass all the testcases to get a positive score.
+
+Solution:
+p_code = input().strip()
+digit = p_code.isdigit()
+in_range = digit and 100000 <= int(p_code) <= 999999
+repetitive_digit = digit and sum([p_code[i]==p_code[i+2] for i in range(0,4)]) > 1
+#print True or False
+print(in_range and not repetitive_digit)
+
+***************************************************************************************************************************
+2. Neo has a complex matrix script. The matrix script is a  X  grid of strings. It consists of alphanumeric characters, spaces and symbols (!,@,#,$,%,&).
+
+
+To decode the script, Neo needs to read each column and select only the alphanumeric characters and connect them. Neo reads the column from top to bottom and starts reading from the leftmost column.
+
+If there are symbols or spaces between two alphanumeric characters of the decoded script, then Neo replaces them with a single space '' for better readability.
+
+Neo feels that there is no need to use 'if' conditions for decoding.
+
+Alphanumeric characters consist of: [A-Z, a-z, and 0-9].
+
+Input Format
+
+The first line contains space-separated integers  (rows) and  (columns) respectively.
+The next  lines contain the row elements of the matrix script.
+
+Constraints
+
+
+Note: A  score will be awarded for using 'if' conditions in your code.
+
+Output Format
+
+Print the decoded matrix script.
+
+Sample Input 0
+
+7 3
+Tsi
+h%x
+i #
+sM 
+$a 
+#t%
+ir!
+Sample Output 0
+
+This is Matrix#  %!
+Explanation 0
+
+The decoded script is:
+
+This$#is% Matrix#  %!
+Neo replaces the symbols or spaces between two alphanumeric characters with a single space   ' ' for better readability.
+
+So, the final decoded script is:
+
+This is Matrix#  %!
+
+Solution:
+
+import re
+import sys
+first_multiple_input = input().rstrip().split()
+n = int(first_multiple_input[0])
+m = int(first_multiple_input[1])
+matrix = []
+for _ in range(n):
+    matrix_item = input()
+    matrix.append(matrix_item)
+new = ''
+for i in range(0,m):
+    for j in range(0,n):
+        new = new + matrix[j][i]
+t1 = re.match(r'\W*',new[::-1]).group()
+t1= t1[::-1]
+t2 = re.match(r'\W*',new).group()
+s = re.sub('[^0-9a-zA-Z]+', ' ', new).rstrip().lstrip()
+k = t2 + s + t1
+print((k, t1) [s==''])
+
+***************************************************************************************************************************
+3.We add a Leap Day on February 29, almost every four years. The leap day is an extra, or intercalary day and we add it to the shortest month of the year, February.
+In the Gregorian calendar three criteria must be taken into account to identify leap years:
+
+The year can be evenly divided by 4, is a leap year, unless:
+The year can be evenly divided by 100, it is NOT a leap year, unless:
+The year is also evenly divisible by 400. Then it is a leap year.
+This means that in the Gregorian calendar, the years 2000 and 2400 are leap years, while 1800, 1900, 2100, 2200, 2300 and 2500 are NOT leap years.Source
+
+Task
+You are given the year, and you have to write a function to check if the year is leap or not.
+
+Note that you have to complete the function and remaining code is given as template.
+
+Input Format
+
+Read y, the year that needs to be checked.
+
+Constraints
+
+
+Output Format
+
+Output is taken care of by the template. Your function must return a boolean value (True/False)
+
+Sample Input 0
+
+1990
+Sample Output 0
+
+False
+Explanation 0
+
+1990 is not a multiple of 4 hence it's not a leap year.
+
+Solution:
+
+def is_leap(year):
+    leap = False
+    
+    # Write your logic here
+    if year%4 == 0:
+        leap = True
+        if year%100 == 0:
+            leap = False
+            if year%400 == 0:
+                leap = True
+    return leap
+year = int(input())

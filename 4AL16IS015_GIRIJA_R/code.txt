@@ -1,0 +1,91 @@
+# Python program to check if year is a leap year or not
+
+year = 2000
+if (year % 4) == 0:
+   if (year % 100) == 0:
+       if (year % 400) == 0:
+           print("{0} is a leap year".format(year))
+       else:
+           print("{0} is not a leap year".format(year))
+   else:
+       print("{0} is a leap year".format(year))
+else:
+   print("{0} is not a leap year".format(year))
+
+
+
+
+
+#The program takes the coefficients of the polynomial equation and the value of x and gives the value of the polynomial.
+
+
+import math
+print("Enter the coefficients of the form ax^3 + bx^2 + cx + d")
+lst=[]
+for i in range(0,4):
+    a=int(input("Enter coefficient:"))
+    lst.append(a)
+x=int(input("Enter the value of x:"))
+sum1=0
+j=3
+for i in range(0,3):
+    while(j>0):
+        sum1=sum1+(lst[i]*math.pow(x,j))
+        break
+    j=j-1
+sum1=sum1+lst[3]
+print("The value of the polynomial is:",sum1)
+
+
+
+
+
+
+#The program takes a upper limit and determines all Pythagorean triplets till the upper limit.
+
+
+limit=int(input("Enter upper limit:"))
+c=0
+m=2
+while(c<limit):
+    for n in range(1,m+1):
+        a=m*m-n*n
+        b=2*m*n
+        c=m*m+n*n
+        if(c>limit):
+            break
+        if(a==0 or b==0 or c==0):
+            break
+        print(a,b,c)
+    m=m+1
+
+
+
+#The program takes in the the number of terms and finds the sum of sine series.
+
+
+import math
+def sin(x,n):
+    sine = 0
+    for i in range(n):
+        sign = (-1)**i
+        pi=22/7
+        y=x*(pi/180)
+        sine = sine + ((y**(2.0*i+1))/math.factorial(2*i+1))*sign
+    return sine
+x=int(input("Enter the value of x in degrees:"))
+n=int(input("Enter the number of terms:"))
+print(round(sin(x,n),2))
+
+
+#A number is given. We have to clear the rightmost set bit of the number. That is, we have to flip the rightmost 1 in the binary representation of n.
+
+
+def clear_rightmost_set_bit(n):
+    """Clear rightmost set bit of n and return it."""
+    return n & (n - 1)
+ 
+ 
+n = int(input('Enter a number: '))
+ans = clear_rightmost_set_bit(n)
+print('n with its rightmost set bit cleared equals:', ans)

@@ -1,0 +1,313 @@
+4)Giant Wheel
+Raj and his friends plans for a school trip to a theme park. Raj is afraid of giant wheel, so he pushes his mates to the front and enjoys the giant wheel spinning with his mouth wide open.
+
+By the time, he tries to calculates which of his friend will come down first. So help him to find the number of spins should be made to the index position.
+
+Consider there are n cabins in the giant wheel, cabins a numbered between 0 and 100.
+
+
+Note:
+1) Right Rotation: the first element goes to the last.
+2) Left Rotation: the last element comes to the first.
+
+
+
+Define a structure
+struct cabin
+{
+    int number;
+    struct cabin * link;
+};
+
+Include functions:
+
+void append (struct cabin **q,int n);
+void display(struct cabin *q);
+void rotateRight(struct cabin **q,int n);
+void rotateleft(struct cabin **q,int n);
+int validate(struct cabin **q,int num);
+append --- to add new cabin at the end of the linked list
+display --- to display the cabin order. If there are no cabins are present in the gaint wheel, print "No cabins were inserted",
+rotateRight --- to rotate the linked list right
+rotateleft --- to rotate the linked list left
+validate --- to check whether a cabin is present in the gaint wheel or not. Return 1, if present, else return 0.
+
+Note: If validate returns 0, print "Enter a valid cabin number".
+
+Input and Output Format:
+Refer sample input and output for formatting specifications.
+
+[All text in bold corresponds to input and the rest corresponds to output.]
+
+Sample Input and Output 1:
+1.Insert cabin
+2.Display
+3.Rotate Right
+4.Rotate Left
+5.Exit
+Enter your choice
+1
+Enter the cabin number
+1
+1.Insert cabin
+2.Display
+3.Rotate Right
+4.Rotate Left
+5.Exit
+Enter your choice
+1
+Enter the cabin number
+2
+1.Insert cabin
+2.Display
+3.Rotate Right
+4.Rotate Left
+5.Exit
+Enter your choice
+1
+Enter the cabin number
+3
+1.Insert cabin
+2.Display
+3.Rotate Right
+4.Rotate Left
+5.Exit
+Enter your choice
+1
+Enter the cabin number
+4
+1.Insert cabin
+2.Display
+3.Rotate Right
+4.Rotate Left
+5.Exit
+Enter your choice
+1
+Enter the cabin number
+5
+1.Insert cabin
+2.Display
+3.Rotate Right
+4.Rotate Left
+5.Exit
+Enter your choice
+2
+Cabin positions are:1 2 3 4 5
+1.Insert cabin
+2.Display
+3.Rotate Right
+4.Rotate Left
+5.Exit
+Enter your choice
+3
+Enter the cabin number to rotate
+3
+Number of rotation = 2
+Cabin positions are:3 4 5 1 2
+1.Insert cabin
+2.Display
+3.Rotate Right
+4.Rotate Left
+5.Exit
+Enter your choice
+4
+Enter the cabin number to rotate
+1
+Number of rotation = 2
+Cabin positions are:1 2 3 4 5
+1.Insert cabin
+2.Display
+3.Rotate Right
+4.Rotate Left
+5.Exit
+Enter your choice
+5
+Exit
+
+Sample Input and Output 2:
+1.Insert cabin
+2.Display
+3.Rotate Right
+4.Rotate Left
+5.Exit
+Enter your choice
+1
+Enter the cabin number
+1
+1.Insert cabin
+2.Display
+3.Rotate Right
+4.Rotate Left
+5.Exit
+Enter your choice
+1
+Enter the cabin number
+2
+1.Insert cabin
+2.Display
+3.Rotate Right
+4.Rotate Left
+5.Exit
+Enter your choice
+1
+Enter the cabin number
+3
+1.Insert cabin
+2.Display
+3.Rotate Right
+4.Rotate Left
+5.Exit
+Enter your choice
+2
+Cabin positions are:1 2 3
+1.Insert cabin
+2.Display
+3.Rotate Right
+4.Rotate Left
+5.Exit
+Enter your choice
+3
+Enter the cabin number to rotate
+5
+Enter a valid cabin number
+1.Insert cabin
+2.Display
+3.Rotate Right
+4.Rotate Left
+5.Exit
+Enter your choice
+5
+Exit
+
+
+
+Program:
+
+#include<stdio.h>
+#include<stdlib.h>
+struct cabin
+{
+	int number;
+	struct cabin * link;
+};
+void append (struct cabin **q,int n);
+void display(struct cabin *q);
+void rotateRight(struct cabin **q,int n);
+void rotateleft(struct cabin **q,int n);
+int main()
+{
+	int n,choice;
+	struct cabin *list;
+	list = NULL;
+while(choice!=5)
+{
+	printf("1.Insert cabin\n2.Display\n3.Rotate Right\n4.Rotate Left\n5.Exit\n");
+	printf("Enter your choice\n");
+	scanf("%d",&choice);
+switch(choice)
+{
+case 1:
+	printf("Enter the cabin number\n");
+	scanf("%d",&n);
+	if(n>0 && n<100)
+	append(&list,n);
+	else
+	printf("Invalid cabin number");
+break;
+case 2:
+	display(list);
+break;
+case 3:
+	printf("Enter the cabin number to rotate\n");
+	scanf("%d",&n);
+	rotateRight(&list,n);
+break;
+case 4:
+	printf("Enter the cabin number to rotate\n");
+	scanf("%d",&n);
+	rotateleft(&list,n);
+
+	break;
+case 5:
+printf("Exit\n");
+break;
+}
+}
+	return 0;
+}
+
+int validate(struct cabin **q,int num)
+{
+	struct cabin *w=NULL;
+	w=*q;
+	if(*q==NULL)
+	    return 2;
+	else
+	{
+	    while(w!=NULL)
+	    {
+	        if((w->number)==num)
+	        {
+	            return 1;
+	            break;
+	        }
+	        w=w->link;
+	    }
+	}
+	return 0;
+}
+
+void append (struct cabin **q,int n)
+{
+	struct cabin *nn;
+	nn=(struct cabin*)malloc(sizeof(struct cabin));
+	nn->link=NULL;
+	if(*q==NULL)
+	{
+	    *q=nn;
+	}
+	else
+	{
+	    struct cabin *ln=*q;
+	    while(ln->link!=NULL)
+	    ln=ln->link;
+	    ln->link=nn;
+	}
+}
+void display(struct cabin *q)
+{	
+    while(q!=NULL)
+    {
+        printf("%d",q->number);
+        q=q->link;
+        
+    }
+}
+void rotateRight(struct cabin **q,int n)
+{
+	if(n==0)
+	return;
+	struct cabin* cn=*q;
+	int c=1;
+	while(c<n&&cn!=NULL)
+	{
+	    cn=cn->link;
+	    c++;
+	}
+	if(cn==NULL)
+	return;
+	struct cabin *nnode=cn;
+	while(cn->link!=NULL)
+	{
+	    cn=cn->link;
+	    cn->link=*q;
+	    *q=nnode->link;
+	    nnode->link=NULL;
+	}
+}
+
+
+void rotateleft(struct cabin **q,int n)
+{
+	// Fill in the code here
+}
