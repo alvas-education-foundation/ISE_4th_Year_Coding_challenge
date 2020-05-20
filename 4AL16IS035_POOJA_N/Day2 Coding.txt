@@ -1,0 +1,305 @@
+1)
+
+Strings are usually ordered in lexicographical order. That means they are ordered by comparing their leftmost different characters. For example,  because . Also  because . If one string is an exact prefix of the other it is lexicographically smaller, e.g., .
+
+Given an array of strings sorted in lexicographical order, print all of its permutations in strict lexicographical order. If two permutations look the same, only print one of them. See the 'note' below for an example.
+
+Complete the function next_permutation which generates the permutations in the described order.
+
+For example, . The six permutations in correct order are:
+
+ab bc cd
+ab cd bc
+bc ab cd
+bc cd ab
+cd ab bc
+cd bc ab
+Note: There may be two or more of the same string as elements of .
+For example, . Only one instance of a permutation where all elements match should be printed. In other words, if , then print either  or  but not both.
+
+A three element array having three discrete elements has six permutations as shown above. In this case, there are three matching pairs of permutations where  and  are switched. We only print the three visibly unique permutations:
+
+ab ab bc
+ab bc ab
+bc ab ab
+Input Format
+
+The first line of each test file contains a single integer , the length of the string array .
+
+Each of the next  lines contains a string .
+
+Constraints
+
+ contains only lowercase English letters.
+Output Format
+
+Print each permutation as a list of space-separated strings on a single line.
+
+Sample Input 0
+
+2
+ab
+cd
+Sample Output 0
+
+ab cd
+cd ab
+
+
+Solution:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void swap(char **s, int i, int j){
+    char * tmp = s[i];
+    s[i] = s[j];
+    s[j] = tmp;
+}
+
+void reverse(char **s, int start, int end){
+    while(start<end){
+        swap(s,start++,end--);
+    }
+}
+
+int next_permutation(int n, char **s)
+{
+    for(int i=n-2;i>-1;i--){
+        if(strcmp(s[i+1],s[i])>0){
+          
+            for(int j=n-1;j>i;j--){
+                if(strcmp(s[j],s[i])>0){
+                   
+                    swap(s,i,j);
+                    
+                    reverse(s,i+1,n-1);
+                    return 1;
+                }
+            }
+        }
+    }
+    return 0;
+}
+int main()
+{
+	char **s;
+	int n;
+	scanf("%d", &n);
+	s = calloc(n, sizeof(char*));
+	for (int i = 0; i < n; i++)
+	{
+		s[i] = calloc(11, sizeof(char));
+		scanf("%s", s[i]);
+	}
+	do
+	{
+		for (int i = 0; i < n; i++)
+			printf("%s%c", s[i], i == n - 1 ? '\n' : ' ');
+	} while (next_permutation(n, s));
+	for (int i = 0; i < n; i++)
+		free(s[i]);
+	free(s);
+	return 0;
+}
+
+***************************************************************************************************************************
+2)
+write a python program for Insertion Sort.
+
+Solution:
+def insertionSort(arr): 
+	for i in range(1, len(arr)): 
+  		key = arr[i] 
+ 		j = i-1
+        while j >=0 and key < arr[j] : 
+                arr[j+1] = arr[j] 
+                j -= 1
+        	arr[j+1] = key 
+arr = [67,45,106] 
+insertionSort(arr) 
+print ("ARRAY AFTER SORTING:") 
+for i in range(len(arr)): 
+    print ("%d" %arr[i])
+
+***************************************************************************************************************************
+3)
+Write a C program for Prime Number (Using Dynamic Array)
+
+Solution:
+#include<iostream.h>
+#include<conio.h>
+void main()
+{
+clrscr();
+int n,i,count=0;
+cout<<“Enter number to check its prime or not : “;
+cin>>n;
+int *a=new int[n];        //Dynamic array to store the divisors of NON-Prime number
+for(i=1;i<=n;i++)
+{
+if(n%i==0)
+{
+a[i]=i;
+count++;
+}
+else
+a[i]=0;
+}
+if(count==2)
+cout<<n<<” is a Prime number”;
+else
+{
+cout<<n<<” is Not a prime number\n”;
+cout<<n<<” has “<< count<<” divisors.\n”;
+cout<<n<<” is Divisible by :\n”;
+for(i=1;i<=n;i++)
+{
+if(a[i]!=0)
+cout<<a[i]<<“\n”;
+else
+cout<<“”;
+}
+}
+getch();
+}
+***************************************************************************************************************************
+4)
+Write a C program that sort numbers using Quick Sort method.
+
+Solution:
+#include  <stdio.h>  
+void shell_sort (int *a, int n) {
+    int h, i, j, t;
+    for (h = n; h /= 2;) {
+        for (i = h; i < n; i++) {
+            t = a[i];
+            for (j = i; j >= h && t < a[j - h]; j -= h) {
+                a[j] = a[j - h];
+            }
+            a[j] = t;
+        }
+    }
+} 
+int main (int ac, char **av) {
+    int a[] = {4, 65, 2, -31, 0, 99, 2, 83, 782, 1};
+    int n = sizeof a / sizeof a[0];
+    int i;
+    printf("Original Array:\n");
+    for (i = 0; i < n; i++)
+        printf("%d%s", a[i], i == n - 1 ? "\n" : " ");
+    shell_sort(a, n);
+    printf("\nSorted Array:\n");
+	for (i = 0; i < n; i++)
+        printf("%d%s", a[i], i == n - 1 ? "\n" : " ");
+    return 0;
+}
+***************************************************************************************************************************
+5)program in C to search an element in a circular linked list.
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int num;
+    struct node * nextptr;
+}*stnode,*ennode;
+ 
+
+void ClListcreation(int n);
+int FindElement(int FindElem, int n);
+void displayClList();
+
+int main()
+{
+    int n,m;
+    int i,FindElem,FindPlc;
+    stnode = NULL;
+    ennode = NULL;
+	printf("\n\n Circular Linked List : Search an element in a circular linked list :\n");
+	printf("-------------------------------------------------------------------------\n");	   	
+
+    printf(" Input the number of nodes : ");
+    scanf("%d", &n);
+    m=n;
+ 
+    ClListcreation(n); 
+    displayClList();
+    printf(" Input the element you want to find : ");
+    scanf("%d", &FindElem);   
+
+    FindPlc=FindElement(FindElem,m);
+	if(FindPlc<n)
+		printf(" Element found at node %d \n\n",FindPlc);
+	else
+		printf(" This element does not exists in linked list.\n\n");    
+    
+    return 0;
+}
+
+void ClListcreation(int n)
+{
+    int i, num;
+    struct node *preptr, *newnode;
+    if(n >= 1)
+    {
+        stnode = (struct node *)malloc(sizeof(struct node));
+	printf(" Input data for node 1 : ");
+        scanf("%d", &num);
+        stnode->num = num;
+        stnode->nextptr = NULL;
+        preptr = stnode;
+        for(i=2; i<=n; i++)
+        {
+            newnode = (struct node *)malloc(sizeof(struct node));
+            printf(" Input data for node %d : ", i);
+            scanf("%d", &num);
+            newnode->num = num;
+            newnode->nextptr = NULL;	
+            preptr->nextptr = newnode;	
+            preptr = newnode;   		
+        }
+        preptr->nextptr = stnode; 		
+    }
+}
+
+int FindElement(int FindElem, int a)
+{
+	int ctr=1;
+	ennode=stnode;
+	while(ennode->nextptr!=NULL)
+	{
+		if(ennode->num==FindElem)
+			break;
+		else
+			ctr++;
+			ennode=ennode->nextptr;
+			if (ctr==a+1)
+			break;
+	}
+	return ctr;
+}
+void displayClList()
+{
+    struct node *tmp;
+    int n = 1;
+
+    if(stnode == NULL)
+    {
+        printf(" No data found in the List yet.");
+    }
+    else
+    {
+        tmp = stnode;
+        printf("\n\n Data entered in the list are :\n");
+
+        do {
+            printf(" Data %d = %d\n", n, tmp->num);
+
+            tmp = tmp->nextptr;
+            n++;
+        }while(tmp != stnode);
+    }
+}
+
