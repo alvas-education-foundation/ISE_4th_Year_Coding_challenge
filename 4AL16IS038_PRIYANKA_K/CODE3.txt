@@ -1,0 +1,109 @@
+
+3)INSERTION SORT
+Two friends Reema and Rita decide to play cards. But Reema doesn't know to play the cards. So Rita decides to teach her how to play cards. Rita distributes 13 cards to each other which are in unsorted order and teaches her how to make set with the cards without considering the symbols.
+Rita first takes two cards and checks which card has the lesser number and the card with the least number is put first and larger at second. 
+She takes third card and checks it with second card. If the third card number is less than the second card she inserts the third card at the second position and checks newly inserted second card with the first card. If the newly inserted second card number is less than the first card, she inserts the second card at the first place and this goes on till all the cards get sorted.
+Rita finally learns how to order the cards.
+ 
+Write a program to perform insertion sort on an array of n elements.
+ 
+Input Format:
+Input consists of n+1 integers. The first integer corresponds to n, the number of elements in the array. The next n integers correspond to the elements in the array.
+ 
+Output Format:
+Refer sample output for formatting specs.
+ 
+Sample Input and Output:
+[All text in bold corresponds to input and the rest corresponds to output]
+Enter the total number of cards
+13
+Enter card number 1
+7
+Enter card number 2
+11
+Enter card number 3
+9
+Enter card number 4
+12
+Enter card number 5
+1
+Enter card number 6
+8
+Enter card number 7
+4
+Enter card number 8
+5
+Enter card number 9
+2
+Enter card number 10
+3
+Enter card number 11
+13
+Enter card number 12
+10
+Enter card number 13
+6
+Cards before being sorted:
+7 11 9 12 1 8 4 5 2 3 13 10 6
+Arrangement of cards after iteration 1
+7 11 9 12 1 8 4 5 2 3 13 10 6
+Arrangement of cards after iteration 2
+7 9 11 12 1 8 4 5 2 3 13 10 6
+Arrangement of cards after iteration 3
+7 9 11 12 1 8 4 5 2 3 13 10 6
+Arrangement of cards after iteration 4
+1 7 9 11 12 8 4 5 2 3 13 10 6
+Arrangement of cards after iteration 5
+1 7 8 9 11 12 4 5 2 3 13 10 6
+Arrangement of cards after iteration 6
+1 4 7 8 9 11 12 5 2 3 13 10 6
+Arrangement of cards after iteration 7
+1 4 5 7 8 9 11 12 2 3 13 10 6
+Arrangement of cards after iteration 8
+1 2 4 5 7 8 9 11 12 3 13 10 6
+Arrangement of cards after iteration 9
+1 2 3 4 5 7 8 9 11 12 13 10 6
+Arrangement of cards after iteration 10
+1 2 3 4 5 7 8 9 11 12 13 10 6
+Arrangement of cards after iteration 11
+1 2 3 4 5 7 8 9 10 11 12 13 6
+Arrangement of cards after iteration 12
+1 2 3 4 5 6 7 8 9 10 11 12 13
+Finally the sorted card order is:
+1 2 3 4 5 6 7 8 9 10 11 12 13
+
+
+Program:
+#include<stdio.h>
+int main(){
+   int i,e, count, temp, number[25],j;
+
+   printf("Enter the total number of cards\n");
+   scanf("%d",&count);
+   for(i=1;i<=count;i++){
+      printf("Enter card number %d\n", i);
+      scanf("%d",&number[i]);}
+    printf("Cards before being sorted:\n");
+    for(i=1;i<=count;i++)
+        printf("%d ", number[i]);
+       
+  for(i=2;i<=count;i++){
+      temp=number[i];
+      j=i-1;
+      while((temp<number[j])&&(j>=0)){
+         number[j+1]=number[j];
+         j=j-1;
+      }
+      number[j+1]=temp;
+   
+      printf("\nArrangement of cards after iteration %d\n",i-1);
+      for(e=1;e<=count;e++)
+        printf("%d ",number[e]);
+   }
+
+   printf("\nFinally the sorted card order is:\n");
+   for(i=1;i<=count;i++)
+      printf("%d ",number[i]);
+
+   return 0;
+}
