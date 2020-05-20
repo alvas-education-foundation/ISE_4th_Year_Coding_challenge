@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// tree node is defined
+class tree{
+	public:
+		int data;
+		tree *left;
+		tree *right;
+};
+
+//finding vertical sum
+void findVerticalSum(tree* root,int col,map<int,int> &hash){ 
+	if(root==NULL) //base case
+		return;
+	//finding sum for respecting column, hashing the column
+	hash[col]+=root->data; 
+	//recursively process left sub-tree
+	findVerticalSum(root->left,col-1,hash); 
+	//recursively process right sub-tree
+	findVerticalSum(root->right,col+1,hash); 
+}
+
+void vertical_sum(tree* root){
+	//ordered hash map
+	map<int,int> hash; 
+	//column no for root is 0
+	findVerticalSum(root,0,hash); 
+	cout<<"column"<<"\t"<<"sum\n";
+	//printing the values from hash map
+	for(auto it=hash.begin();it!=hash.end();it++){ 
+		//it->first= column no(key) , 
+		//it->second=vertical sum of respective column(value)
+		cout<<it->first<<"\t"<<it->second<<endl;  
+	}
+}
+
+// creating new node
+tree* newnode(int data)  
+{ 
+	tree* node = (tree*)malloc(sizeof(tree)); 
+	node->data = data; 
+	node->left = NULL; 
+	node->right = NULL; 
+	return(node); 
+} 
+
+int main() 
+{ 
+	//**same tree is builted as shown in example**
+	int c,K;
+	cout<<"Tree is built like the example aforesaid"<<endl;
+	//building the tree like as in the example
+	tree *root=newnode(2); 
+	root->left= newnode(7); 
+	root->right= newnode(5); 
+	root->right->right=newnode(9);
+	root->right->right->left=newnode(4);
+	root->left->left=newnode(2); 
+	root->left->right=newnode(6);
+	root->left->right->left=newnode(5);
+	root->left->right->right=newnode(11);
+
+	cout<<"finding vertical sums......"<<endl; 
+	vertical_sum(root);
+
+	return 0; 
+} 
