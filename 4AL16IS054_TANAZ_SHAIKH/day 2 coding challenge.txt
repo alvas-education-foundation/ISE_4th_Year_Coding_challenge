@@ -1,0 +1,134 @@
+#1.Mr. Vincent works in a door mat manufacturing company. One day, he designed a new door mat with the following specifications:
+
+Mat size must be N*M ( N is an odd natural number, M and  is  3times N .)
+The design should have 'WELCOME' written in the center.
+The design pattern should only use |, . and - characters.
+
+N, M = map(int,raw_input().split()) # More than 6 lines of code will result in 0 score. Blank lines are not counted.
+for i in xrange(0,N/2): 
+    print ('.|.'*i).rjust((M-2)/2,'-')+'.|.'+('.|.'*i).ljust((M-2)/2,'-')
+print 'WELCOME'.center(M,'-')
+for i in reversed(xrange(0,N/2)): 
+    print ('.|.'*i).rjust((M-2)/2,'-')+'.|.'+('.|.'*i).ljust((M-2)/2,'-')
+
+Compiler Message
+Success
+Input (stdin)
+7 21
+Expected Output
+
+---------.|.---------
+------.|..|..|.------
+---.|..|..|..|..|.---
+-------WELCOME-------
+---.|..|..|..|..|.---
+------.|..|..|.------
+
+2. You are asked to ensure that the first and last names of people begin with a capital letter in their passports. For example, alison heck should be capitalised correctly as Alison Heck.
+Given a full name, your task is to capitalize the name appropriately.
+
+def solve(s):
+
+    for i in s.split():
+        s = s.replace(i,i.capitalize())
+    return s
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = raw_input()
+
+    result = solve(s)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
+Compiler Message
+Success
+Input (stdin)
+
+hello world
+Expected Output
+
+Hello World
+
+3. Given an integer n, , perform the following conditional actions:
+
+If n is odd, print Weird
+If n is even and in the inclusive range of 2 to 5 , print Not Weird
+If n is even and in the inclusive range of 6 to 20 , print Weird
+If n is even and greater than 20 , print Not Weird
+
+n = input("")
+if n%2!=0 :
+    print ("Weird")
+elif n%2==0 :
+    for n in range(3,4,5) :
+            print ("Not Weird")
+elif n%2==0 :
+    for n in range(6,21) :
+            print ("Weird")
+else :
+    if (n%2==0 & n>20) :
+        print ("Not Weird")
+Input (stdin)
+3
+Your Output (stdout)
+Weird
+Expected Output
+Weird
+
+4. Read two integers from STDIN and print three lines where:
+
+The first line contains the sum of the two numbers.
+The second line contains the difference of the two numbers (first - second).
+The third line contains the product of the two numbers.
+
+if __name__ == '__main__':
+    a = int(raw_input())
+    b = int(raw_input())
+  
+
+print a + b
+print a - b
+print a * b
+
+Input (stdin)
+
+3
+2
+Your Output (stdout)
+5
+1
+6
+Expected Output
+
+5
+1
+6
+
+5.Given an integer n, , print the following values for each integer i from 1  to n:
+
+Decimal
+Octal
+Hexadecimal (capitalized)
+Binary
+The four values must be printed on a single line in the order specified above for each i  from 1 to n . Each value should be space-padded to match the width of the binary value of n .
+
+def print_formatted(number):
+    a=len('{:b}'.format(n))+1
+    for i in range (1,n+1):
+        print((str(i)).rjust(a-1," ")+(str('{:o}'.format(i))).rjust(a," ") +(str('{:X}'.format(i))).rjust(a," ") +(str('{:b}'.format(i))).rjust(a," "))
+if __name__ == '__main__':
+    n = int(raw_input())
+    print_formatted(n)
+
+Input (stdin)
+2
+Your Output (stdout)
+ 1  1  1  1
+ 2  2  2 10
+Expected Output
+ 1  1  1  1
+ 2  2  2 10
