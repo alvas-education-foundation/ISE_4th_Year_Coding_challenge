@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset='UTF-8'><meta name="robots" content="noindex">
+<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+<style>
+    body{
+  background-color: #212121;
+  color: #e2e2e2;
+  font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  /*letter-spacing: 0.02em;*/
+  margin:0px;
+  padding:0px;
+}
+.container{
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.left-col{
+  display:flex;
+  flex-direction: column;
+  padding-left: 5%;
+  flex: 1 0 0;
+}
+
+.right-col{
+  display:flex;
+  flex-direction: column;
+  padding-left :3%;
+  flex: 2 0 0;
+  background-color: #F0F0F0;
+  color:#212121;
+}
+.name h1{
+  text-align: center;
+  text-transform: uppercase;
+  color: RGB(59,166,216);
+}
+
+.name h1 span:first-child{
+  /*padding-left:0.3em;*/
+  letter-spacing: 0.2em;
+  font-weight: normal;
+}
+
+.photo {
+  margin: 20px 0;
+  align-self: center;
+  width: 50%;
+}
+
+.photo img{
+  border: 2px solid RGB(166, 170, 169);
+  overflow: hidde;
+  width: 100%;
+  height: auto;
+}
+
+h2{
+  text-transform: uppercase;
+  width: 90%;
+  font-size:1.8em;
+  color:RGB(59, 166, 216);
+  border-bottom: 2px solid RGB(166, 170, 169);
+}
+
+ul{
+  margin-bottom: 0px;
+  list-style:none;
+  /*border: 1px solid white;*/
+  padding-left:2%;
+}
+ul li{
+  display:flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width:90%;
+}
+ul li i{
+  margin-right: 10px;
+  width:20px;
+  color: RGB(59, 166, 216);
+  font-size: 1.3em;
+}
+ul li p{
+  margin-top: 0px;
+}
+ul li p a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.bar{
+  
+  margin: 0px;
+  margin-left: auto;
+  border: 2px solid  RGB(59, 166, 216);
+  border-radius:8px;
+  width: 60%;
+  height: 15px;
+  overflow: hidde;
+}
+
+.slider{
+  width:60%;
+  height:74%;
+  background-color: RGB(166,170,169);
+  border: 2px solid  rgba(0,0,0,0);
+  background-clip: padding-box;
+  border-radius: 6px;
+}
+
+.education{
+  
+}  
+.header{
+  display: flex;
+  flex-direction: row;
+  align-items:  center;
+  width: 93%;
+}
+.header i{
+  margin-top:10px;
+  margin-right: 10px;
+  color: RGB(59, 166, 216);
+}
+
+p.bold{
+  font-size:1.4em;
+  margin-bottom:0px;
+  font-weight: 500;
+}
+p.date{
+  margin-top: 5px;
+  font-size:1.2em;
+  margin-bottom: 50px;
+}
+
+ul.main{
+  display:flex;
+  flex-flow: row wrap;
+  padding:0px;
+  margin-bottom: 0px;
+  list-style: none;
+}
+ul.main li{
+  width: 40%;
+}
+
+ul.main li:nth-child(odd){
+  margin-right: 5%;
+}
+
+ul.main li p{
+  margin-top: 0px;
+}
+
+.main a{
+  text-decoration: none;
+  margin: auto;
+  width:50%;
+  border: 2px solid RGB(166, 170, 169);
+  text-align:center;
+  padding:0px;
+  color: inherit;
+  margin-bottom:50px;
+}
+.main a:hover{
+  background-color: #212121;
+  color: #e2e2e2;
+  border-color: #F0F0F0;
+}
+
+.main a h3 {
+  margin:0px;
+  padding:20px;
+}
+
+footer{
+  padding: 10px 0;
+  color: #f0f0f0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color:  RGB(59, 166, 216);
+}
+
+a.icon { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:40px;
+  height:40px;
+  font-size: 25px;
+  margin: 0 5px;
+  color: #f0f0f0;
+  border: 2px solid #f0f0f0;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: background-color 0.2s ease-in; 
+}
+
+a.icon:hover{
+  color: rgb(59, 166, 216);
+  background-color:  #f0f0f0;
+  transition: color 0.1s ease-in;
+}
+
+
+
+table {
+  font-family: "Helvetica Neue", Helvetica, sans-serif
+}
+thead {
+  background: SteelBlue;
+  color: white;
+}
+th,
+td {
+  font-size: 15px;
+  padding: 5px 10px;
+}
+
+
+
+  </style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
+<div class="container">
+<div class="left-col">
+<div class="photo"><img src="https://3.bp.blogspot.com/-4jOumFIZFoA/XVWAxNKXnGI/AAAAAAAABkY/jbs4kPEJaeYA17wUe-_g3uTvsH8z7AEsACK4BGAYYCw/s84/imgonline-com-ua-CompressToSize-MTiy1YyuJaCcly%2B%25281%2529.jpg" alt="photo" /></div>
+<div class="name">
+<h1 align="center"> Akshay Shenoy </h1>
+</div>
+<div class="personalInfo">
+<h2>personal info</h2>
+<ul class="info">
+<li><i class="fa fa-home "></i>
+<p>"Ashwini Nivas" K.G Road Hirgana Post, Murur, Karkala Tq, Udupi Dist Pin-576117</p>
+</li>
+<li><i class="fa fa-phone"></i>
+<p>+91 874 894 5737</p>
+</li>
+<li><i class="fa fa-envelope"></i>
+<p>akshayshenoy88@gmail.com</p>
+</li>
+</ul>
+</div>
+<div class="language">
+<h2>Language</h2>
+<ul>
+<li><i class="fa fa-language"></i>
+<p>English</p>
+</li>
+<li><i class="fa fa-language"></i>
+<p>Kannada</p>
+</li>
+<li><i class="fa fa-language"></i>
+<p>Konkani</p>
+</li>
+<li><i class="fa fa-language"></i>
+<p>Tulu</p>
+</li>
+<li><i class="fa fa-language"></i>
+<p>Sanskrith</p>
+</li>
+</ul>
+</div>
+<div class="hobbies">
+<h2>Hobbies / Intrests</h2>
+<ul>
+<li><i class="fa fa-film"></i>
+<p>Movies</p>
+</li>
+<li><i class="fa fa-bicycle"></i>
+<p>Sports</p>
+</li>
+<li><i class="fa fa-car"></i>
+<p>Traveling</p>
+</li>
+<li><i class="fa fa-music"></i>
+<p>Music</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="right-col">
+<div class="CAREEROBJECTIVE:">
+<div class="header">
+<i class="fa fa-snowflake-o fa-2x"></i>
+<h2>CAREER OBJECTIVE</h2>
+</div>
+Seeking a full-time career with an organization, which will permit me to use and
+contribute my abilities and also to enhance my knowledge and contribute
+towards its growth by committed and hardworking quality.
+</div>
+<div class="education">
+<div class="header">
+<i class="fa fa-graduation-cap fa-3x"></i>
+<h2>Education</h2>
+</div>
+<table>
+<thead>
+<tr>
+<th>Qualification</th>
+<th>College </th>
+<th>Board / University</th>
+<th>Aggregate % or CGPA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SSLC / 10TH</td>
+<td>Srimad Bhuvanendra College Karkala</td>
+<td>Karnataka State Board -2013 </td>
+<td>74.08%</td>
+</tr>
+<tr>
+<td>PUC / 12TH</td>
+<td>Sri Bhuvanendra College Karkala</td>
+<td>Karnataka State Board -2015 </td>
+<td>65.33%</td>
+</tr>
+<tr>
+<td>B.E.</td>
+<td>Alva's Institute Of Engineering & Technology</td>
+<td>Vishweshwaraya Tecnological Univarsity Belgum -2020</td>
+<td>6.28 CGPA</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="workExperiences">
+<div class="header">
+<i class="fa fa-file-text fa-2x"></i>
+<h2>CERTIFICATION COURSES / PAPER PUBLICATIONS</h2>
+</div>
+<p>1. Completed certification course on JAVA by Saara IT Solution Pvt Ltd</p>
+<p>2. Completed course on “Cloud Computing with Amazon Web Services development” by Udemy. </p>
+<p>3. Completed course on “Python Core and Advanced” by Udemy</p>
+<p>4. Published Paper entitled “An Efficient Approach for Blue Brain Technology to Advanced Researching” Certified by International Journal for Research Trends and Innovation (IJRTI).
+</div>
+<div class="INTERNSHIPS">
+<div class="header">
+<i class="fa fa-folder-open fa-3x"></i>
+<h2>INTERNSHIPS / MINI-PROJECTS </h2>
+</div>
+<p>1. Internship on “Arduino Uno using Embedded C” Conducted by Oscki Labs, Bangalore</p>
+<p>2. Mini-Project on Library Management Database System using DBMS</p>
+<p>3. Mini project on Resturant Seat Reservation System usinf File Structure</p>
+<p>4. Mini project on School Management System using Python Application Programming</p>
+</div>
+<div class="skills">
+<div class="header">
+<i class="fa fa-code fa-3x"></i>
+<h2>Skills</h2>
+</div>
+<h4>Programming Language</h4>
+<table style="width:100%" align="left">
+<tr>
+<td>C</td>
+<td>Java</td>
+<td>HTML</td>
+</tr>
+<tr>
+<td>C++</td>
+<td>SQL</td>
+</tr>
+</table>
+<h4>Professional Tools used</h4>
+<table style="width:113%" align="left">
+<tr>
+<td> Eclipse</td>
+<td> Git</td>
+<td>Atoms</td>
+<td>Codeblocks</td>
+</tr>
+<tr>
+<td>Netbeans</td>
+<td>MS Office</td>
+<td>Anaconda</td>
+</tr>
+</table>
+</div>
+<footer center>
+<h4>Akshay Shenoy © 2019.</h4>
+<a class="icon" target="_blank" href="https://www.linkedin.com/in/akshay-shenoy-ab734112b/">
+<i class="fa fa-linkedin"></i></a>
+<a class="icon" target="_blank" href="https://github.com/akshayshenoy">
+<i class="fa fa-github"></i></a>
+</footer>
+</body>
+</html>
