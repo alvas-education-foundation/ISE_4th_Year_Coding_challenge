@@ -1,0 +1,104 @@
+#1. Python has built-in string validation methods for basic data. It can check if a string is composed of alphabetical characters, alphanumeric characters, digits, etc.
+str.isalnum()
+This method checks if all the characters of a string are alphanumeric (a-z, A-Z and 0-9).
+
+if __name__ == '__main__':
+    s = raw_input()
+print any(c.isalnum() for c in s)
+print any(c.isalpha() for c in s)
+print any(c.isdigit() for c in s)
+print any(c.islower() for c in s)
+print any(c.isupper() for c in s)
+
+Compiler Message
+Success
+Input (stdin)
+D
+qA2
+Expected Output
+True
+True
+True
+True
+True
+
+2. Given an integer,n , and n space-separated integers as input, create a tuple,t , of those n integers. Then compute and print the result of hash(t) .
+
+Note: hash() is one of the functions in the __builtins__ module, so it need not be imported.
+
+print hash(tuple(map(int, raw_input().split(' '))))
+
+
+
+n = int(raw_input())
+l = list()
+integers = raw_input().split()
+for i in integers:
+        l.append(int(i))
+print hash(tuple(l))
+
+3.Errors detected during execution are called exceptions.
+for i in xrange(input()):
+    try:
+        k = map(int,raw_input().split())
+        print k[0]//k[1]
+    except ZeroDivisionError as e:
+            print "Error Code:",e
+    except ValueError as e:        
+            print "Error Code:",e
+
+Input (stdin)
+3
+1 0
+2 $
+3 1
+Your Output (stdout)
+Error Code: integer division or modulo by zero
+Error Code: invalid literal for int() with base 10: '$'
+3
+Expected Output
+Error Code: integer division or modulo by zero
+Error Code: invalid literal for int() with base 10: '$'
+3
+
+4.You are given a string and your task is to swap cases. In other words, convert all lowercase letters to uppercase letters and vice versa.
+
+def change(x):
+    if str.islower(x):
+        return str.upper(x)
+    else:
+        return str.lower(x)
+def swap_case(s):
+    return ('').join(map(change,s))
+if __name__ == '__main__':
+    s = raw_input()
+    result = swap_case(s)
+    print result
+
+Input (stdin)
+HackerRank.com presents "Pythonist 2".
+Your Output (stdout)
+hACKERrANK.COM PRESENTS "pYTHONIST 2".
+Expected Output
+hACKERrANK.COM PRESENTS "pYTHONIST 2".
+
+5. This tool computes the cartesian product of input iterables.
+It is equivalent to nested for-loops.
+For example, product(A, B) returns the same as ((x,y) for x in A for y in B).
+
+from itertools import product
+
+A = raw_input().split()
+A = list(map(int, A))
+B = raw_input().split()
+B = list(map(int, B))
+
+for i in product(A, B):
+    print i,
+Input (stdin)
+1 2
+3 4
+Your Output (stdout)
+(1, 3) (1, 4) (2, 3) (2, 4)
+Expected Output
+(1, 3) (1, 4) (2, 3) (2, 4)

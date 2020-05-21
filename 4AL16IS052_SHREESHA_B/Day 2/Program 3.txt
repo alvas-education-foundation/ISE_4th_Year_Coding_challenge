@@ -1,0 +1,42 @@
+Given two given numbers a and b where 1<=a<=b, find the number of perfect squares between a and b (a and b inclusive).
+
+Input:
+First line of input contains number of test cases T. Each line of test case contain numbers 'a' and 'b' seperated by a single space.
+
+Output:
+Number of perfect squares are displayed.
+
+Constraints:
+1 <= T <= 100
+1 <= a,b <= 105 
+Example:
+Input:
+2
+9 25
+1 1000
+
+Output:
+3
+31
+
+
+#include <bits/stdc++.h> 
+using namespace std; 
+  
+int countSquares(int a, int b) 
+{ 
+    int cnt = 0;
+    for (int i = a; i <= b; i++) 
+        for (int j = 1; j * j <= i; j++) 
+            if (j * j == i) 
+                cnt++; 
+    return cnt; 
+} 
+  
+int main() 
+{ 
+    int a = 9, b = 25; 
+    cout << "Count of squares is "
+         << countSquares(a, b); 
+    return 0; 
+} 
