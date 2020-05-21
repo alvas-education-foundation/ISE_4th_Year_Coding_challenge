@@ -1,0 +1,120 @@
+1. fibonacci series program without using recursion
+
+class FibonacciExample1{  
+public static void main(String args[])  
+{    
+ int n1=0,n2=1,n3,i,count=10;    
+ System.out.print(n1+" "+n2);   
+    
+ for(i=2;i<count;++i)    
+ {    
+  n3=n1+n2;    
+  System.out.print(" "+n3);    
+  n1=n2;    
+  n2=n3;    
+ }    
+  
+}}
+
+op: 0 1 1 2 3 5 8 13 21 34
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+2.fibonacci series program using recursion 
+
+class FibonacciExample2{  
+ static int n1=0,n2=1,n3=0;    
+ static void printFibonacci(int count){    
+    if(count>0){    
+         n3 = n1 + n2;    
+         n1 = n2;    
+         n2 = n3;    
+         System.out.print(" "+n3);   
+         printFibonacci(count-1);    
+     }    
+ }    
+ public static void main(String args[]){    
+  int count=10;    
+  System.out.print(n1+" "+n2);    
+  printFibonacci(count-2);   
+ }  
+} 
+
+op: 0 1 1 2 3 5 8 13 21 34
+
+
+------------------------------------------------------------------------------------------------------------------------
+3. Check whether given number is palindrome or not
+
+class PalindromeExample{  
+ public static void main(String args[]){  
+  int r,sum=0,temp;    
+  int n=454;
+  
+  temp=n;    
+  while(n>0){    
+   r=n%10;  
+   sum=(sum*10)+r;    
+   n=n/10;    
+  }    
+  if(temp==sum)    
+   System.out.println("palindrome number ");    
+  else    
+   System.out.println("not palindrome");    
+}  
+}  
+
+op: palindrome  number
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+4. factorial program using recursion. 
+
+class FactorialExample2{  
+ static int factorial(int n){    
+  if (n == 0)    
+    return 1;    
+  else    
+    return(n * factorial(n-1));    
+ }    
+ public static void main(String args[]){  
+  int i,fact=1;  
+  int number=4;    
+  fact = factorial(number);   
+  System.out.println("Factorial of "+number+" is: "+fact);    
+ }  
+}  
+
+op: Factorial of 4 is: 24
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+5. program to check Armstrong Number
+
+class ArmstrongExample{  
+  public static void main(String[] args)  {  
+    int c=0,a,temp;  
+    int n=153;//It is the number to check armstrong  
+    temp=n;  
+    while(n>0)  
+    {  
+    a=n%10;  
+    n=n/10;  
+    c=c+(a*a*a);  
+    }  
+    if(temp==c)  
+    System.out.println("armstrong number");   
+    else  
+        System.out.println("Not armstrong number");   
+   }  
+}  
+
+op: armstrong number
+
+
+--------------------------------------------------------------------------------------------------------------------------
