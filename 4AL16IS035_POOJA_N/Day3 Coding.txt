@@ -1,0 +1,180 @@
+1)
+Palindromes are strings that read the same from the left or right, for example madam or 0110.
+
+You will be given a string representation of a number and a maximum number of changes you can make. Alter the string, one digit at a time, to create the string representation of the largest number possible given the limit to the number of changes. The length of the string may not be altered, so you must consider 's left of all higher digits in your tests. For example  is valid,  is not.
+
+Given a string representing the starting number and a maximum number of changes allowed, create the largest palindromic string of digits possible or the string -1 if it's impossible to create a palindrome under the contstraints.
+
+Solution:
+
+#!/bin/python3
+import math
+import os
+import random
+import re
+import sys
+
+def highestValuePalindrome(s, n, k):
+    s=list(s)
+    if n<=k:
+        return '9'*n
+    mink=[0]*(n//2+1)
+    for i in range(n//2-1,-1,-1):
+        if s[i]!=s[n-1-i]:
+            mink[i]=mink[i+1]+1
+        else:
+            mink[i]=mink[i+1]
+    if mink[0]>k:
+        return '-1'
+    i=0
+    while i<n//2 and k>mink[i]:
+        if s[i]=='9':
+            if s[n-1-i]!='9':
+                s[n-1-i]='9'
+                k-=1
+        elif s[n-1-i]=='9':
+            s[i]='9'
+            k-=1
+        elif k-2>=mink[i+1]:
+            s[i]=s[n-1-i]='9'
+            k-=2
+        else:
+            if s[i]!=s[n-1-i]:
+                s[i]=s[n-1-i]=max(s[n-1-i],s[i])
+                k-=1
+        i+=1
+    if i<n//2:
+        for j in range(i,n//2):
+            if s[j]>s[n-1-j]:
+                s[n-1-j]=s[j]
+            else:
+                s[j]=s[n-1-j]
+    elif n%2:
+        if k>0:
+            s[n//2]='9'
+    return ''.join(s)
+
+s='12321'
+n=5
+k=1
+ans= highestValuePalindrome(s, n, k)
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nk = input().split()
+
+    n = int(nk[0])
+
+    k = int(nk[1])
+
+    s = input()
+
+    result = highestValuePalindrome(s, n, k)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
+
+***************************************************************************************************************************
+2)
+Python3 program to check for balanced parenthesis. 
+
+Solution:
+def areParanthesisBalanced(expr) : 
+	stack = [] 
+	for char in expr: 
+		if char in ["(", "{", "["]: 
+			stack.append(char) 
+		else: 
+
+			# IF current character is not opening 
+			# bracket, then it must be closing. 
+			# So stack cannot be empty at this point. 
+			if not stack: 
+				return False
+			current_char = stack.pop() 
+			if current_char == '(': 
+				if char != ")": 
+					return False
+			if current_char == '{': 
+				if char != "}": 
+					return False
+			if current_char == '[': 
+				if char != "]": 
+					return False
+	if stack: 
+		return False
+	return True
+if __name__ == "__main__" : 
+	expr = "{()}[]"; 
+	if areParanthesisBalanced(expr) : 
+		print("Balanced"); 
+	else : 
+		print("Not Balanced"); 
+***************************************************************************************************************************
+3)
+Given the names and grades for each student in a Physics class of  students, store them in a nested list and print the name(s) of any student(s) having the second lowest grade.
+
+Solution:
+N = int(raw_input())
+
+students = []
+for i in range(2*N):
+    students.append(raw_input().split())
+grades = {}
+for j in range(0, len(students), 2):
+    grades[students[j][0]] = float(students[j + 1][0])
+result = []
+num_to_match = sorted(set(grades.values()))[1]
+for pupil in grades.keys():
+    if grades[pupil] == num_to_match:
+        result.append(pupil)
+for k in sorted(result):
+    print k
+***************************************************************************************************************************
+4)
+Swap case problem
+
+Solution:
+def swap_case(s):
+
+    temp = []
+    l = list(s)
+
+    for i in l:
+        j = ""
+        if i.islower():
+            j = i.upper()
+        elif i.isupper():
+            j = i.lower()
+        else:
+            temp.append(i)
+        temp.append(j)
+    
+    r = ''.join(temp)
+    
+    return r
+
+s = input()
+result = swap_case(s)
+print(result)
+***************************************************************************************************************************
+5)Calculate no of upper-case and no of lower-case letters in the string
+
+Solution:
+def string_test(s):
+    d={"Upper_Case":0, "Lower_Case":0}
+    for c in s:
+        if c.isupper():
+           d["Upper_Case"]+=1
+        elif c.islower():
+           d["Lower_Case"]+=1
+        else:
+           pass
+    print ("Original String : ", s)
+    print ("No. of Upper case characters : ", d["Upper_Case"])
+    print ("No. of Lower case Characters : ", d["Lower_Case"])
+
+string_test('Alvas Institute of Engineering Engineering and Technology')
+***************************************************************************************************************************

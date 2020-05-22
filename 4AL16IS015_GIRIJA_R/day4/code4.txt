@@ -1,0 +1,174 @@
+1.Java program to ChecK for a palindrome using stack
+
+
+import java.util.Stack;
+import java.util.Scanner;
+class PalindromeTest {
+
+    public static void main(String[] args) {
+
+    	System.out.print("Enter any string:");
+        Scanner in=new Scanner(System.in);
+        String inputString = in.nextLine();
+        Stack stack = new Stack();
+
+        for (int i = 0; i < inputString.length(); i++) {
+            stack.push(inputString.charAt(i));
+        }
+
+        String reverseString = "";
+
+        while (!stack.isEmpty()) {
+            reverseString = reverseString+stack.pop();
+        }
+
+        if (inputString.equals(reverseString))
+            System.out.println("The input String is a palindrome.");
+        else
+            System.out.println("The input String is not a palindrome.");
+
+    }
+}
+
+Output 1:
+
+Enter any string:abccba
+The input String is a palindrome.
+
+2.Java program to ChecK for a palindrome using queue.
+
+
+
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.LinkedList;
+class PalindromeTest {
+
+    public static void main(String[] args) {
+
+    	System.out.print("Enter any string:");
+        Scanner in=new Scanner(System.in);
+        String inputString = in.nextLine();
+        Queue queue = new LinkedList();
+
+        for (int i = inputString.length()-1; i >=0; i--) {
+            queue.add(inputString.charAt(i));
+        }
+
+        String reverseString = "";
+
+        while (!queue.isEmpty()) {
+            reverseString = reverseString+queue.remove();
+        }
+        if (inputString.equals(reverseString))
+            System.out.println("The input String is a palindrome.");
+        else
+            System.out.println("The input String is not a palindrome.");
+
+    }
+}
+Output 1:
+
+Enter any string:xyzzyx
+xyzzyx
+The input String is a palindrome.
+
+Output 2:
+
+Enter any string:xyz
+The input String is not a palindrome.
+
+
+
+
+3.Java program to ChecK for a palindrome using while loop
+
+
+import java.util.Scanner;
+class PalindromeTest {
+   public static void main(String args[])
+   {
+      String reverseString="";
+      Scanner scanner = new Scanner(System.in);
+
+      System.out.println("Enter a string to check if it is a palindrome:");
+      String inputString = scanner.nextLine();
+
+      int length = inputString.length();
+
+      for ( int i = length - 1 ; i >= 0 ; i-- )
+         reverseString = reverseString + inputString.charAt(i);
+
+      if (inputString.equals(reverseString))
+         System.out.println("Input string is a palindrome.");
+      else
+         System.out.println("Input string is not a palindrome.");
+
+   }
+}
+Output 1:
+
+Enter a string to check if it is a palindrome:
+aabbaa
+Input string is a palindrome.
+Output 2:
+
+Enter a string to check if it is a palindrome:
+aaabbb
+Input string is not a palindrome.
+
+
+4.Java program to calculate area and circumference of circle.
+
+import java.util.Scanner;
+class CircleDemo
+{
+   static Scanner sc = new Scanner(System.in);
+   public static void main(String args[])
+   {
+      System.out.print("Enter the radius: ");
+      /*We are storing the entered radius in double
+       * because a user can enter radius in decimals
+       */
+      double radius = sc.nextDouble();
+      //Area = PI*radius*radius
+      double area = Math.PI * (radius * radius);
+      System.out.println("The area of circle is: " + area);
+      //Circumference = 2*PI*radius
+      double circumference= Math.PI * 2*radius;
+      System.out.println( "The circumference of the circle is:"+circumference) ;
+   }
+}
+Output:
+
+
+Enter the radius: 1
+The area of circle is: 3.141592653589793
+The circumference of the circle is:6.283185307179586
+
+
+5.Java program to find a power of a number
+
+public class JavaExample {
+    public static void main(String[] args) {
+    	//Here number is the base and p is the exponent
+        int number = 2, p = 5;
+        long result = 1;
+        
+        //Copying the exponent value to the loop counter
+        int i = p;
+        for (;i != 0; --i)
+        {
+            result *= number;
+        }
+        
+        //Displaying the output
+        System.out.println(number+"^"+p+" = "+result);
+    }
+}
+Output:
+2^5=32
+
+
+
+
