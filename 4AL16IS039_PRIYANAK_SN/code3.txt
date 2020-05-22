@@ -1,0 +1,271 @@
+1)A program that implements a stack using linked list 
+
+#include <iostream>
+using namespace std;
+struct Node { 
+   int data; 
+   struct Node *next; 
+}; 
+struct Node* top = NULL; 
+void push(int val) {
+   struct Node* newnode = (struct Node*) malloc(sizeof(struct Node)); 
+   newnode->data = val; 
+   newnode->next = top; 
+   top = newnode; 
+}
+void pop() {
+   if(top==NULL)
+      cout<<"Stack Underflow"<<endl;
+   else {
+      cout<<"The popped element is "<< top->data <<endl;
+      top = top->next;
+   }
+}
+void display() {
+   struct Node* ptr;
+   if(top==NULL)
+      cout<<"stack is empty";
+   else {   
+      ptr = top; 
+      cout<<"Stack elements are: ";
+      while (ptr != NULL) { 
+         cout<< ptr->data <<" "; 
+         ptr = ptr->next; 
+      } 
+   }
+   cout<<endl;
+}
+int main() {
+   int ch, val; 
+   cout<<"1) Push in stack"<<endl;
+   cout<<"2) Pop from stack"<<endl;
+   cout<<"3) Display stack"<<endl;
+   cout<<"4) Exit"<<endl;
+   do {
+      cout<<"Enter choice: "<<endl;
+      cin>>ch;
+      switch(ch) {
+         case 1: {   
+            cout<<"Enter value to be pushed:"<<endl;
+            cin>>val;
+            push(val);
+            break;
+         }
+         case 2: {
+            pop();
+            break;
+         }
+         case 3: {
+            display();
+            break;
+         }
+         case 4: {
+            cout<<"Exit"<<endl;
+            break;
+         }
+         default: {
+            cout<<"Invalid Choice"<<endl;
+         }
+      }
+   }while(ch!=4); 
+      return 0;
+}  
+
+2)Dijkstra's algorithm  
+
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+#define INFINITY 9999
+#define max 5
+void dijkstra(int G[max][max],int n,int startnode);
+int main() {
+   int G[max][max]={{0,1,0,3,10},{1,0,5,0,0},{0,5,0,2,1},{3,0,2,0,6},{10,0,1,6,0}};
+   int n=5;
+   int u=0;
+   dijkstra(G,n,u);
+   return 0;
+}
+void dijkstra(int G[max][max],int n,int startnode) {
+   int cost[max][max],distance[max],pred[max];
+   int visited[max],count,mindistance,nextnode,i,j;
+   for(i=0;i<n;i++)
+      for(j=0;j<n;j++)
+   if(G[i][j]==0)
+      cost[i][j]=INFINITY;
+   else
+      cost[i][j]=G[i][j];
+   for(i=0;i<n;i++) {
+      distance[i]=cost[startnode][i];
+      pred[i]=startnode;
+      visited[i]=0;
+   }
+   distance[startnode]=0;
+   visited[startnode]=1;
+   count=1;
+   while(count<n-1) {
+      mindistance=INFINITY;
+      for(i=0;i<n;i++)
+         if(distance[i]<mindistance&&!visited[i]) {
+         mindistance=distance[i];
+         nextnode=i;
+      }
+      visited[nextnode]=1;
+      for(i=0;i<n;i++)
+         if(!visited[i])
+      if(mindistance+cost[nextnode][i]<distance[i]) {
+         distance[i]=mindistance+cost[nextnode][i];
+         pred[i]=nextnode;
+      }
+      count++;
+   }
+   for(i=0;i<n;i++)
+   if(i!=startnode) {
+      cout<<"\nDistance of node"<<i<<"="<<distance[i];
+      cout<<"\nPath="<<i;
+      j=i;
+      do {
+         j=pred[j];
+         cout<<"<-"<<j;
+      }while(j!=startnode);
+   }
+}
+
+3) Insertion in sigly linked list
+
+#include <iostream>
+using namespace std;
+struct Node { 
+   int data; 
+   struct Node *next; 
+}; 
+struct Node* head = NULL;   
+void insert(int new_data) { 
+   struct Node* new_node = (struct Node*) malloc(sizeof(struct Node)); 
+   new_node->data = new_data; 
+   new_node->next = head; 
+   head = new_node; 
+} 
+void display() { 
+   struct Node* ptr;
+   ptr = head;
+   while (ptr != NULL) { 
+      cout<< ptr->data <<" "; 
+      ptr = ptr->next; 
+   } 
+} 
+int main() { 
+   insert(3);
+   insert(1);
+   insert(7);
+   insert(2);
+   insert(9);
+   cout<<"The linked list is: ";
+   display(); 
+   return 0; 
+} 
+
+4)Write a program to Delete a Tree in C programming
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node {
+   int data;
+   struct node* left;
+   struct node* right;
+};
+struct node* addnode(int data) {
+   struct node* node = (struct node*)
+      malloc(sizeof(struct node));
+   node->data = data;
+   node->left = NULL;
+   node->right = NULL;
+   return(node);
+}
+void nodedel(struct node* node) {
+   if (node == NULL) return;
+   nodedel(node->left);
+   nodedel(node->right);
+   printf("\n Node deleted, value is %d", node->data);
+   free(node);
+}
+int main() {
+   struct node *root = addnode(9);
+   root->left = addnode(4);
+   root->right = addnode(15);
+   root->left->left = addnode(2);
+   root->left->right = addnode(6);
+   root->right->left = addnode(12);
+   root->right->right = addnode(17);
+   nodedel(root);
+   root = NULL;
+   printf("\n Tree deleted ");
+   return 0;
+}
+
+5)
+
+#include <iostream>
+using namespace std;
+struct adjNode {
+    int val, cost;
+    adjNode* next;
+};
+struct graphEdge {
+    int start_ver, end_ver, weight;
+};
+class DiaGraph{
+       adjNode* getAdjListNode(int value, int weight, adjNode* head)   {
+        adjNode* newNode = new adjNode;
+        newNode->val = value;
+        newNode->cost = weight;
+         
+        newNode->next = head;   
+        return newNode;
+    }
+    int N;  
+public:
+    adjNode **head;                
+    DiaGraph(graphEdge edges[], int n, int N)  {
+       head = new adjNode*[N]();
+        this->N = N;
+       for (int i = 0; i < N; ++i)
+            head[i] = nullptr;
+            for (unsigned i = 0; i < n; i++)  {
+            int start_ver = edges[i].start_ver;
+            int end_ver = edges[i].end_ver;
+            int weight = edges[i].weight;
+            adjNode* newNode = getAdjListNode(end_ver, weight, head[start_ver]);
+              head[start_ver] = newNode;
+             }
+    }
+       DiaGraph() {
+    for (int i = 0; i < N; i++)
+        delete[] head[i];
+        delete[] head;
+     }
+};
+void display_AdjList(adjNode* ptr, int i)
+{
+    while (ptr != nullptr) {
+        cout << "(" << i << ", " << ptr->val
+            << ", " << ptr->cost << ") ";
+        ptr = ptr->next;
+    }
+    cout << endl;
+}
+
+int main()
+{
+    graphEdge edges[] = {0,1,2},{0,2,4},{1,4,3},{2,3,2},{3,1,4},{4,3,3}
+    };
+    int N = 6;      
+    int n = sizeof(edges)/sizeof(edges[0]);
+    DiaGraph diagraph(edges, n, N);
+   cout<<"Graph adjacency list "<<endl<<"(start_vertex, end_vertex, weight):"<<endl;
+    for (int i = 0; i < N; i++)
+    {
+        display_AdjList(diagraph.head[i], i);
+    }
+    return 0;
+}
