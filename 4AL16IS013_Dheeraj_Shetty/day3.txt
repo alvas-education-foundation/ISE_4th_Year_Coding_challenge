@@ -1,0 +1,357 @@
+Question 1)
+
+Strings are usually ordered in lexicographical order. That means they are ordered by comparing their leftmost different characters. For example,  because . Also  because . If one string is an exact prefix of the other it is lexicographically smaller, e.g., .
+
+Given an array of strings sorted in lexicographical order, print all of its permutations in strict lexicographical order. If two permutations look the same, only print one of them. See the 'note' below for an example.
+
+Complete the function next_permutation which generates the permutations in the described order.
+
+For example, . The six permutations in correct order are:
+
+ab bc cd
+ab cd bc
+bc ab cd
+bc cd ab
+cd ab bc
+cd bc ab
+Note: There may be two or more of the same string as elements of .
+For example, . Only one instance of a permutation where all elements match should be printed. In other words, if , then print either  or  but not both.
+
+A three element array having three discrete elements has six permutations as shown above. In this case, there are three matching pairs of permutations where  and  are switched. We only print the three visibly unique permutations:
+
+ab ab bc
+ab bc ab
+bc ab ab
+Input Format
+
+The first line of each test file contains a single integer , the length of the string array .
+
+Each of the next  lines contains a string .
+
+Constraints
+
+ contains only lowercase English letters.
+Output Format
+
+Print each permutation as a list of space-separated strings on a single line.
+
+Sample Input 0
+
+2
+ab
+cd
+Sample Output 0
+
+ab cd
+cd ab
+
+
+Solution:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void swap(char **s, int i, int j){
+    char * tmp = s[i];
+    s[i] = s[j];
+    s[j] = tmp;
+}
+
+void reverse(char **s, int start, int end){
+    while(start<end){
+        swap(s,start++,end--);
+    }
+}
+
+int next_permutation(int n, char **s)
+{
+    for(int i=n-2;i>-1;i--){
+        if(strcmp(s[i+1],s[i])>0){
+          
+            for(int j=n-1;j>i;j--){
+                if(strcmp(s[j],s[i])>0){
+                   
+                    swap(s,i,j);
+                    
+                    reverse(s,i+1,n-1);
+                    return 1;
+                }
+            }
+        }
+    }
+    return 0;
+}
+int main()
+{
+	char **s;
+	int n;
+	scanf("%d", &n);
+	s = calloc(n, sizeof(char*));
+	for (int i = 0; i < n; i++)
+	{
+		s[i] = calloc(11, sizeof(char));
+		scanf("%s", s[i]);
+	}
+	do
+	{
+		for (int i = 0; i < n; i++)
+			printf("%s%c", s[i], i == n - 1 ? '\n' : ' ');
+	} while (next_permutation(n, s));
+	for (int i = 0; i < n; i++)
+		free(s[i]);
+	free(s);
+	return 0;
+}
+
+===============================================================================================================================================================
+
+
+Question 2)
+In this challenge, we use regular expressions (RegEx) to remove instances of words that are repeated more than once, but retain the first occurrence of any case-insensitive repeated word. For example, the words love and to are repeated in the sentence I love Love to To tO code. Can you complete the code in the editor so it will turn I love Love to To tO code into I love to code?
+
+To solve this challenge, complete the following three lines:
+
+Write a RegEx that will match any repeated word.
+Complete the second compile argument so that the compiled RegEx is case-insensitive.
+Write the two necessary arguments for replaceAll such that each repeated word is replaced with the very first instance the word found in the sentence. It must be the exact first occurrence of the word, as the expected output is case-sensitive.
+Note: This challenge uses a custom checker; you will fail the challenge if you modify anything other than the three locations that the comments direct you to complete. To restore the editor's original stub code, create a new buffer by clicking on the branch icon in the top left of the editor.
+
+
+Solution:
+
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class DuplicateWords {
+
+    public static void main(String[] args) {
+
+        String regex = "\\b(\\w+)(\\W+\\1\\b)+";
+        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+
+        Scanner in = new Scanner(System.in);
+        int numSentences = Integer.parseInt(in.nextLine());
+        
+        while (numSentences-- > 0) {
+            String input = in.nextLine();
+            
+            Matcher m = p.matcher(input);
+            
+           
+            while (m.find()) {
+                input = input.replaceAll(m.group(), m.group(1));
+            }
+            
+            
+            System.out.println(input);
+        }
+        
+        in.close();
+    }
+}
+
+
+===============================================================================================================================================================
+
+Question 3)
+
+You inherited a piece of code that performs username validation for your company's website. The existing function works reasonably well, but it throws an exception when the username is too short. Upon review, you realize that nobody ever defined the exception.
+
+The inherited code is provided for you in the locked section of your editor. Complete the code so that, when an exception is thrown, it prints Too short: n (where  is the length of the given username).
+
+Solution :-
+
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <exception>
+using namespace std;
+/* Define the exception here */
+class BadLengthException : public std::exception{
+    private:
+        std::string n;
+    public:
+        BadLengthException(int size){ n = std::to_string(size); };
+
+        const char* what() const noexcept override{
+            return n.c_str();
+        }
+
+        
+        
+
+};
+
+
+bool checkUsername(string username) {
+    bool isValid = true;
+    int n = username.length();
+    if(n < 5) {
+        throw BadLengthException(n);
+    }
+    for(int i = 0; i < n-1; i++) {
+        if(username[i] == 'w' && username[i+1] == 'w') {
+            isValid = false;
+        }
+    }
+    return isValid;
+}
+
+int main() {
+    int T; cin >> T;
+    while(T--) {
+        string username;
+        cin >> username;
+        try {
+            bool isValid = checkUsername(username);
+            if(isValid) {
+                cout << "Valid" << '\n';
+            } else {
+                cout << "Invalid" << '\n';
+            }
+        } catch (BadLengthException e) {
+            cout << "Too short: " << e.what() << '\n';
+        }
+    }
+    return 0;
+}
+
+===============================================================================================================================================================
+
+
+Question 4)
+
+You are required to extend the existing code so that it handles std::invalid_argument exception properly. More specifically, you have to extend the implementation of process_input function. It takes integer  as an argument and has to work as follows:
+
+It calls function largest_proper_divisor(n).
+If this call returns a value without raising an exception, it should print in a single line result=d where  is the returned value.
+Otherwise, if the call raises a std::invalid_argument exception, it has to print in a single line the string representation of the raised exception, i.e. its message.
+Finally, no matter if the exception is raised or not, it should print in a single line returning control flow to caller after any other previously printed output.
+To keep the code quality high, you are advised to have exactly one line printing returning control flow to caller in the body of process_input function.
+
+Your function will be tested against several cases by the locked template code.
+
+Solution:-
+
+#include <iostream>
+#include <stdexcept>
+
+using namespace std;
+
+int largest_proper_divisor(int n) {
+    if (n == 0) {
+        throw invalid_argument("largest proper divisor is not defined for n=0");
+    }
+    if (n == 1) {
+        throw invalid_argument("largest proper divisor is not defined for n=1");
+    }
+    for (int i = n/2; i >= 1; --i) {
+        if (n % i == 0) {
+            return i;
+        }
+    }
+    return -1; 
+}
+
+void process_input(int n) {
+    try {
+        int d = largest_proper_divisor(n);
+        cout << "result=" << d << endl;
+    }
+    catch (invalid_argument& e) {
+        cout << e.what() << endl;
+    }
+    cout << "returning control flow to caller" << endl;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    process_input(n);
+    return 0;
+}
+
+===============================================================================================================================================================
+
+Question 5)
+
+Palindromes are strings that read the same from the left or right, for example madam or 0110.
+
+You will be given a string representation of a number and a maximum number of changes you can make. Alter the string, one digit at a time, to create the string representation of the largest number possible given the limit to the number of changes. The length of the string may not be altered, so you must consider 's left of all higher digits in your tests. For example  is valid,  is not.
+
+Given a string representing the starting number and a maximum number of changes allowed, create the largest palindromic string of digits possible or the string -1 if it's impossible to create a palindrome under the contstraints.
+
+Solution :-
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the highestValuePalindrome function below.
+def highestValuePalindrome(s, n, k):
+    s=list(s)
+    if n<=k:
+        return '9'*n
+    mink=[0]*(n//2+1)
+    for i in range(n//2-1,-1,-1):
+        if s[i]!=s[n-1-i]:
+            mink[i]=mink[i+1]+1
+        else:
+            mink[i]=mink[i+1]
+    if mink[0]>k:
+        return '-1'
+    i=0
+    while i<n//2 and k>mink[i]:
+        if s[i]=='9':
+            if s[n-1-i]!='9':
+                s[n-1-i]='9'
+                k-=1
+        elif s[n-1-i]=='9':
+            s[i]='9'
+            k-=1
+        elif k-2>=mink[i+1]:
+            s[i]=s[n-1-i]='9'
+            k-=2
+        else:
+            if s[i]!=s[n-1-i]:
+                s[i]=s[n-1-i]=max(s[n-1-i],s[i])
+                k-=1
+        i+=1
+    if i<n//2:
+        for j in range(i,n//2):
+            if s[j]>s[n-1-j]:
+                s[n-1-j]=s[j]
+            else:
+                s[j]=s[n-1-j]
+    elif n%2:
+        if k>0:
+            s[n//2]='9'
+    return ''.join(s)
+
+s='12321'
+n=5
+k=1
+ans= highestValuePalindrome(s, n, k)
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nk = input().split()
+
+    n = int(nk[0])
+
+    k = int(nk[1])
+
+    s = input()
+
+    result = highestValuePalindrome(s, n, k)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
