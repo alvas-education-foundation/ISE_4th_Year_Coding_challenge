@@ -1,0 +1,134 @@
+1)Day of The Programmer:
+
+Marie invented a Time Machine and wants to test it by time-traveling to visit Russia on the Day of the Programmer (the 256th day of the year) during a year in the inclusive range from 1700 to 2700.
+
+Solution:
+#!/bin/python
+import math
+import os
+import random
+import re
+import sys
+ 
+# Complete the dayOfProgrammer function below.
+def dayOfProgrammer(year):
+    raise SystemError("This challenge is stupid")
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    year = int(raw_input().strip())
+    result = dayOfProgrammer(year)
+    fptr.write(result + '\n')
+    fptr.close()
+***************************************************************************************************************************
+2) Migratory Birds:
+
+You have been asked to help study the population of birds migrating across the continent. Each type of bird you are interested in will be identified by an integer value. Each time a particular kind of bird is spotted, its id number will be added to your array of sightings. You would like to be able to find out which type of bird is most common given a list of sightings. Your task is to print the type number of that bird and if two or more types of birds are equally common, choose the type with the smallest ID number.
+
+Solution:
+#!/bin/python
+import math
+import os
+import random
+import re
+import sys
+from collections import Counter
+ 
+# Complete the migratoryBirds function below.
+def migratoryBirds(arr):
+    mc = Counter(arr)
+    return mc.most_common(1)[0][0]
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    arr_count = int(raw_input().strip())
+    arr = map(int, raw_input().rstrip().split())
+    result = migratoryBirds(arr)
+    fptr.write(str(result) + '\n')
+    fptr.close()
+# Complete the migratoryBirds function below.
+def migratoryBirds(arr):
+    frequencies = [0] * 6
+    for ele in arr:
+        frequencies[ele] += 1
+    max_val = 0
+    max_idx = 5
+    for idx in xrange(5, 0, -1):
+        if frequencies[idx] >= max_val:
+            max_idx = idx
+            max_val = frequencies[idx]
+    return max_idx
+***************************************************************************************************************************
+3) Birthday Chocolate Problem:
+
+The member states of the UN are planning to send 2 people to the moon. They want them to be from different countries. You will be given a list of pairs of astronaut ID’s. Each pair is made of astronauts from the same country. Determine how many pairs of astronauts from different countries they can choose from.
+
+Solution:
+#!/bin/python
+import sys
+def getWays(squares, d, m):
+    cnt = 0
+    q = squares[:m-1]
+    for ele in squares[m-1:]:
+        q.append(ele)
+        if (sum(q) == d):
+            cnt += 1
+        q.pop(0)
+    return cnt
+n = int(raw_input().strip())
+s = map(int, raw_input().strip().split(' '))
+d,m = raw_input().strip().split(' ')
+d,m = [int(d),int(m)]
+result = getWays(s, d, m)
+print(result)
+
+***************************************************************************************************************************
+4) Left Rotation:
+
+A left rotation operation on an array shifts each of the array’s elements 1 unit to the left. For example, if 2 left rotations are performed on array [1,2,3,4,5], then the array would become [3,4,5,1,2].
+
+Solution:
+import math
+import os
+import random
+import re
+import sys
+ 
+# Complete the rotLeft function below.
+def rotLeft(a, d):
+    return a[d:] + a[:d]
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    nd = raw_input().split()
+    n = int(nd[0])
+    d = int(nd[1])
+    a = map(int, raw_input().rstrip().split())
+    result = rotLeft(a, d)
+    fptr.write(' '.join(map(str, result)))
+    fptr.write('\n')
+    fptr.close()
+
+***************************************************************************************************************************
+5) Breaking the Records:
+
+Maria plays college basketball and wants to go pro. Each season she maintains a record of her play. She tabulates the number of times she breaks her season record for most points and least points in a game. Points scored in the first game establish her record for the season, and she begins counting from there.
+
+Solution:
+#!/bin/python
+import sys
+def getRecord(s):
+    min_ele = s[0]
+    max_ele = s[0]
+    min_cnt = 0
+    max_cnt = 0
+    for ele in s:
+        if ele > max_ele:
+            max_ele = ele
+            max_cnt += 1
+        if ele < min_ele:
+            min_ele = ele
+            min_cnt += 1
+    return [max_cnt, min_cnt]
+n = int(raw_input().strip())
+s = map(int, raw_input().strip().split(' '))
+result = getRecord(s)
+print " ".join(map(str, result))
+***************************************************************************************************************************
