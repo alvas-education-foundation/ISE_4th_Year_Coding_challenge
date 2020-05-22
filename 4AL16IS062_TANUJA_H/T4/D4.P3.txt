@@ -1,0 +1,50 @@
+1. find largest 3 number in a list using heap queue algorithm
+
+import heapq as hq
+nums_list = [25, 35, 22, 85, 14, 65, 75, 22, 58]
+print("original list:")
+print(nums_list)
+
+largest_nums = hq.nlargest(3, nums_list)
+print("\nThree largest numbers are:", largest_nums)
+
+
+2.  Finding the percentage 
+
+n = int(input())
+
+student_marks = {}
+
+for _ in range(n):
+    name, *line = input().split()
+    scores = list(map(float, line))
+    student_marks[name] = scores
+query_name = input()
+
+print("{0:.2f}".format(round(sum(student_marks[query_name]) / len(student_marks[query_name]), 2)))
+
+
+3.  swap case problem
+
+def swap_case(s):
+
+    temp = []
+    l = list(s)
+
+    for i in l:
+        j = ""
+        if i.islower():
+            j = i.upper()
+        elif i.isupper():
+            j = i.lower()
+        else:
+            temp.append(i)
+        temp.append(j)
+    
+    r = ''.join(temp)
+    
+    return r
+
+s = input()
+result = swap_case(s)
+print(result)

@@ -1,0 +1,52 @@
+Given a sorted array A[](0 based index) and a key "k"  you need to complete the function bin_search to  determine the position of the key if the key is present in the array. If the key is not  present then you have to return -1. The arguments left and right denotes the left most index  and right most index of the array A[]. There are multiple test cases. For each test case, this function will be called individually.
+
+Input:
+The first line contains an integer 'T' denoting the number of test cases. Then 'T' test cases follow. Each test case consists of 3 lines. First line of each test case contains an integer N denoting the size of the array. Second line of each test case consists of 'N' space separated integers denoting the elements of the array A[]. The third line contains a key 'k' .
+
+Output:
+Prints the position of the key if its present in the array else print -1 if the key is not present in the array.
+
+Constraints:
+1 <= T <= 100
+1 <= N <= 200
+
+Example:
+Input:
+2
+5
+1 2 3 4 5 
+4
+5
+11 22 33 44 55
+445
+
+Output:
+3
+-1
+
+
+#include <stdio.h> 
+int binarySearch(int arr[], int l, int r, int x) 
+{ 
+    if (r >= l) { 
+        int mid = l + (r - l) / 2; 
+        if (arr[mid] == x) 
+            return mid; 
+        if (arr[mid] > x) 
+            return binarySearch(arr, l, mid - 1, x); 
+        return binarySearch(arr, mid + 1, r, x); 
+    } 
+    return -1; 
+} 
+  
+int main(void) 
+{ 
+    int arr[] = { 2, 3, 4, 10, 40 }; 
+    int n = sizeof(arr) / sizeof(arr[0]); 
+    int x = 10; 
+    int result = binarySearch(arr, 0, n - 1, x); 
+    (result == -1) ? printf("Element is not present in array") 
+                   : printf("Element is present at index %d", 
+                            result); 
+    return 0; 
+} 
