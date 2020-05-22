@@ -1,0 +1,36 @@
+Mathematicians love all sorts of odd properties of numbers. For instance, they consider 945 to be an interesting number, since it is the first odd number for which the sum of its divisors is larger than the number itself.
+
+To search for interesting numbers,Write a program that scans a range of numbers and determines the number that has the largest number of divisors in the range.
+
+Input Specification
+The first line of input specifies a range, consisting of a lower bound L and an upper bound U, where L and U are included in the range.
+
+Output Specification
+For each range, find the number P which has the largest number of divisors (if several numbers tie for first place, select the lowest), and the number of positive divisors D of P (where P is included as a divisor). Print the text 'Between L and U, P has a maximum of D divisors.
+#include<stdio.h>
+
+int main()
+
+{
+	
+int n,m,i,c=0;
+	
+printf("Enter the lower bound and upper bound values \n");
+	
+scanf("%d %d",&n,&m);
+    
+for(i=1;i<=n&&i<=m;i++)
+    
+{
+        
+if(n%i==0 && m%i==0)
+            
+c++;
+   
+ }
+	
+printf("Between %d and %d,%d has a maximum of %d divisors",n,m,i,c);
+	
+return 0;
+
+}

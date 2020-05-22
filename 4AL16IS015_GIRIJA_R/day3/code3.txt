@@ -1,0 +1,341 @@
+1. Chandu's girlfriend loves arrays that are sorted in non-increasing order. Today is her birthday. Chandu wants to give her some sorted arrays on her birthday. But the shop has only unsorted arrays. So, Chandu bought T unsorted arrays and is trying to sort them. But, he doesn't have much time to sort the arrays manually as he is getting late for the birthday party. So, he asked you to write a program to sort the T arrays in non-increasing order. Help him, or his girlfriend will kill him.
+Input:
+First line contains an integer T, denoting the number of test cases.
+First line of each test case contains an integer N, denoting the size of the array.
+Second line contains N space separated integers, denoting the array elements Ai.
+Output:
+For each test case, print the sorted array in non-increasing order.
+
+Constraints:
+1 <= T <= 100
+1 <= N <= 105
+0 <= Ai <= 109
+
+Sample Input               Sample Output
+2
+5
+2 5 2 4 3          5 4 3 2 2
+5
+5 4 2 3 1          5 4 3 2 1
+
+
+
+code:
+import java.io.BufferedReader;
+
+import java.io.InputStreamReader;
+
+import java.util.Random;
+
+public class Chandu_And_His_Girlfriend {
+
+   public static void main(String args[] ) throws Exception {  
+
+         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+         String line = br.readLine();
+
+         int N = Integer.parseInt(line);
+
+         for (int i = 0; i < N; i++) {
+
+          line=br.readLine();
+
+          int k=Integer.parseInt(line);
+
+          int arr[]=new int[k];
+
+          line=br.readLine();
+
+          String str[]=line.split(" ");
+
+           for(int p=0;p<str.length;p++){
+
+            arr[p]=Integer.parseInt(str[p]);
+
+           }
+
+          int[] ser=quickSort(arr, 0,arr.length-1);
+
+          for(int d=0;d<ser.length;d++){
+
+           System.out.print(ser[d]+" ");
+
+          }    System.out.println();
+
+          }
+
+      }
+
+
+  public  static int partition(int[] arr1,int start,int end) {
+
+   int pivot = arr1[end];
+
+   int partitionIndex=start;
+
+   for(int i=start;i<=end;i++){
+
+    if(arr1[i]>pivot){
+
+     int tmp=arr1[i];
+
+     arr1[i]=arr1[partitionIndex];
+
+     arr1[partitionIndex]=tmp;
+
+     partitionIndex++;
+
+    }
+
+   }
+
+   int tmp=arr1[partitionIndex];
+
+   arr1[partitionIndex]=arr1[end];
+
+   arr1[end]=tmp;
+
+   return partitionIndex;
+
+  }
+
+  public static int[] quickSort(int[] arr1,int start,int end){
+
+   if(start<end){
+
+    int partitionIndex=partition(arr1, start, end);
+
+    quickSort(arr1, start, partitionIndex-1);
+
+    quickSort(arr1, partitionIndex+1, end);
+
+   }
+
+   return arr1;
+
+  }
+
+}
+
+
+
+2. Chandu is a bad student. Once his teacher asked him to print the reverse of a given string. He took three hours to solve it. The teacher got agitated at Chandu and asked you the same question. Can you solve it?
+Input:
+The first line contains an integer T, denoting the number of test cases.
+Each test case contains a string S, comprising of only lower case letters.
+Output:
+For each test case, print the reverse of the string S.
+Constraints:
+1 <= T <= 10
+1 <= |S| <= 30
+
+
+Sample Input                 Sample Output
+2
+ab                              ba
+aba                             aba
+
+code:
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+
+class TestClass {
+         public static void main(String args[] ) throws Exception {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            String line = br.readLine();
+            int N = Integer.parseInt(line);
+            for (int i = 0; i < N; i++) {
+                String s=br.readLine();
+                String r="";
+                for(int j=s.length()-1;j>=0;j--){
+                   r=r+s.charAt(j);
+                }
+               System.out.println(r);
+           }
+       }
+}
+
+
+3.Chandu is very fond of strings. (Or so he thinks!) But, he does not like strings which have same consecutive letters. No one has any idea why it is so. He calls these strings as Bad strings. So, Good strings are the strings which do not have same consecutive letters. Now, the problem is quite simple. Given a string S, you need to convert it into a Good String.
+You simply need to perform one operation - if there are two same consecutive letters, delete one of them.
+Input:
+The first line contains an integer T, denoting the number of test cases.
+Each test case consists of a string S, which consists of only lower case letters.
+Output:
+For each test case, print the answer to the given problem.
+Constraints:
+1 <= T <= 10
+1 <= |S| <= 30
+
+Sample Input           Sample Output
+3
+abb            ab
+aaab                     ab
+ababa                   ababa
+
+code:
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+
+class TestClass {
+    public static void main(String args[] ) throws Exception {
+       BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String line = br.readLine();
+        int N = Integer.parseInt(line);
+        for (int i = 0; i < N; i++) {
+         String s= br.readLine();
+         String r="";
+         int x;
+         for(int j=0;j<s.length();j=x){
+          x=j;
+          while(++x<s.length() && s.charAt(x)==s.charAt(j));
+          r=r+s.charAt(j);
+         }
+            System.out.println(r);
+        }
+    }
+}
+
+
+4.You are given two numbers a and b. Your task is to find the sum of two numbers.
+Input
+The first line contains an integer t, denoting the number of test cases. Next t lines contain two integers, a and b separated by a space.
+Input Constraint
+1 <= t <= 1000000000
+1 <= a, b <= 1000000000
+Output
+For every number a and b, output the sum of two numbers a and b.
+
+
+Sample Input                Sample Output
+
+1
+1 2                3
+
+
+code:
+import java.math.BigInteger; 
+
+import java.io.BufferedReader;
+
+import java.io.InputStreamReader;
+
+
+class TestClass {
+
+    public static void main(String args[] ) throws Exception {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String line = br.readLine();
+
+        int N = Integer.parseInt(line);
+
+        for (int i = 0; i < N; i++) {
+
+        line=br.readLine();
+
+        String str[]=new String[line.length()];
+
+    str=line.split(" ");
+
+      BigInteger a=new BigInteger(str[0]);
+
+   BigInteger b=new BigInteger(str[1]);
+
+   BigInteger c=new BigInteger("0");
+
+   c=b.add(a);
+
+   System.out.println(c);
+
+        }
+
+    }
+
+}
+
+
+5.Our Monk loves candy!
+While taking a stroll in the park, he stumbled upon N Bags with candies. The i'th of these bags contains Ai candies.
+He picks up a bag, eats all the candies in it and drops it on the ground. But as soon as he drops the bag, the number of candies in the bag increases magically! Say the bag that used to contain X candies (before eating), now contains [X/2] candies! ,where [x] is the greatest integer less than x (Greatest Integer Function).
+Amazed by the magical spell, Monk can now have a lot more candies! But he has to return home in K minutes. In a singleminute,Monk can consume all the candies in a single bag, regardless of the number of candies in it.
+Find the maximum number of candies that Monk can consume.
+Input:
+First line contains an integer T. T test cases follow.
+First line of each test case contains two space-separated integers N and K.
+Second line of each test case contains N space-separated integers,the number of candies in the bags.
+Output:
+Print the answer to each test case in a new line.
+
+Constraints:
+1 ≤ T ≤ 10
+1 ≤ N ≤ 105
+0 ≤ K ≤ 105
+0 ≤ Ai ≤ 1010
+
+Sample Input                       Sample Output
+1
+5 3
+2 1 7 4 2                            14
+
+
+code:
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+
+class TestClass {
+      public static void main(String args[] ) throws Exception {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+          String line = br.readLine();
+          int N = Integer.parseInt(line);
+          int monk=0;
+          for (int i = 0; i < N; i++) {
+           line=br.readLine();
+           String str[]=new String[2];
+           str=line.split(" ");
+           int a=Integer.parseInt(str[0]);
+           int b=Integer.parseInt(str[1]);         
+           int arr[]=new int[a];
+          
+           line=br.readLine();
+           String st1[]=new String[a];
+           st1=line.split(" ");
+           for(int l=0;l<st1.length;l++){
+            arr[l]=Integer.parseInt(st1[l]);
+           }
+              for(int j=0;j<b;j++){
+               long max=0;
+                  int d=0;
+      for(int k=0;k<arr.length-1;k++){
+       if(arr[k]>arr[k+1]&&arr[k]>max){
+       max=arr[k];
+       d=k;
+       }else if(arr[k]<arr[k+1]&&arr[k+1]>max){
+       max=(long)arr[k+1];
+       d=k+1;
+       }
+      }
+      
+      arr[d]/=2;
+     
+      monk+=max;
+     
+     }  
+    
+              }
+          System.out.print(monk);
+              
+           
+       }
+}
+  
+
+
+
+
