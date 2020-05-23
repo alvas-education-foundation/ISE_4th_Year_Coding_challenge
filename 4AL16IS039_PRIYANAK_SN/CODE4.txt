@@ -1,0 +1,172 @@
+1)Convert InputStream To String In Java
+
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+public class Example {
+   public static void main(String[] args) throws IOException {
+       InputStreamReader isr = null;
+       BufferedReader br = null;
+       InputStream is = 
+            new ByteArrayInputStream("This is the content of my file".getBytes());
+       StringBuilder sb = new StringBuilder();
+       String content;
+       try {
+           isr = new InputStreamReader(is);
+	   br = new BufferedReader(isr);
+	   while ((content = br.readLine()) != null) {
+		sb.append(content);
+	   }
+	} catch (IOException ioe) {
+		System.out.println("IO Exception occurred");
+		ioe.printStackTrace();	
+	   } finally {
+		isr.close();
+		br.close();
+	      }
+        String mystring = sb.toString();
+	System.out.println(mystring);
+   }
+}
+
+2)Program to Multiply Two Matrices using a Function
+
+public class MultiplyMatrices {
+
+    public static void main(String[] args) {
+        int r1 = 2, c1 = 3;
+        int r2 = 3, c2 = 2;
+        int[][] firstMatrix = { {3, -2, 5}, {3, 0, 4} };
+        int[][] secondMatrix = { {2, 3}, {-9, 0}, {0, 4} };
+
+        // Mutliplying Two matrices
+        int[][] product = multiplyMatrices(firstMatrix, secondMatrix, r1, c1, c2);
+
+        // Displaying the result
+        displayProduct(product);
+    }
+
+    public static int[][] multiplyMatrices(int[][] firstMatrix, int[][] secondMatrix, int r1, int c1, int c2) {
+        int[][] product = new int[r1][c2];
+        for(int i = 0; i < r1; i++) {
+            for (int j = 0; j < c2; j++) {
+                for (int k = 0; k < c1; k++) {
+                    product[i][j] += firstMatrix[i][k] * secondMatrix[k][j];
+                }
+            }
+        }
+
+        return product;
+    }
+
+    public static void displayProduct(int[][] product) {
+        System.out.println("Product of two matrices is: ");
+        for(int[] row : product) {
+            for (int column : row) {
+                System.out.print(column + "    ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+3)Program to Find Transpose of a Matrix
+
+public class Transpose {
+
+    public static void main(String[] args) {
+        int row = 2, column = 3;
+        int[][] matrix = { {2, 3, 4}, {5, 6, 4} };
+
+        // Display current matrix
+        display(matrix);
+
+        // Transpose the matrix
+        int[][] transpose = new int[column][row];
+        for(int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                transpose[j][i] = matrix[i][j];
+            }
+        }
+
+        // Display transposed matrix
+        display(transpose);
+    }
+
+    public static void display(int[][] matrix) {
+        System.out.println("The matrix is: ");
+        for(int[] row : matrix) {
+            for (int column : row) {
+                System.out.print(column + "    ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+4)Convert list to array
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class ListArray {
+
+    public static void main(String[] args) {
+
+        List<String> list = new ArrayList<String>();
+        list.add("a");
+        list.add("b");
+
+        String[] array = new String[list.size()];
+        list.toArray(array);
+
+        System.out.println(Arrays.toString(array));
+
+    }
+}
+
+5)Armstrong Numbers Between Two Integers
+
+public class Armstrong {
+
+    public static void main(String[] args) {
+
+        int low = 999, high = 99999;
+
+        for(int number = low + 1; number < high; ++number) {
+
+            if (checkArmstrong(number))
+                System.out.print(number + " ");
+        }
+    }
+
+    public static boolean checkArmstrong(int num) {
+        int digits = 0;
+        int result = 0;
+        int originalNumber = num;
+
+        // number of digits calculation
+        while (originalNumber != 0) {
+            originalNumber /= 10;
+            ++digits;
+        }
+
+        originalNumber = num;
+
+        // result contains sum of nth power of its digits
+        while (originalNumber != 0) {
+            int remainder = originalNumber % 10;
+            result += Math.pow(remainder, digits);
+            originalNumber /= 10;
+        }
+
+        if (result == num)
+            return true;
+
+        return false;
+    }
+}

@@ -1,0 +1,179 @@
+1] Count of total Heads and Tails after N flips in a coin
+
+import math 
+def count_ht( s, N ):  
+      
+   
+    if s == "H": 
+        h = math.floor( N / 2 ) 
+        t = math.ceil( N / 2 ) 
+           
+    elif s == "T": 
+        h = math.ceil( N / 2 ) 
+        t = math.floor( N / 2 ) 
+          
+    return [h, t] 
+  
+ 
+if __name__ == "__main__": 
+    C = "H"
+    N = 5
+    l = count_ht(C, n) 
+    print("Head = ", l[0]) 
+    print("Tail = ", l[1]) 
+
+
+2] Minimum number of colors required to color a Circular Array
+
+  
+#include <bits/stdc++.h> 
+using namespace std; 
+
+void colorRequired(int arr[], int n) 
+{ 
+  
+    bool all_same = true; 
+  
+    bool one_adjacent_same = false; 
+  
+    for (int i = 0; i < n - 1; i++) { 
+  
+        if (arr[i] != arr[i + 1]) { 
+            all_same = false; 
+        } 
+  
+        if (arr[i] == arr[i + 1]) { 
+            one_adjacent_same = true; 
+        } 
+    } 
+  
+    if (all_same == true) { 
+        cout << 1 << endl; 
+        return; 
+    } 
+  
+    if (n % 2 == 0 
+        || one_adjacent_same == true) { 
+        cout << 2 << endl; 
+        return; 
+    } 
+  
+    cout << 3 << endl; 
+} 
+   
+int main() 
+{ 
+    int arr[] = { 1, 2, 1, 1, 2 }; 
+    int n = sizeof(arr) / sizeof(arr[0]); 
+  
+    colorRequired(arr, n); 
+    return 0; 
+} 
+
+3]Smallest number to make Array sum at most K by dividing each element
+
+
+#include <bits/stdc++.h> 
+using namespace std; 
+ 
+int findMinDivisor(int arr[], int n, int limit) 
+{ 
+    int low = 0, high = 1e9; 
+    while (low < high) { 
+        int mid = (low + high) / 2; 
+        int sum = 0; 
+  
+
+        for (int i = 0; i < n; i++) { 
+            sum += ceil((double)arr[i] / (double)mid); 
+        } 
+  
+        if (sum <= limit) 
+            high = mid; 
+        else
+  
+            low = mid + 1; 
+    } 
+  
+    return low; 
+} 
+  
+int main() 
+{ 
+    int arr[] = { 2, 3, 4, 9 }; 
+    int N = sizeof(arr) / sizeof(arr[0]); 
+  
+    int K = 6; 
+  
+    cout << findMinDivisor(arr, N, K); 
+} 
+
+4] Sum of all Palindrome Numbers present in a Linked list
+
+
+#include <bits/stdc++.h> 
+using namespace std; 
+
+struct Node { 
+    int data; 
+    Node* next; 
+}; 
+
+void push(Node** head_ref, int new_data) 
+{ 
+    Node* new_node = (Node*)malloc( 
+        sizeof(struct Node)); 
+  
+    new_node->data = new_data; 
+  
+
+    new_node->next = (*head_ref); 
+  
+    (*head_ref) = new_node; 
+} 
+bool isPalin(int n) 
+{ 
+    int d = 0, s = 0; 
+    int temp = n; 
+    while (n > 0) { 
+        d = n % 10; 
+        s = s * 10 + d; 
+        n = n / 10; 
+    } 
+
+    return temp == s; 
+} 
+ 
+int sumOfpal(Node* head_1) 
+{ 
+    int s = 0; 
+    Node* ptr = head_1; 
+    while (ptr != NULL) { 
+
+        if (isPalin(ptr->data)) { 
+  
+            // Add the value 
+            // to the sum 
+            s += ptr->data; 
+        } 
+        ptr = ptr->next; 
+    } 
+    return s; 
+} 
+  
+int main() 
+{ 
+
+    Node* head1 = NULL; 
+  
+    push(&head1, 13); 
+    push(&head1, 212); 
+    push(&head1, 22); 
+    push(&head1, 44); 
+    push(&head1, 4); 
+    push(&head1, 3); 
+  
+    cout << sumOfpal(head1) 
+         << endl; 
+    return 0; 
+} 
