@@ -1,0 +1,184 @@
+1).Mathematicians love all sorts of odd properties of numbers. For instance, they consider 945 to be an interesting number, since it is the first odd number for which the sum of its divisors is larger than the number itself.
+
+To search for interesting numbers,Write a program that scans a range of numbers and determines the number that has the largest number of divisors in the range.
+
+Input Specification
+The first line of input specifies a range, consisting of a lower bound L and an upper bound U, where L and U are included in the range.
+
+Output Specification
+For each range, find the number P which has the largest number of divisors (if several numbers tie for first place, select the lowest), 
+and the number of positive divisors D of P (where P is included as a divisor). Print the text 'Between L and U, P has a maximum of
+ D divisors.
+
+
+#include<stdio.h>
+
+int main()
+
+{
+	
+int n,m,i,c=0;
+	
+printf("Enter the lower bound and upper bound values \n");
+	
+scanf("%d %d",&n,&m);
+    
+for(i=1;i<=n&&i<=m;i++)
+    
+{
+        
+if(n%i==0 && m%i==0)
+            
+c++;
+   
+ }
+	
+printf("Between %d and %d,%d has a maximum of %d divisors",n,m,i,c);
+
+
+
+
+
+2)program to implement Alexander Bogomolny’s UnOrdered Permutation Algorithm 
+
+
+#include <iostream>
+using namespace std; 
+   
+void print(int perm[], int N) 
+{ 
+    for (int i = 0; i < N; i++) 
+        cout << " " << perm[i]; 
+    cout << "\n"; 
+} 
+  
+ 
+void AlexanderBogomolyn(int perm[], int N, int k) 
+{ 
+    static int level = -1; 
+  
+  
+    level = level + 1; 
+    perm[k] = level; 
+  
+    if (level == N) 
+        print(perm, N); 
+    else
+        for (int i = 0; i < N; i++) 
+  
+            
+            if (perm[i] == 0) 
+                AlexanderBogomolyn(perm, N, i); 
+  
+    level = level - 1; 
+      
+    perm[k] = 0; 
+} 
+  
+
+int main() 
+{ 
+    int i, N = 3; 
+    int perm[N] = { 0 }; 
+    AlexanderBogomolyn(perm, N, 0); 
+    return 0; 
+} 
+
+
+
+
+3)#include <bits/stdc++.h>
+using namespace std;
+
+void capitalize(char* arr,int i){
+	//ascii value of each lower case letter-ascii value 
+	//of each uppercase letter=32
+	//i is the length of line
+	unordered_set<int> table;
+	table.insert(0); //index of first letter of line
+	table.insert(i-1);//index of last letter of line
+	
+	for(int j=1;j<i;j++){
+		if(arr[j]==' '){
+			// last letter of word is before 
+			//space & first letter of word is after space
+			//check index already present in hash table or not
+			if(table.find(j-1)==table.end())
+				table.insert(j-1); //if not insert index
+			//check index already present in hash table or not
+			if(table.find(j+1)==table.end())			
+				table.insert(j+1); //if not insert index
+		}
+	}
+	//capitalize
+	for(auto it=table.begin();it!=table.end();it++)
+		arr[*it]-=32;
+	printf("converted input line is: ");
+	//printing 
+	for(int j=0;j<i;j++)
+		printf("%c",arr[j]);
+	printf("\n");
+}
+
+int main(){
+	//store the input line
+	char arr[100];
+	char c;
+	int i=0;
+
+	printf("input the line.....\n");
+	scanf("%c",&c);
+	while(c!='\n'){
+		arr[i++]=c;
+		scanf("%c",&c);
+	}
+	capitalize(arr,i);
+	
+	return 0;
+}
+
+
+
+
+4)#include <iostream>
+using namespace std;
+int main() {
+   int a = 534;
+   int sum;
+   if(a)
+      sum = a % 9 == 0 ? 9 : a % 9 ;
+   else
+      sum = 0;
+   cout<<"The final sum is "<<sum;
+   return 0;
+}	
+return 0;
+
+}
+
+
+5)#include <stdio.h>
+int main() {
+    int low, high, i, flag;
+    printf("Enter two numbers(intervals): ");
+    scanf("%d %d", &low, &high);
+    printf("Prime numbers between %d and %d are: ", low, high);
+
+    while (low < high) {
+        flag = 0;
+
+        // if low is a non-prime number, flag will be 1
+        for (i = 2; i <= low / 2; ++i) {
+            if (low % i == 0) {
+                flag = 1;
+                break;
+            }
+        }
+
+        if (flag == 0)
+            printf("%d ", low);
+        ++low;
+    }
+
+    return 0;
+}
