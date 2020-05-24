@@ -1,0 +1,41 @@
+Given a number N, print the first N fibonacci numbers.
+
+Input:
+The first line of input contains an integer T denoting the number of test cases. Then T test cases follow. The first line of each test case contains the integer N.
+
+Output:
+Print the first n fibonacci numbers with a space between each number. Print the answer for each test case in a new line.
+
+Constraints:
+1<= T <=100
+1<= N <=84
+
+Example:
+Input:
+2
+7
+5
+
+Output:
+1 1 2 3 5 8 13
+1 1 2 3 5
+
+
+void printFibonacciNumbers(int n) 
+{ 
+    int f1 = 0, f2 = 1, i; 
+    if (n < 1) 
+        return; 
+    for (i = 1; i <= n; i++) 
+    { 
+        printf("%d ", f2); 
+        int next = f1 + f2; 
+        f1 = f2; 
+        f2 = next; 
+    } 
+} 
+int main() 
+{ 
+    printFibonacciNumbers(7); 
+    return 0; 
+} 

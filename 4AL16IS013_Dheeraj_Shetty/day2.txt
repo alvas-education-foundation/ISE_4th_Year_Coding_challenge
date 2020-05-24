@@ -1,0 +1,596 @@
+Question 1)
+A linked list is said to contain a cycle if any node is visited more than once while traversing the list.
+
+Complete the function provided for you in your editor. It has one parameter: a pointer to a Node object named  that points to the head of a linked list. Your function must return a boolean denoting whether or not there is a cycle in the list. If there is a cycle, return true; otherwise, return false.
+
+Answer :-
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class SinglyLinkedListNode {
+    public:
+        int data;
+        SinglyLinkedListNode *next;
+
+        SinglyLinkedListNode(int node_data) {
+            this->data = node_data;
+            this->next = nullptr;
+        }
+};
+
+class SinglyLinkedList {
+    public:
+        SinglyLinkedListNode *head;
+        SinglyLinkedListNode *tail;
+
+        SinglyLinkedList() {
+            this->head = nullptr;
+            this->tail = nullptr;
+        }
+
+        void insert_node(int node_data) {
+            SinglyLinkedListNode* node = new SinglyLinkedListNode(node_data);
+
+            if (!this->head) {
+                this->head = node;
+            } else {
+                this->tail->next = node;
+            }
+
+            this->tail = node;
+        }
+};
+
+void print_singly_linked_list(SinglyLinkedListNode* node, string sep, ofstream& fout) {
+    while (node) {
+        fout << node->data;
+
+        node = node->next;
+
+        if (node) {
+            fout << sep;
+        }
+    }
+}
+
+void free_singly_linked_list(SinglyLinkedListNode* node) {
+    while (node) {
+        SinglyLinkedListNode* temp = node;
+        node = node->next;
+
+        free(temp);
+    }
+}
+
+
+
+/*
+ * For your reference:
+ *
+ * SinglyLinkedListNode {
+ *     int data;
+ *     SinglyLinkedListNode* next;
+ * };
+ *
+ */
+
+bool has_cycle(SinglyLinkedListNode* head)
+{
+   
+    SinglyLinkedListNode* fast = head, *slow = head; 
+   while(fast!= NULL){ 
+     fast = fast->next->next; 
+     slow = slow->next; 
+     if(fast == slow){ 
+       return 1; 
+     } 
+   }return 0;
+}
+
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int tests;
+    cin >> tests;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int tests_itr = 0; tests_itr < tests; tests_itr++) {
+        int index;
+        cin >> index;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        SinglyLinkedList* llist = new SinglyLinkedList();
+
+        int llist_count;
+        cin >> llist_count;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        for (int i = 0; i < llist_count; i++) {
+            int llist_item;
+            cin >> llist_item;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            llist->insert_node(llist_item);
+        }
+      
+      	SinglyLinkedListNode* extra = new SinglyLinkedListNode(-1);
+      	SinglyLinkedListNode* temp = llist->head;
+      
+      	for (int i = 0; i < llist_count; i++) {
+            if (i == index) {
+          		extra = temp;
+            }
+          	
+          	if (i != llist_count-1) {
+          		temp = temp->next;
+            }
+        }
+      
+      	temp->next = extra;
+
+        bool result = has_cycle(llist->head);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}
+
+
+===============================================================================================================================================================
+
+Question 2)
+
+A binary tree is a tree which is characterized by one of the following properties:
+
+It can be empty (null).
+It contains a root node only.
+It contains a root node with a left subtree, a right subtree, or both. These subtrees are also binary trees.
+In-order traversal is performed as
+
+Traverse the left subtree.
+Visit root.
+Traverse the right subtree.
+For this in-order traversal, start from the left child of the root node and keep exploring the left subtree until you reach a leaf. When you reach a leaf, back up to its parent, check for a right child and visit it if there is one. If there is not a child, you've explored its left and right subtrees fully. If there is a right child, traverse its left subtree then its right in the same manner. Keep doing this until you have traversed the entire tree. You will only store the values of a node as you visit when one of the following is true:
+
+it is the first node visited, the first time visited
+it is a leaf, should only be visited once
+all of its subtrees have been explored, should only be visited once while this is true
+it is the root of the tree, the first time visited
+
+Answers :-
+
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+class Node {
+ int data;
+ public:
+ Node * children[2];
+ Node();
+ Node(int);
+ ~Node();
+ void setData(int);
+ int getData();
+};
+
+Node::Node(){
+ children[0] = NULL;
+ children[1] = NULL;
+}
+
+Node::Node(int _data){
+ data = _data;
+ children[0] = NULL;
+ children[1] = NULL;
+}
+
+Node::~Node(){
+ for(int i = 0; i < 2; i++){
+  if(children[i] != NULL){
+   delete(children[i]);
+  }
+  children[i] = NULL;
+ }
+}
+
+void Node::setData(int _data){
+ data = _data;
+}
+
+int Node::getData(){
+ return data;
+}
+
+class Tree {
+ Node * root;
+ void swapNodesLevel(Node **,int,int);
+ void printPreorder(Node *);
+ void printInOrder(Node *);
+ public:
+ Tree();
+ void addChildPair(int,int,int);
+ void print();
+ void swapNodes(int);
+};
+
+Tree::Tree(){
+ root = new Node(1);
+}
+
+void Tree::addChildPair(int left, int right, int pos){
+ vector<Node *> queue;
+ Node * ptr;
+ queue.push_back(root);
+ while(queue.size() > 0){
+  ptr = queue[0];
+  if(pos == 0){
+   if(left == -1){
+    ptr->children[0] = NULL;
+   } else {
+    ptr->children[0] = new Node(left);
+   }
+   if(right == -1){
+    ptr->children[1] = NULL;
+   } else {
+    ptr->children[1] = new Node(right);
+   }
+   break;
+  }
+  queue.erase(queue.begin());
+  for(int i = 0; i < 2; i++){
+   if(ptr->children[i] != NULL){
+    queue.push_back(ptr->children[i]);
+   }
+  }
+  pos--;
+ }
+ 
+}
+
+void Tree::print(){
+ printInOrder(root);
+ cout << endl;
+}
+
+void Tree::printPreorder(Node * ptr){
+ cout << ptr->getData() << " ";
+ if(ptr->children[0] != NULL){
+  printPreorder(ptr->children[0]);
+ }
+ if(ptr->children[1] != NULL){
+  printPreorder(ptr->children[1]);
+ }
+}
+
+void Tree::printInOrder(Node * ptr){
+ if(ptr->children[0] != NULL){
+  printInOrder(ptr->children[0]);
+ }
+ cout << ptr->getData() << " ";
+ if(ptr->children[1] != NULL){
+  printInOrder(ptr->children[1]);
+ }
+}
+
+void Tree::swapNodes(int depth){
+ swapNodesLevel(&root,depth,1);
+}
+
+void Tree::swapNodesLevel(Node ** ptr,int depth,int current){
+ if(current % depth == 0){
+  Node * temp = (*ptr)->children[0];
+  (*ptr)->children[0] = (*ptr)->children[1];
+  (*ptr)->children[1] = temp;
+ }
+ for(int i = 0; i < 2; i++){
+  if((*ptr)->children[i] != NULL){
+   swapNodesLevel(&((*ptr)->children[i]),depth,current+1);
+  }
+ }
+}
+
+int main() {
+ int nodes; cin >> nodes;
+ int a, b;
+ Tree * mytree = new Tree();
+ for(int i = 0; i < nodes; i++){
+  cin >> a >> b;
+  mytree->addChildPair(a,b,i);
+ }
+ cin >> a;
+ while(a--){
+  cin >> b;
+  mytree->swapNodes(b);
+  mytree->print();
+ }
+    return 0;
+}
+
+===============================================================================================================================================================
+
+Question 3)
+
+An AVL tree (Georgy Adelson-Velsky and Landis' tree, named after the inventors) is a self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done to restore this property.
+
+We define balance factor for each node as :
+
+balanceFactor = height(left subtree) - height(right subtree)
+The balance factor of any node of an AVL tree is in the integer range [-1,+1]. If after any modification in the tree, the balance factor becomes less than −1 or greater than +1, the subtree rooted at this node is unbalanced, and a rotation is needed.
+
+Answer:-
+
+/* Node is defined as :
+typedef struct node
+{
+    int val;
+    struct node* left;
+    struct node* right;
+    int ht;
+} node; */
+
+
+node* newAvlTreeNode(int data);
+int heightOfSubtree(node *nod);
+int maxVal(int a, int b);
+node *leftRotate(node *x);
+node* rightRotate(node *y);
+int getBalance(node *Nod);
+
+node* insert(node* root,int val)
+{
+    if (root == NULL)
+        return  newAvlTreeNode(val);
+
+    if (val < root -> val)
+        root->left = insert(root->left,val );
+    else if (val > root->val)
+        root->right = insert(root->right,val );
+
+
+    root->ht = 1 + maxVal(heightOfSubtree(root->left), heightOfSubtree(root->right));
+
+    int balance = getBalance(root);
+
+    if (balance > 1 && val < root->left->val)
+        return rightRotate(root);
+
+  
+    if (balance < -1 && val > root->right->val)
+        return leftRotate(root);
+
+    
+    if (balance > 1 && val > root->left->val)
+    {
+        root->left = leftRotate(root->left);
+        return rightRotate(root);
+    }
+
+    
+    if (balance < -1 && val < root->right->val)
+    {
+        root->right = rightRotate(root->right);
+        return leftRotate(root);
+    }
+    return root;
+}
+
+node* rightRotate(node *y)
+{
+    node* x = y->left;
+    node* T2 = x->right;
+
+    
+    x->right = y;
+    y->left = T2;
+
+   
+    y->ht = maxVal(heightOfSubtree(y->left), heightOfSubtree(y->right)) + 1;
+    x->ht = maxVal(heightOfSubtree(x->left), heightOfSubtree(x->right)) + 1;
+
+    
+    return x;
+}
+
+
+node *leftRotate(node *x)
+{
+    node *y = x->right;
+    node *T2 = y->left;
+
+   
+    y->left = x;
+    x->right = T2;
+
+   
+    x->ht = maxVal(heightOfSubtree(x->left), heightOfSubtree(x->right)) + 1;
+    y->ht = maxVal(heightOfSubtree(y->left), heightOfSubtree(y->right)) + 1;
+
+    
+    return y;
+}
+
+int getBalance(node *Nod)
+{
+    if (Nod == NULL)
+        return 0;
+    return heightOfSubtree(Nod->left) - heightOfSubtree(Nod->right);
+}
+
+int maxVal(int a,int b)
+{
+    return (a > b) ? a : b;
+}
+
+node* newAvlTreeNode(int data)
+{
+    
+    node* treeNode = (node*)malloc(sizeof(node));
+
+    
+    treeNode->val = data;
+
+    
+    treeNode->left = NULL;
+    treeNode->right = NULL;
+    treeNode->ht = 0;
+    return(treeNode);
+}
+
+int heightOfSubtree(node *nod)
+{
+    if (nod == NULL)
+        return -1;
+    return nod->ht;
+}
+
+===============================================================================================================================================================
+
+Question 4)
+
+There is a collection of input strings and a collection of query strings. For each query string, determine how many times it occurs in the list of input strings.
+
+For example, given input  and , we find  instances of ',  of '' and  of ''. For each query, we add an element to our return array, .
+
+Function Description
+
+Complete the function matchingStrings in the editor below. The function must return an array of integers representing the frequency of occurrence of each query string in strings.
+
+matchingStrings has the following parameters:
+
+strings - an array of strings to search
+queries - an array of query strings
+
+Answer :-
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+public class Solution {
+
+public static void main(String[] args) {
+   Scanner sc=new Scanner(System.in); 
+      int n=sc.nextInt();
+      String []s=new String[n];   
+      int count=0;
+     for(int i=0;i<n;i++)
+        {
+          sc.nextLine();
+           s[i]=sc.next();
+        }   
+    int n1=sc.nextInt();
+    String[] s1=new String[n1];
+    for(int j=0;j<n1;j++)
+        {
+           sc.nextLine();
+           s1[j]=sc.next();  
+      }
+   for(int i=0;i<n1;i++)
+       {
+          count=0;
+          for(int j=0;j<n;j++)
+              {
+                 if((s[j].equals(s1[i])))
+                     {
+                     count++;
+                    }
+
+              }
+         System.out.println(count);
+      }
+
+
+}
+
+
+}
+
+
+===============================================================================================================================================================
+
+
+Question 5)
+
+A queue is an abstract data type that maintains the order in which elements were added to it, allowing the oldest elements to be removed from the front and new elements to be added to the rear. This is called a First-In-First-Out (FIFO) data structure because the first element added to the queue (i.e., the one that has been waiting the longest) is always the first one to be removed.
+
+A basic queue has the following operations:
+
+Enqueue: add a new element to the end of the queue.
+Dequeue: remove the element from the front of the queue and return it.
+In this challenge, you must first implement a queue using two stacks. Then process  queries, where each query is one of the following  types:
+
+1 x: Enqueue element  into the end of the queue.
+2: Dequeue the element at the front of the queue.
+3: Print the element at the front of the queue.
+
+Answer :-
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+struct stack
+{
+    int data[100000];
+    int top;
+};
+struct stack st,s1;
+
+void enq()
+{
+    int item;
+    scanf("%d",&item);
+    st.data[++st.top]=item;
+}
+void deq()
+{
+    int del;
+    while(st.top>=0)
+    {
+        del = st.data[st.top];
+        st.top--;
+        s1.top++;
+        s1.data[s1.top]=del;
+    }
+    s1.top--;
+    while(s1.top>=0)
+    {
+        del = s1.data[s1.top];
+        s1.top--;
+        st.top++;
+        st.data[st.top]=del;
+     }
+}
+int main() {
+
+st.top=-1;
+s1.top=-1;
+int t,c;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&c);
+        switch(c)
+        {
+            case 1: enq();
+                    break;
+            case 2: deq();
+                    break;
+            case 3: printf("%d\n",st.data[0]);
+                    break;
+        }
+    }
+    return 0;
+}

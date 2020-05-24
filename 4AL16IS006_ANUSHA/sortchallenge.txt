@@ -1,0 +1,87 @@
+In a class room the teacher decides to shuffle all the students so that each student collaborates with other students too and she also checks that board is visible to all students. In a bench n number of students can be seated. She calls the students and makes them stand in a line.
+
+She checks first two person and if the first person is taller than the second person he is put in second place and second in first, i.e., their positions are swapped. After swapping, the teacher checks second and third person height and if the second person is taller than third person their positions are swapped. She repeats this till the end. She finds that the last student is the tallest student after completing one iteration.
+
+So she repeats the process for (n-1) times so that all students are sorted. She stops the process in the middle as soon as she find that the students are sorted.
+
+For ex:
+
+Consider 5 number of students can be seated in a bench
+
+Their height order is in
+
+6 4 3 2 5
+
+During first comparison, adjacent numbers 6 and 4 is compared, 6 is greater than 4 hence the order becomes 4 6 3 2 5.
+
+Again the teacher checks 6 and 3. 6 is greater than 3 hence the numbers are swapped and the order becomes 4 3 6 2 5.
+
+She compares 6 and 2 and they get swapped and the order becomes 4 3 2 6 5. She compares 6 and 5 they get swapped and the order becomes 4 3 2 5 6.
+
+She sees that they are not in order she again takes adjacent person heights and she swaps. She keeps doing this until the order becomes 2 3 4 5 6.
+
+Help the teacher write a program to do bubble sorting inorder to sort the height in order.
+
+ 
+
+#include<stdio.h>
+
+int main()
+
+{
+   
+ int i,n,j,a[10],temp,e;
+    
+printf("How many students can be seated in a bench?\n");
+    
+scanf("%d",&n);
+    for(i=1;i<=n;i++)
+   
+ {
+        printf("Enter the height of student %d\n",i);
+ 
+       scanf("%d",&a[i]);
+    
+}
+   
+ printf("Height order of students before sorting:\n");
+    
+for(i=1;i<=n;i++)
+        
+printf("%d ",a[i]);
+        
+    
+for(i=1;i<=n-1;i++){
+      
+  for(j=0;j<=n-i;j++){
+          
+  if(a[j]>a[j+1])
+            
+	{
+                
+		temp=a[j];
+               
+		 a[j]=a[j+1];
+              
+		  a[j+1]=temp;
+            }
+        }
+        
+printf("\nHeight order of students after iteration %d\n",i);
+       
+ for(e=1;e<=n;e++)
+          
+  printf("%d ",a[e]);
+    }     
+
+	printf("\nFinal sorting of students in a bench are:\n");
+	
+for(i=1;i<=n;i++)
+	    
+printf("%d ",a[i]);
+	
+	
+	
+return 0;
+
+}
