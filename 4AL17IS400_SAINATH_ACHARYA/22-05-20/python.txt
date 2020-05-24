@@ -1,0 +1,81 @@
+
+1. Python Program to find the area of triangle
+
+a = 5
+b = 6
+c = 7
+
+s = (a + b + c) / 2
+
+area = (s*(s-a)*(s-b)*(s-c)) ** 0.5
+print('The area of the triangle is %0.2f' %area)
+
+op: The area of the triangle is 14.70
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+2. Solve the quadratic equation ax**2 + bx + c = 0
+
+import cmath
+
+a = 1
+b = 5
+c = 6
+
+d = (b**2) - (4*a*c)
+
+sol1 = (-b-cmath.sqrt(d))/(2*a)
+sol2 = (-b+cmath.sqrt(d))/(2*a)
+
+print('The solution are {0} and {1}'.format(sol1,sol2))
+
+op:	Enter a: 1
+	Enter b: 5
+	Enter c: 6
+	The solutions are (-3+0j) and (-2+0j)
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+3. Python program to swap two variables
+
+x = 5
+y = 10
+
+temp = x
+x = y
+y = temp
+
+print('The value of x after swapping: {}'.format(x))
+print('The value of y after swapping: {}'.format(y))
+
+op:	The value of x after swapping: 10
+	The value of y after swapping: 5
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+4. Program to generate a random number between 0 and 9
+
+import random
+
+print(random.randint(0,9))
+
+op:	6
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+5. Python Program to calculate the square root
+
+num = 8 
+
+
+num_sqrt = num ** 0.5
+print('The square root of %0.3f is %0.3f'%(num ,num_sqrt))
+
+op:	The square root of 8.000 is 2.828
+
+
+--------------------------------------------------------------------------------------------------------------------------
