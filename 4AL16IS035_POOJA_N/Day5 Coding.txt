@@ -1,0 +1,206 @@
+1) Between Two Sets:
+
+You will be given two arrays of integers and asked to determine all integers that satisfy the following two conditions:
+1.The elements of the first array are all factors of the integer being considered
+2.The integer being considered is a factor of all elements of the second array
+
+Solution:
+#!/bin/python
+import sys
+def isValid(a, b, candidate):
+    for a_ele in a:
+        if candidate % a_ele != 0:
+            return False
+    for b_ele in b:
+        if b_ele % candidate != 0:
+            return False
+    return True
+n,m = raw_input().strip().split(' ')
+n,m = [int(n),int(m)]
+a = map(int,raw_input().strip().split(' '))
+b = map(int,raw_input().strip().split(' '))
+cnt = 0
+for candidate in xrange(max(a), min(b)+1):
+    if isValid(a, b, candidate):
+        cnt += 1
+print cnt
+*************************************************************************************************************
+2) Journey to the Moon:
+
+The member states of the UN are planning to send 2 people to the moon. They want them to be from different countries. You will be given a list of pairs of astronaut ID’s. Each pair is made of astronauts from the same country. Determine how many pairs of astronauts from different countries they can choose from.
+
+Solution:
+#!/bin/python
+import math
+import os
+import random
+import re
+import sys
+from collections import defaultdict
+class UnionFind:
+    def __init__(self):
+        self.num_weights = {}
+        self.parent_pointers = {}
+        self.num_to_objects = {}
+        self.objects_to_num = {}
+        self.__repr__ = self.__str__
+    def insert_objects(self, objects):
+        for object in objects:
+            self.find(object); 
+    def find(self, object):
+        if not object in self.objects_to_num:
+            obj_num = len(self.objects_to_num)
+            self.num_weights[obj_num] = 1
+            self.objects_to_num[object] = obj_num
+            self.num_to_objects[obj_num] = object
+            self.parent_pointers[obj_num] = obj_num
+            return object
+        stk = [self.objects_to_num[object]]
+        par = self.parent_pointers[stk[-1]]
+        while par != stk[-1]:
+            stk.append(par)
+            par = self.parent_pointers[par]
+        for i in stk:
+            self.parent_pointers[i] = par
+        return self.num_to_objects[par] 
+    def union(self, object1, object2):
+        o1p = self.find(object1)
+        o2p = self.find(object2)
+        if o1p != o2p:
+            on1 = self.objects_to_num[o1p]
+            on2 = self.objects_to_num[o2p]
+            w1 = self.num_weights[on1]
+            w2 = self.num_weights[on2]
+            if w1 < w2:
+                o1p, o2p, on1, on2, w1, w2 = o2p, o1p, on2, on1, w2, w1
+            self.num_weights[on1] = w1+w2
+            del self.num_weights[on2]
+            self.parent_pointers[on2] = on1 
+# Complete the journeyToMoon function below.
+def journeyToMoon(n, astronauts):
+    # generate disjoint sets
+    uf = UnionFind()
+    uf.insert_objects(xrange(n)) 
+    for astronaut in astronauts:
+        uf.union(astronaut[0], astronaut[1]) 
+    # calculate sizes of countries
+    country_sizes = defaultdict(int)
+    for i in xrange(n):
+        country_sizes[uf.find(i)] += 1 
+    # calculate number of viable pairs
+    sm = 0
+    result = 0
+    for size in country_sizes.values():
+        result += sm*size;
+        sm += size;  
+    return result 
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    np = raw_input().split()
+    n = int(np[0]) 
+    p = int(np[1]) 
+    astronaut = [] 
+    for _ in xrange(p):
+        astronaut.append(map(int, raw_input().rstrip().split())) 
+    result = journeyToMoon(n, astronaut) 
+    fptr.write(str(result) + '\n') 
+    fptr.close()
+*************************************************************************************************************
+3) Grading Students:
+
+HackerLand University has the following grading policy:
+1.Every student receives a grade in the inclusive range from 0 to 100.
+2.Any grade less than 40 is a failing grade.
+
+Solution:
+#!/bin/python 
+from __future__ import print_function 
+import os
+import sys
+# Complete the gradingStudents function below.
+def gradingStudents(grades):
+    res = []
+    for grade in grades:
+        if grade >= 38 and grade % 5 >= 3:
+            grade = grade + 5 - (grade % 5)
+        res.append(grade)
+    return res
+if __name__ == '__main__':
+    f = open(os.environ['OUTPUT_PATH'], 'w') 
+    n = int(raw_input()) 
+    grades = [] 
+    for _ in xrange(n):
+        grades_item = int(raw_input())
+        grades.append(grades_item)
+    result = gradingStudents(grades)
+    f.write('\n'.join(map(str, result)))
+    f.write('\n')
+    f.close()
+*************************************************************************************************************
+4) Min-Max Sum 
+
+Given five positive integers, find the minimum and maximum values that can be calculated by summing exactly four of the five integers. Then print the respective minimum and maximum values as a single line of two space-separated long integers.
+
+Solution:
+#!/bin/python
+import math
+import os
+import random
+import re
+import sys
+# Complete the miniMaxSum function below.
+def miniMaxSum(arr):
+    min_ele = sys.maxint
+    max_ele = 0
+    arr_sum = 0
+    for val in arr:
+        min_ele = min(min_ele, val)
+        max_ele = max(max_ele, val)
+        arr_sum += val   
+    return arr_sum-max_ele, arr_sum-min_ele 
+if __name__ == '__main__':
+    arr = map(int, raw_input().rstrip().split())
+    print " ".join(map(str, miniMaxSum(arr)))
+*************************************************************************************************************
+5) Bear and Steady Gene:
+
+A gene is represented as a string of length N (where  is divisible by 4), composed of the letters A, C, G, and T. It is considered to be steady if each of the four letters occurs exactly 1/4 times. For example, GACT and AAGGCCTT are both steady genes.
+
+Solution:
+def steadyGene(gene):
+    min_length_string = len(gene)     
+    occurences = dict()
+    occurences['A'] = 0
+    occurences['G'] = 0
+    occurences['C'] = 0
+    occurences['T'] = 0     
+    expected = len(gene) // 4     
+    for g in gene:
+        occurences[g] += 1     
+    for x in occurences:
+        occurences[x] = max(0, occurences[x] - expected)     
+    if occurences['A'] == 0 and occurences['G'] == 0 and occurences['C'] == 0 and occurences['T'] == 0:
+        return 0    
+    found = dict()
+    found['A'] = 0
+    found['G'] = 0
+    found['C'] = 0
+    found['T'] = 0    
+    tail = 0
+    head = 0     
+    while head != len(gene):
+        found[gene[head]] += 1
+        if found['A'] >= occurences['A'] and \
+        found['C'] >= occurences['C'] and \
+        found['G'] >= occurences['G'] and \
+        found['T'] >= occurences['T']:
+            # this is a valid candidate
+            min_length_string = min(min_length_string, head-tail+1)            
+            # try to shorten it
+            while found[gene[tail]] > occurences[gene[tail]]:
+                found[gene[tail]] -= 1
+                tail += 1
+                min_length_string = min(min_length_string, head-tail+1)             
+        head += 1     
+    return min_length_string
+*************************************************************************************************************
