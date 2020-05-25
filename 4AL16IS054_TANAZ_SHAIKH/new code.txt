@@ -1,0 +1,116 @@
+1. Read an integer N . For all non-negative integers i < N , print i*i. see the sample for details.
+
+N = int(raw_input())
+
+for i in range(N):
+    print i * i
+
+Input (stdin)
+5
+Your Output (stdout)
+0
+1
+4
+9
+16
+Expected Output
+0
+1
+4
+9
+16
+
+
+2. Polar coordinates are an alternative way of representing Cartesian coordinates or Complex Numbers.
+
+A complex number z Capture.PNG z=x+yj
+
+is completely determined by its real part x and imaginary part y.
+Here,i  is the imaginary unit.
+
+
+from cmath import sqrt,phase
+c = complex(input())
+
+print sqrt(pow(c.real,2)+pow(c.imag,2)).real
+print phase(complex(c.real,c.imag))
+
+Input (stdin)
+1+2j
+Your Output (stdout)
+2.2360679775
+1.10714871779
+Expected Output
+2.23606797749979
+1.1071487177940904
+
+3.So far, we have only heard of Python's powers. Now, we will witness them!
+
+Powers or exponents in Python can be calculated using the built-in power function . Call the power function a to the power b as shown below
+
+
+a = int(raw_input())
+b = int(raw_input())
+m = int(raw_input())
+print(pow(a,b))
+print(pow(a,b,m))
+
+Input (stdin)
+3
+4
+5
+Your Output (stdout)
+81
+1
+Expected Output
+81
+1
+
+
+4. The tool .difference() returns a set with all the elements from the set that are not in an iterable.
+Sometimes the - operator is used in place of the .difference() tool, but it only operates on the set of elements in set.
+Set is immutable to the .difference() operation (or the - operation).
+
+eng_num = int(raw_input())
+eng_set = set(map(int, raw_input().split()))
+fren_num = int(raw_input())
+fren_set = set(map(int, raw_input().split()))
+
+print len(eng_set.difference(fren_set))
+
+Input (stdin)
+9
+1 2 3 4 5 6 7 8 9
+9
+10 1 2 3 11 21 55 6 8
+Your Output (stdout)
+4
+Expected Output
+4
+
+5. This function returns a list of tuples. The th tuple contains the th element from each of the argument sequences or iterables.
+
+If the argument sequences are of unequal lengths, then the returned list is truncated to the length of the shortest argument sequence.
+
+a = map(int, raw_input().split())
+b = [map(float, raw_input().split()) for i in range(a[1])]
+for i in zip(*b):
+    print sum(i)/a[1]
+
+Input (stdin)
+5 3
+89 90 78 93 80
+90 91 85 88 86
+91 92 83 89 90.5
+Your Output (stdout)
+90.0
+91.0
+82.0
+90.0
+85.5
+Expected Output
+90.0
+91.0
+82.0
+90.0
+85.5
