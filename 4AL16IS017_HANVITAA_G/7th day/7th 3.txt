@@ -1,0 +1,102 @@
+#include <bits/stdc++.h> 
+using namespace std; 
+#define MAX 1000 
+  
+int weight[MAX]; 
+int level[MAX]; 
+int par[MAX]; 
+bool prime[MAX + 1]; 
+vector<int> graph[MAX]; 
+
+void SieveOfEratosthenes() 
+{ 
+
+    memset(prime, true, sizeof(prime)); 
+  
+    for (int p = 2; p * p <= MAX; p++) { 
+ 
+        if (prime[p] == true) { 
+
+            for (int i = p * p; i <= MAX; i += p) 
+                prime[i] = false; 
+        } 
+    } 
+} 
+
+void dfs(int node, int parent, int h) 
+{ 
+
+    par[node] = parent; 
+
+    level[node] = h; 
+  
+    for (int child : graph[node]) { 
+        if (child == parent) 
+            continue; 
+        dfs(child, node, h + 1); 
+    } 
+} 
+
+int findPrimeOnPath(int u, int v) 
+{ 
+    int count = 0; 
+
+    if (level[u] > level[v]) 
+        swap(u, v); 
+  
+    int d = level[v] - level[u]; 
+
+    while (d--) { 
+
+        if (prime[weight[v]]) 
+            count++; 
+  
+        v = par[v]; 
+    } 
+ 
+    if (v == u) { 
+        if (prime[weight[v]]) 
+            count++; 
+        return count; 
+    } 
+ 
+    while (v != u) { 
+        if (prime[weight[v]]) 
+            count++; 
+  
+        if (prime[weight[u]]) 
+            count++; 
+  
+        u = par[u]; 
+        v = par[v]; 
+    } 
+ 
+    if (prime[weight[v]]) 
+        count++; 
+  
+    return count; 
+} 
+
+int main() 
+{ 
+ 
+    SieveOfEratosthenes(); 
+  
+    weight[1] = 5; 
+    weight[2] = 10; 
+    weight[3] = 11; 
+    weight[4] = 8; 
+    weight[5] = 6; 
+
+    graph[1].push_back(2); 
+    graph[2].push_back(3); 
+    graph[2].push_back(4); 
+    graph[1].push_back(5); 
+  
+    dfs(1, -1, 0); 
+    int u = 3, v = 5; 
+    cout << findPrimeOnPath(u, v) 
+         << endl; 
+  
+    return 0; 
+} 
