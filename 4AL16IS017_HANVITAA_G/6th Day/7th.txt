@@ -1,0 +1,22 @@
+
+#include <stdio.h> 
+
+void findAbsolute(int N) 
+{ 
+
+    if (N < 0) { 
+        N = (-1) * N; 
+    } 
+
+    printf("%d ", N); 
+} 
+
+int main() 
+{ 
+  
+    int N = -12; 
+  
+ 
+    findAbsolute(N); 
+    return 0; 
+} 
