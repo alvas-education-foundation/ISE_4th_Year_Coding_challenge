@@ -1,0 +1,226 @@
+1) Castle On The Grid:
+
+You are given a grid with both sides equal to N/N. Rows and columns are numbered from 0/0 to N−1/N−1. There is a castle on the intersection of the aath row and the bbth column.
+Your task is to calculate the minimum number of steps it would take to move the castle from its initial position to the goal position (c/d).
+It is guaranteed that it is possible to reach the goal position from the initial position.
+
+Solution:
+from collections import deque
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y     
+    def __str__(self):
+        return "X=%d,Y=%d" % (self.x, self.y) 
+def getPointsFromPoint(N, arr, point):
+    x = point.x
+    y = point.y
+    points = []     
+    while x > 0:
+        x -= 1
+        if arr[x][y] == 'X':
+            break
+        points.append(Point(x,y))     
+    x = point.x
+    while x < N-1: 
+        x += 1
+        if arr[x][y] == 'X': 
+            break
+        points.append(Point(x,y))      
+    x = point.x 
+    while y > 0:
+        y -= 1
+        if arr[x][y] == 'X':
+            break
+        points.append(Point(x,y))
+     
+    y = point.y
+    while y < N-1:
+        y += 1
+        if arr[x][y] == 'X':
+            break
+        points.append(Point(x,y))         
+    return points     
+def solveCastleGrid(N, arr, start, end):
+    q = deque([start])
+    arr[start.x][start.y] = 0     
+    while q:
+        current_point = q.pop()
+        current_distance = arr[current_point.x][current_point.y]         
+        points = getPointsFromPoint(N, arr, current_point)
+        for p in points:
+            if arr[p.x][p.y] == '.':
+                arr[p.x][p.y] = current_distance + 1
+                q.appendleft(p)
+                if p.x == end.x and p.y == end.y:
+                    return current_distance + 1
+    return -1     
+if __name__ == '__main__':
+    N = input()
+    arr = [0] * N     
+    for i in xrange(N):
+        arr[i] = list(raw_input())         
+    start_x, start_y, end_x, end_y = map(int, raw_input().split())     
+    print solveCastleGrid(N, arr, Point(start_x, start_y), Point(end_x, end_y))
+***********************************************************************************************************************************************************************
+2) Sherlock and Valid String:
+
+Sherlock considers a string to be valid if all characters of the string appear the same number of times. It is also valid if he can remove just 1 character at 1 index in the string, and the remaining characters will occur the same number of times. Given a string , determine if it is valid. If so, return YES, otherwise return NO.
+
+Solution:
+from collections import Counter 
+def isValid(S):
+    char_map = Counter(S)
+    char_occurence_map = Counter(char_map.values()) 
+    if len(char_occurence_map) == 1:
+        return True 
+    if len(char_occurence_map) == 2:
+        for v in char_occurence_map.values():
+            if v == 1:
+                return True 
+    return False 
+S = raw_input()
+if isValid(S):
+    print "YES"
+else:
+    print "NO"
+***********************************************************************************************************************************************************************
+3) Poisonous Plants:
+
+There are NN plants in a garden. Each of these plants has been added with some amount of pesticide. After each day, if any plant has more pesticide than the plant at its left, being weaker than the left one, it dies. You are given the initial values of the pesticide in each plant. Print the number of days after which no plant dies, i.e. the time after which there are no plants with more pesticide content than the plant to their left.
+
+Solution:
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+# Complete the poisonousPlants function below.
+def poisonousPlants(p):
+    class Plant:
+    def __init__(self, pesticide, days):
+        self.pesticide = pesticide
+        self.days = days 
+def solvePlants(a):
+    stack = []
+    maxDaysAlive = 0     
+    for pesticide in a:
+        daysAlive = 0
+        while stack and pesticide <= stack[-1].pesticide:
+            daysAlive = max(daysAlive, stack.pop().days)             
+        if not stack:
+            daysAlive = 0
+        else:
+            daysAlive += 1             
+        maxDaysAlive = max(maxDaysAlive, daysAlive)        
+        stack.append(Plant(pesticide, daysAlive))     
+    print maxDaysAlive 
+def main():
+    N = input()      
+    numbers = map(int, raw_input().split())      
+    solvePlants(numbers)
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    n = int(input())
+    p = list(map(int, input().rstrip().split()))
+    result = poisonousPlants(p)
+    fptr.write(str(result) + '\n')
+    fptr.close()
+***********************************************************************************************************************************************************************
+4) Waiter
+
+You are a waiter at a party. There are NN stacked plates. Each plate has a number written on it. You start picking up the plates from the top one by one and check whether the number written on the plate is divisible by a prime.
+
+Solution:
+import os
+import sys
+# Complete the waiter function below.
+def waiter(number, q):    
+    # Write your code here.
+    generated_primes = [...] 
+def solveWaiter(N, Q, numbers):
+    stack = []     
+    for value in numbers:
+        if value % generated_primes[0] != 0:
+            stack.append(value)
+        else:
+            print value     
+    for prime_idx in xrange(1, Q):
+        leftover = []         
+        while stack:
+            value = stack.pop()
+            if value % generated_primes[prime_idx] != 0:
+                leftover.append(value)
+            else:
+                print value
+        stack = leftover
+     
+    for value in stack:
+        print value 
+def main():
+    N, Q = map(int, raw_input().split())     
+    numbers = map(int, raw_input().split())     
+    solveWaiter(N, Q, numbers)
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    nq = input().split()
+    n = int(nq[0])
+    q = int(nq[1])
+    number = list(map(int, input().rstrip().split()))
+    result = waiter(number, q)
+    fptr.write('\n'.join(map(str, result)))
+    fptr.write('\n')
+    fptr.close()
+***********************************************************************************************************************************************************************
+5) Largest Rectangle
+
+There are NN buildings in a certain two-dimensional landscape. Each building has a height given by hi,i∈[1,N]hi,i∈[1,N]. If you join KK adjacent buildings, they will form a solid rectangle of area K×min(hi,hi+1,…,hi+k−1)K×min(hi,hi+1,…,hi+k−1).
+Given NN buildings, find the greatest such solid area formed by consecutive buildings.
+
+Solution:
+#!/bin/python3
+import math
+import os
+import random
+import re
+import sys
+# Complete the largestRectangle function below.
+def computeLargestArea(hist, N):
+    stack = []     
+    max_area = 0     
+    idx = 0
+    while (idx < N):
+        if not stack or hist[stack[-1]] <= hist[idx]:
+            stack.append(idx)
+            idx += 1
+        else:             
+            height_idx = stack.pop()             
+            depth = idx
+            if stack:
+                depth = idx - stack[-1] - 1             
+            area = hist[height_idx] * depth
+            max_area = max(area, max_area)      
+    while stack:
+        height_idx = stack.pop()            
+        depth = idx
+        if stack:
+            depth = idx - stack[-1] - 1             
+        area = hist[height_idx] * depth
+        max_area = max(area, max_area)             
+    return max_area 
+def main():
+    N = int(raw_input())     
+    hist = map(int, raw_input().split())     
+    print computeLargestArea(hist, N)
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    n = int(input())
+    h = list(map(int, input().rstrip().split()))
+    result = largestRectangle(h)
+    fptr.write(str(result) + '\n')
+    fptr.close()
+***********************************************************************************************************************************************************************
+
+
