@@ -1,0 +1,42 @@
+1. convert JSON to python object
+
+import json
+json_obj =  '{ "Name":"SHWETHA", "Class":"8", "Age":13 }'
+python_obj = json.loads(json_obj)
+print("\nJSON data:")
+print(python_obj)
+print("\nName: ",python_obj["Name"])
+print("Class: ",python_obj["Class"])
+print("Age: ",python_obj["Age"]) 
+
+2. to check Armstrong numbers in a certain interval
+
+lower = 100
+upper = 2000
+
+for num in range(lower, upper + 1):
+   order = len(str(num))
+   sum = 0
+   temp = num
+   while temp > 0:
+       digit = temp % 10
+       sum += digit ** order
+       temp //= 10
+
+   if num == sum:
+       print(num)
+
+3. 
+
+def jpeg_res(filename):
+   """ prints the resolution of the jpeg image file passed into it""
+
+   with open(filename,'rb') as img_file:
+       img_file.seek(163)
+       a = img_file.read(2)
+       height = (a[0] << 8) + a[1]
+       a = img_file.read(2)
+       width = (a[0] << 8) + a[1]
+   print("The resolution of the image is",width,"x",height)
+
+jpeg_res("img1.jpg")
