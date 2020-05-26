@@ -1,0 +1,127 @@
+#include <bits/stdc++.h> 
+using namespace std; 
+  
+#define MAX 100000 
+
+int block; 
+ 
+struct Query { 
+
+    int L, R, K, index; 
+
+    int odd; 
+ 
+    int even; 
+}; 
+ 
+int count_oddP; 
+
+bool compare(Query x, Query y) 
+{ 
+ 
+    if (x.L / block != y.L / block) 
+        return x.L / block < y.L / block; 
+
+    return x.R < y.R; 
+} 
+ 
+bool compare1(Query x, Query y) 
+{ 
+    return x.index < y.index; 
+} 
+
+void add(int currL, int a[]) 
+{ 
+ 
+    if (__builtin_parity(a[currL])) 
+        count_oddP++; 
+} 
+
+void remove(int currR, int a[]) 
+{ 
+
+    if (__builtin_parity(a[currR])) 
+        count_oddP--; 
+} 
+
+void queryResults(int a[], int n, Query q[], 
+                  int m) 
+{ 
+
+    count_oddP = 0; 
+ 
+    block = (int)sqrt(n); 
+
+    sort(q, q + m, compare); 
+
+    int currL = 0, currR = 0; 
+  
+    for (int i = 0; i < m; i++) { 
+  
+ 
+        int L = q[i].L, 
+            R = q[i].R, 
+            k = q[i].K; 
+  
+
+        while (currR <= R) { 
+            add(currR, a); 
+            currR++; 
+        } 
+        while (currL > L) { 
+            add(currL - 1, a); 
+            currL--; 
+        } 
+ 
+        while (currR > R + 1) 
+  
+        { 
+            remove(currR - 1, a); 
+            currR--; 
+        } 
+        while (currL < L) { 
+            remove(currL, a); 
+            currL++; 
+        } 
+ 
+        if (!__builtin_parity(k)) { 
+            q[i].odd = count_oddP; 
+            q[i].even 
+                = R - L + 1 - count_oddP; 
+        } 
+ 
+        else { 
+            q[i].odd 
+                = R - L + 1 - count_oddP; 
+            q[i].even = count_oddP; 
+        } 
+    } 
+} 
+
+void printResults(Query q[], int m) 
+{ 
+    sort(q, q + m, compare1); 
+    for (int i = 0; i < m; i++) { 
+        cout << q[i].odd << " "
+             << q[i].even << endl; 
+    } 
+} 
+
+int main() 
+{ 
+  
+    int arr[] = { 5, 2, 3, 1, 4, 8, 10 }; 
+    int n = sizeof(arr) / sizeof(arr[0]); 
+  
+    Query q[] = { { 0, 5, 3, 0, 0, 0 }, 
+                  { 1, 4, 8, 1, 0, 0 }, 
+                  { 4, 6, 10, 2, 0, 0 } }; 
+  
+    int m = sizeof(q) / sizeof(q[0]); 
+  
+    queryResults(arr, n, q, m); 
+  
+    printResults(q, m); 
+  
+    return 0; 
+} 
