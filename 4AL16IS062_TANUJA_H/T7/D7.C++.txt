@@ -1,0 +1,41 @@
+castle stone problem
+
+#include<iostream>
+#include<cstring>
+#include <cstdlib>
+#include<cmath>
+#include<string>
+#include<map>
+using namespace std;
+vector<int> Stones;
+int main() {
+	int T;
+	for (cin >> T; T; T--) {
+		int M, N; cin >> M >> N;
+		Stones.clear();
+		for (int i = 0; i < N; i++) {
+			int a;
+			cin >> a;
+			Stones.push_back(a);
+		}
+		sort(Stones.begin(), Stones.end());
+		for (int i = 0; i < N; i++) cout << Stones[i] << " "; cout <<"\n";
+		int moves = 0, i = 0, j = N -1;
+		bool used[1010];
+		memset(used, false ,sizeof(used));
+		for (; i < j; i++) {
+			while (j > i && (Stones[i] + Stones[j] > M))j--;
+			if (j > i){
+				used[i] = used[j] = true;
+				//cout << i << " "<< j <<"\n";
+				moves++;
+				j--;	
+			} 
+		}
+		for (i = 0; i < N; i++) {
+			if (!used[i] && Stones[i] <= M) moves++;
+		}
+		cout <<moves<<"\n";
+	}
+	return 0;
+}
