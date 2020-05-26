@@ -1,0 +1,155 @@
+1. If we want to add a single element to an existing set, we can use the .add() operation.
+It adds the element to the set and returns 'None'.
+
+a = input()
+b = set()
+for i in xrange(a):
+    b.add(raw_input())
+
+print len(b)
+
+Input (stdin)
+Download
+7
+UK
+China
+USA
+France
+New Zealand
+UK
+France
+Your Output (stdout)
+5
+Expected Output
+Download
+5
+
+2. You are given two sets,A  and  B.
+Your job is to find whether set  A  is a subset of set  B.
+
+If set A is subset of set B, print True.
+If set A is not a subset of set B , print False.
+
+for i in range(int(raw_input())): #More than 4 lines will result in 0 score. Blank lines won't be counted.  
+    a = int(raw_input()); A = set(raw_input().split());b = int(raw_input()); B = set(raw_input().split())
+    if A.issubset(B) : print 'True'
+    else : print 'False'
+
+Input (stdin)
+Download
+3
+5
+1 2 3 5 6
+9
+9 8 5 6 3 2 1 4 7
+1
+2
+5
+3 6 5 4 1
+7
+1 2 3 5 6 8 9
+3
+9 8 2
+Your Output (stdout)
+True
+False
+False
+Expected Output
+Download
+True
+False
+False
+
+3. You are given a spreadsheet that contains a list of N athletes and their details (such as age, height, weight and so on). You are required to sort the data based on the  Kth attribute and print the final resulting table. Follow the example given below for better understanding.
+
+n,m = map(int,raw_input().split())
+lst = []
+for i in range(n):
+    lst.append(map(int,raw_input().split()))
+k = int(raw_input())    
+print "\n".join(map(lambda x: " ".join(map(str, x)), sorted(lst, key = lambda x: x[k]))) 
+
+Input (stdin)
+Download
+5 3
+10 2 5
+7 1 0
+9 9 9
+1 23 12
+6 5 9
+1
+Your Output (stdout)
+7 1 0
+10 2 5
+6 5 9
+9 9 9
+1 23 12
+Expected Output
+Download
+7 1 0
+10 2 5
+6 5 9
+9 9 9
+1 23 12
+
+4. A deque is a double-ended queue. It can be used to add or remove elements from both ends.
+
+Deques support thread safe, memory efficient appends and pops from either side of the deque with approximately the same O(1) performance in either direction.
+
+Click on the link to learn more about deque() methods.
+Click on the link to learn more about various approaches to working with deques: Deque Recipes.
+
+from collections import deque
+d = deque()
+for i in xrange(input()):
+    k = raw_input().split()
+    if k[0] == 'append':
+        d.append(int(k[1]))
+    elif k[0] == 'pop':
+        d.pop()
+    elif k[0] == 'popleft':
+        d.popleft()
+    elif k[0] == 'appendleft':
+        d.appendleft(int(k[1]))
+print ' '.join(map(str,d))
+
+
+Input (stdin)
+Download
+6
+append 1
+append 2
+append 3
+appendleft 4
+pop
+popleft
+Your Output (stdout)
+1 2
+Expected Output
+Download
+1 2
+
+5. The itertools module standardizes a core set of fast, memory efficient tools that are useful by themselves or in combination. Together, they form an iterator algebra making it possible to construct specialized tools succinctly and efficiently in pure Python.
+
+from itertools import *
+N = input()
+st = raw_input().split()
+K = input()
+ind = list()
+com = list(combinations(range(1,N+1),K))
+for i,g in enumerate(st):
+    if g == 'a':
+         ind.append(i+1) 
+count = 0
+print float(len(set([y for x in ind for y in com if x in y ])))/len(com)
+
+Input (stdin)
+Download
+4
+a a c d
+2
+Your Output (stdout)
+0.833333333333
+Expected Output
+Download
+0.833333333333
