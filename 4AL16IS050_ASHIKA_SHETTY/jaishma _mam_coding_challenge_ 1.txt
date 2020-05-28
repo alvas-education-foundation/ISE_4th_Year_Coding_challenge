@@ -1,0 +1,69 @@
+1.	Given an integer n, , perform the following conditional actions:
+•	If  n is odd, print Weird
+•	If n is even and in the inclusive range of  2 to 5 , print Not Weird
+•	If  n is even and in the inclusive range of 6 to 20 , print Weird
+•	If  n is even and greater than 20 , print Not Weird
+Complete the stub code provided in your editor to print whether or not  is weird.
+Input Format
+A single line containing a positive integer,n .
+Constraints
+•	1<=n<=100
+Output Format
+Print Weird if the number is weird; otherwise, print Not Weird.
+Sample Input 0
+3
+Sample Output 0
+Weird
+Sample Input 1
+24
+Sample Output 1
+Not Weird
+Explanation
+Sample Case 0: n=3
+ n is odd and odd numbers are weird, so we print Weird.
+Sample Case 1:  n=24
+ n> 20 and  is even, so it isn't weird. Thus, we print Not Weird.\
+
+Solution: n = int(input())
+if n % 2 == 1:
+    print("Weird")
+elif n % 2 == 0 and 2 <= n <= 5:
+    print("Not Weird")
+elif n % 2 == 0 and 6 <= n <= 20:
+    print("Weird")
+else:
+    print("Not Weird")
+
+2.  Read an integer N . For all non-negative integers i<N , print i2 . See the sample for details.
+Input Format
+The first and only line contains the integer,N .
+Constraints
+1<=N,=20
+Output Format
+Print  N lines, one corresponding to each  i.
+
+Solution:  n=int(input())
+for i in range(n):
+if i < n:
+print(i**2)
+
+
+3. Read two integers and print two lines. The first line should contain integer division,  a//b . The second line should contain float division, a /b .
+You don't need to perform any rounding or formatting operations.
+Input Format
+The first line contains the first integer, a. The second line contains the second integer,b .
+Output Format
+Print the two lines as described above.
+Sample Input 0
+4
+3
+Sample Output 0
+1
+1.33333333333
+
+Solution:  a = input("")
+n1 = int(a)
+b = input("")
+n2 = int(b)
+print(n1 // n2)
+print(n1 / n2)

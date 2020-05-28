@@ -1,0 +1,200 @@
+1]  program to implement Alexander Bogomolny’s UnOrdered Permutation Algorithm 
+
+
+#include <iostream>
+using namespace std; 
+   
+void print(int perm[], int N) 
+{ 
+    for (int i = 0; i < N; i++) 
+        cout << " " << perm[i]; 
+    cout << "\n"; 
+} 
+  
+ 
+void AlexanderBogomolyn(int perm[], int N, int k) 
+{ 
+    static int level = -1; 
+  
+  
+    level = level + 1; 
+    perm[k] = level; 
+  
+    if (level == N) 
+        print(perm, N); 
+    else
+        for (int i = 0; i < N; i++) 
+  
+            
+            if (perm[i] == 0) 
+                AlexanderBogomolyn(perm, N, i); 
+  
+    level = level - 1; 
+      
+    perm[k] = 0; 
+} 
+  
+
+int main() 
+{ 
+    int i, N = 3; 
+    int perm[N] = { 0 }; 
+    AlexanderBogomolyn(perm, N, 0); 
+    return 0; 
+} 
+
+
+
+ 2]  program to print n-th number in Recaman's sequence 
+
+
+#include <bits/stdc++.h> 
+using namespace std; 
+  
+ 
+int recaman(int n) 
+{ 
+    
+    int arr[n]; 
+  
+    arr[0] = 0; 
+    printf("%d, ", arr[0]); 
+  
+    
+ 
+    for (int i=1; i< n; i++) 
+    { 
+        int curr = arr[i-1] - i; 
+        int j; 
+        for (j = 0; j < i; j++) 
+        { 
+            
+            if ((arr[j] == curr) || curr < 0) 
+            { 
+                curr = arr[i-1] + i; 
+                break; 
+            } 
+        } 
+  
+        arr[i] = curr; 
+        printf("%d, ", arr[i]); 
+    } 
+} 
+  
+ 
+int main() 
+{ 
+    int n = 17; 
+    recaman(n); 
+    return 0; 
+}
+
+
+3]  C++ program to print leaf nodes from left  to right 
+
+
+#include <iostream> 
+using namespace std; 
+   
+
+struct Node 
+{ 
+    int data; 
+    struct Node *left, *right; 
+}; 
+  
+
+void printLeafNodes(Node *root) 
+{ 
+   
+    if (!root) 
+        return; 
+      
+      
+    if (!root->left && !root->right) 
+    { 
+        cout << root->data << " ";  
+        return; 
+    } 
+  
+  
+    if (root->left) 
+       printLeafNodes(root->left); 
+   
+    if (root->right) 
+       printLeafNodes(root->right); 
+}  
+  
+
+Node* newNode(int data) 
+{ 
+    Node *temp = new Node; 
+    temp->data = data; 
+    temp->left = temp->right = NULL; 
+    return temp; 
+} 
+   
+
+int main() 
+{ 
+  
+    Node *root = newNode(1); 
+    root->left = newNode(2); 
+    root->right = newNode(3); 
+    root->left->left = newNode(4); 
+    root->right->left = newNode(5); 
+    root->right->right = newNode(8); 
+    root->right->left->left = newNode(6); 
+    root->right->left->right = newNode(7); 
+    root->right->right->left = newNode(9); 
+    root->right->right->right = newNode(10); 
+    
+    printLeafNodes(root); 
+      
+    return 0; 
+}
+
+
+4]  Recursive C++ program  to find leaf nodes from given preorder traversal 
+
+
+
+#include<bits/stdc++.h> 
+using namespace std; 
+  
+
+bool isLeaf(int pre[], int &i, int n, 
+                        int min, int max) 
+{     
+    if (i >= n)  
+        return false; 
+      
+    if (pre[i] > min && pre[i] < max) { 
+        i++; 
+          
+        bool left = isLeaf(pre, i, n, min, pre[i-1]); 
+        bool right = isLeaf(pre, i, n, pre[i-1], max); 
+          
+        if (!left && !right)  
+            cout << pre[i-1] << " "; 
+              
+        return true; 
+    } 
+    return false; 
+} 
+  
+void printLeaves(int preorder[],  int n) 
+{ 
+    int i = 0;     
+    isLeaf(preorder, i, n, INT_MIN, INT_MAX); 
+} 
+  
+ 
+int main() 
+{ 
+    int preorder[] = { 890, 325, 290, 530, 965 }; 
+    int n = sizeof(preorder)/sizeof(preorder[0]); 
+    printLeaves(preorder, n);     
+    return 0; 
+} 
+  

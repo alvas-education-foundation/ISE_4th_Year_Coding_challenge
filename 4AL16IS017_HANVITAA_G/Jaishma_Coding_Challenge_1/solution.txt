@@ -1,0 +1,30 @@
+1]
+
+n = int(input())
+if n % 2 == 1:
+    print("Weird")
+elif n % 2 == 0 and 2 <= n <= 5:
+    print("Not Weird")
+elif n % 2 == 0 and 6 <= n <= 20:
+    print("Weird")
+else:
+    print("Not Weird")
+
+
+2]
+
+
+n=int(raw_input());
+for i in range(0,n):
+    print i*i;
+
+
+3]
+
+
+a = input("")
+n1 = int(a)
+b = input("")
+n2 = int(b)
+print(n1 // n2)
+print(n1 / n2)

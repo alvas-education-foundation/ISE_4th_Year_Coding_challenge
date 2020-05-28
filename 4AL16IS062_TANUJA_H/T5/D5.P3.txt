@@ -1,0 +1,48 @@
+1.program to extract year, month, date and time using Lambda.
+
+import datetime
+now = datetime.datetime.now()
+print(now)
+year = lambda x: x.year
+month = lambda x: x.month
+day = lambda x: x.day
+t = lambda x: x.time()
+print(year(now))
+print(month(now))
+print(day(now))
+print(t(now))
+
+2.  to find the kth smallest element in binary search tree
+
+class Treenode(object):
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+def kth_smallest(root, k):
+    stack = []
+    while root or stack:
+        while root:
+            stack.append(root)
+            root = root.left
+        root = stack.pop()
+        k -= 1
+        if k == 0:
+            break
+        root = root.right
+    return root.val
+
+root = Treenode(8)  
+root.left = Treenode(5)  
+root.right = Treenode(14) 
+root.left.left = Treenode(4)  
+root.left.right = Treenode(6) 
+root.left.right.left = Treenode(8)  
+root.left.right.right = Treenode(7)  
+root.right.right = Treenode(24) 
+root.right.right.left = Treenode(22)  
+
+print(kth_smallest(root, 2))
+print(kth_smallest(root, 3))
+

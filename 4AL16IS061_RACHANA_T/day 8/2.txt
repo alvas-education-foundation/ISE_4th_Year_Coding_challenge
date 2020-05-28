@@ -1,0 +1,4 @@
+z=input("")
+n=int(z)
+for i in range(0,n):
+    print(i*i)

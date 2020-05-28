@@ -1,0 +1,141 @@
+1. Given the names and grades for each student in a Physics class of  students, store them in a nested list and print the name(s) of any student(s) having the second lowest grade.
+
+
+N = int(raw_input())
+
+students = []
+for i in range(2*N):
+    students.append(raw_input().split())
+grades = {}
+for j in range(0, len(students), 2):
+    grades[students[j][0]] = float(students[j + 1][0])
+result = []
+num_to_match = sorted(set(grades.values()))[1]
+for pupil in grades.keys():
+    if grades[pupil] == num_to_match:
+        result.append(pupil)
+for k in sorted(result):
+    print k
+
+2. A counter is a container that stores elements as dictionary keys, and their counts are stored as dictionary values.
+
+from collections import Counter
+X = int(input())
+N = map(int,input().split())
+x = int(input())
+L = map(tuple,(map(int,input().split()) for _ in range(x)))
+n = Counter(N)
+p =0
+for i in L:
+    if i[0] in n.keys() and n[i[0]] >0 :
+        n[i[0]] = n[i[0]]-1
+        p = p+i[1]
+          
+print(p)
+
+3. This tool returns successive r length permutations of elements in an iterable.
+
+If r is not specified or is None, then r  defaults to the length of the iterable, and all possible full length permutations are generated.
+
+Permutations are printed in a lexicographic sorted order. So, if the input iterable is sorted, the permutation tuples will be produced in a sorted order.
+
+
+from itertools import permutations
+I = raw_input().split()
+k = map(''.join,list(permutations(I[0],int(I[1]))))
+k.sort()
+for i in k:
+    print ''.join(i)
+
+Input (stdin)
+
+HACK 2
+Your Output (stdout)
+AC
+AH
+AK
+CA
+CH
+CK
+HA
+HC
+HK
+KA
+KC
+KH
+Expected Output
+
+AC
+AH
+AK
+CA
+CH
+CK
+HA
+HC
+HK
+KA
+KC
+KH
+
+4.A set is an unordered collection of elements without duplicate entries.
+When printed, iterated or converted into a sequence, its elements will appear in an arbitrary order.
+
+from __future__ import division
+
+def average(array):
+    return float(sum(set(array)))/len(set(array))
+
+if __name__ == '__main__':
+    n = int(raw_input())
+    arr = map(int, raw_input().split())
+    result = average(arr)
+    print result
+
+Input (stdin)
+Download
+10
+161 182 161 154 176 170 167 171 170 174
+Your Output (stdout)
+169.375
+Expected Output
+Download
+169.375
+
+5.Today, we're learning about a new data type: sets.
+
+Concept
+
+If the inputs are given on one line separated by a space character, use split() to get the separate values in the form of a list:
+
+int(raw_input())
+N = raw_input().split()
+Nint = set(list(map(int, N)))
+int(raw_input())
+M = raw_input().split()
+Mint = set(list(map(int, M)))
+res = []
+for i in list(Nint.difference(Mint)):
+    res.append(i)
+for j in list(Mint.difference(Nint)):
+    res.append(j)
+for k in sorted(res):
+    print k
+
+Input (stdin)
+Download
+4
+2 4 5 9
+4
+2 4 11 12
+Your Output (stdout)
+5
+9
+11
+12
+Expected Output
+Download
+5
+9
+11
+12

@@ -1,0 +1,39 @@
+Python Programs
+
+1.  Sum of all the items in a list
+
+def sum_list(items):
+    sum_numbers = 0
+    for x in items:
+        sum_numbers += x
+    return sum_numbers
+print(sum_list([1,2,-8]))
+
+
+2.   Find the largest num in the list
+
+def max_num_in_list( list ):
+    max = list[ 0 ]
+    for a in list:
+        if a > max:
+            max = a
+    return max
+print(max_num_in_list([1, 2, -8, 0]))
+
+
+3.   Calculate no of upper-case and no of lower-case letters in the string
+
+def string_test(s):
+    d={"Upper_Case":0, "Lower_Case":0}
+    for c in s:
+        if c.isupper():
+           d["Upper_Case"]+=1
+        elif c.islower():
+           d["Lower_Case"]+=1
+        else:
+           pass
+    print ("Original String : ", s)
+    print ("No. of Upper case characters : ", d["Upper_Case"])
+    print ("No. of Lower case Characters : ", d["Lower_Case"])
+
+string_test('Alvas Engineering College')
