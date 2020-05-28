@@ -1,0 +1,68 @@
+1)Write a Python program to display first 5 rows from COVID-19 dataset. Also print the dataset information and check the missing values.
+
+import pandas as pd
+covid_data= pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-17-2020.csv')
+print(covid_data)
+print("\nDataset information:")
+print(covid_data.info())
+print("\nMissing data information:")
+print(covid_data.isna().sum())
+
+
+2)Write a Python program to get the latest number of confirmed, deaths, recovered and active cases of Novel Coronavirus (COVID-19) Country wise.
+
+import pandas as pd
+covid_data= pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-17-2020.csv')
+covid_data['Active'] = covid_data['Confirmed'] - covid_data['Deaths'] - covid_data['Recovered']
+result = covid_data.groupby('Country/Region')['Confirmed', 'Deaths', 'Recovered', 'Active'].sum().reset_index()
+print(result) 
+
+
+3)Write a Python GUI program to create a window and disable to resize the window using tkinter module.
+
+import tkinter as tk
+parent = tk.Tk()
+parent.title("-Welcome to Python tkinter Basic exercises-")
+parent.resizable(0,0)
+parent.mainloop()
+
+4)Write a NumPy program to display all the dates for the month of March, 2017. 
+Expected Output:
+March, 2017
+['2017-03-01' '2017-03-02' '2017-03-03' '2017-03-04' '2017-03-05'
+'2017-03-06' '2017-03-07' '2017-03-08' '2017-03-09' '2017-03-10'
+'2017-03-11' '2017-03-12' '2017-03-13' '2017-03-14' '2017-03-15'
+'2017-03-16' '2017-03-17' '2017-03-18' '2017-03-19' '2017-03-20'
+'2017-03-21' '2017-03-22' '2017-03-23' '2017-03-24' '2017-03-25'
+'2017-03-26' '2017-03-27' '2017-03-28' '2017-03-29' '2017-03-30'
+'2017-03-31']
+
+import numpy as np
+print("March, 2017")
+print(np.arange('2017-03', '2017-04', dtype='datetime64[D]'))
+
+5) Write a NumPy program to sort a given array of shape 2 along the first axis, last axis and on flattened array. Go to the editor
+Expected Output:
+Original array:
+[[10 40]
+[30 20]]
+Sort the array along the first axis:
+[[10 20]
+[30 40]]
+Sort the array along the last axis:
+[[10 40]
+[20 30]]
+Sort the flattened array:
+[10 20 30 40]
+
+import numpy as np
+a = np.array([[10,40],[30,20]])
+print("Original array:")
+print(a)
+print("Sort the array along the first axis:")
+print(np.sort(a, axis=0))
+print("Sort the array along the last axis:")
+print(np.sort(a))
+print("Sort the flattened array:")
+print(np.sort(a, axis=None))
+
