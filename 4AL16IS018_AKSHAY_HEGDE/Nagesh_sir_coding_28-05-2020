@@ -1,0 +1,54 @@
+1. Write a python program which will find all such numbers which are divisible by 7 but are not a multiple of 5 between 2000 and 3200 (both included). 
+The numbers obtained should be printed in a comma-separated sequence on a single line.
+
+
+for i in range(2000,3201):
+    if i%7 == 0 and i%5!=0:
+        print(i,end=',')
+print("\b")
+
+
+
+2.Write a python program that accepts sequence of lines as input and prints the lines after making all characters in the sentence capitalized.
+Suppose the following input is supplied to the program:
+Hello world
+Practice makes perfect
+Then, the output should be:
+HELLO WORLD
+PRACTICE MAKES PERFECT
+
+
+def user_input():
+    while True:
+        s = input()
+        if not s:
+            return
+        yield s
+
+for line in map(str.upper, user_input()):
+    print(line)
+
+
+
+3.Write a python program that accepts a sentence and calculate the number of upper case letters and lower case letters.
+Suppose the following input is supplied to the program:
+Hello world!
+Then, the output should be:
+UPPER CASE 1
+LOWER CASE 9
+
+
+def string_test(s):
+    d={"UPPER_CASE":0, "LOWER_CASE":0}
+    for c in s:
+        if c.isupper():
+           d["UPPER_CASE"]+=1
+        elif c.islower():
+           d["LOWER_CASE"]+=1
+        else:
+           pass
+    print ("Original String : ", s)
+    print ("No. of Upper case characters : ", d["UPPER_CASE"])
+    print ("No. of Lower case Characters : ", d["LOWER_CASE"])
+
+string_test('Hello world!')
