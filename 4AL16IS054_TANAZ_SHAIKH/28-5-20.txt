@@ -1,0 +1,93 @@
+1. You are given a string and your task is to swap cases. In other words, convert all lowercase letters to uppercase letters and vice versa.
+
+Solution: def change(x):
+    if str.islower(x):
+        return str.upper(x)
+    else:
+        return str.lower(x)
+def swap_case(s):
+    return ('').join(map(change,s))
+if __name__ == '__main__':
+    s = raw_input()
+    result = swap_case(s)
+    print result
+
+HackerRank.com presents "Pythonist 2".
+Your Output (stdout)
+hACKERrANK.COM PRESENTS "pYTHONIST 2".
+Expected Output
+hACKERrANK.COM PRESENTS "pYTHONIST 2".
+
+2. Given an integer,n , and n space-separated integers as input, create a tuple,t , of those n integers. Then compute and print the result of hash(t) .
+
+Note: hash() is one of the functions in the __builtins__ module, so it need not be imported.
+
+Solution: print hash(tuple(map(int, raw_input().split(' '))))
+
+n = int(raw_input())
+l = list()
+integers = raw_input().split()
+for i in integers:
+        l.append(int(i))
+print hash(tuple(l))
+
+3. The calendar module allows you to output calendars and provides additional useful functions for them.
+
+class calendar.TextCalendar([firstweekday])
+
+This class can be used to generate plain text calendars.
+
+Solution: import calendar
+k = map(int,raw_input().split())
+m = calendar.weekday(k[2],k[0],k[1])
+w = ['MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY','SUNDAY']
+
+print w[m]
+
+Input (stdin)
+
+08 05 2015
+Your Output (stdout)
+WEDNESDAY
+Expected Output
+
+WEDNESDAY
+
+4. If we want to add a single element to an existing set, we can use the .add() operation.
+It adds the element to the set and returns 'None'.
+Solution:
+
+N = int(raw_input())
+s = set(raw_input() for i in range(N))
+    
+print len(s)
+
+Input (stdin)
+
+7
+UK
+China
+USA
+France
+New Zealand
+UK
+France
+Your Output (stdout)
+5
+Expected Output
+5
+
+5. The .union() operator returns the union of a set and the set of elements in an iterable.
+Sometimes, the | operator is used in place of .union() operator, but it operates only on the set of elements in set.
+Set is immutable to the .union() operation (or | operation).
+
+e = input()
+el = set(map(int,raw_input().split()))
+f = input()
+fl = set(map(int,raw_input().split()))
+
+u = el.union(fl)
+
+print u
+
+print len(u)
