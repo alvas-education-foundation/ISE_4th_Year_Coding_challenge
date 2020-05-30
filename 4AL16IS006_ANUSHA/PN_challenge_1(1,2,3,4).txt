@@ -1,0 +1,81 @@
+1)
+public class main {
+       public static int  findIndex (int[] my_array, int t) {
+        if (my_array == null) return -1;
+        int len = my_array.length;
+        int i = 0;
+        while (i < len) {
+            if (my_array[i] == t) return i;
+            else i=i+1;
+        }
+        return -1;
+    }
+    public static void main(String[] args) {
+      int[] my_array = {34, 25, 66, 13, 36, 56, 77, 18, 39, 69};
+      System.out.println("Index position of 77 is: " + findIndex(my_array, 25));
+      System.out.println("Index position of 69 is: " + findIndex(my_array, 77));
+       }
+}
+
+2)
+import java.util.Arrays; 
+public class DupArray{
+  public static void main(String[] args) 
+    {
+        int[] my_array = {1, 2, 5, 5, 6, 6, 7, 2};
+ 
+        for (int i = 0; i < my_array.length-1; i++)
+        {
+            for (int j = i+1; j < my_array.length; j++)
+            {
+                if ((my_array[i] == my_array[j]) && (i != j))
+                {
+                    System.out.println("Duplicate Element : "+my_array[j]);
+                }
+            }
+        }
+    }    
+}
+
+
+3)
+import java.util.*;
+public class Calender {
+   public static void main(String[] args)
+    {
+      Calendar cal = Calendar.getInstance();
+      Date cdate = cal.getTime();
+      // get next year
+      cal.add(Calendar.YEAR, 1); 
+      Date nyear = cal.getTime();
+      //get previous year
+      cal.add(Calendar.YEAR, -2); 
+      Date pyear = cal.getTime();
+      System.out.println("\nCurrent Date : " + cdate);
+      System.out.println("\nDate before 1 year : " + pyear);
+      System.out.println("\nDate after 1 year  : " + nyear+"\n");  	
+    }
+}
+
+4)#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+
+    int ar[10][10],maxSum = -36985247;
+    for(int i = 0; i < 6; i++){
+        for(int j = 0; j < 6; j++)cin >> ar[i][j];
+    }
+
+    for(int i = 0; i < 6; i++){
+        for(int j = 0; j < 6; j++){
+            if(j+2 < 6 && i+2 < 6 ){
+                int sum = ar[i][j] + ar[i][j+1] + ar[i][j+2] + ar[i+1][j+1] + ar[i+2][j] + ar[i+2][j+1] + ar[i+2][j+2];
+                if(sum > maxSum)maxSum = sum;
+            }
+        }
+    }
+    cout << maxSum << endl;
+    return 0;
+}
+
