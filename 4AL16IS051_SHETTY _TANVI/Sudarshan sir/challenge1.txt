@@ -1,0 +1,72 @@
+1)import numpy as np
+from scipy import stats
+
+N = int(input())
+numbers = list(map(int, input().split()))
+print(np.mean(numbers))
+print(np.median(numbers))
+print(int(stats.mode(numbers)[0]))
+
+
+
+2)N = map(int,input().split())
+X = list(map(int, input().strip().split(' ')))
+W = list(map(int, input().strip().split(' ')))
+sum_X = sum([a*b for a,b in zip(X,W)])
+print(round((sum_X/sum(W)),1))
+
+3)n = input()
+l = []
+for _ in range(n):
+    s = raw_input().split()
+    cmd = s[0]
+    args = s[1:]
+    if cmd !="print":
+        cmd += "("+ ",".join(args) +")"
+        eval("l."+cmd)
+    else:
+        print l
+4)n = int(input())
+x = list(map(int, input().split()))
+
+f = list(map(int, input().split()))
+
+s = []
+
+for i in range(len(x)):
+    j = f[i]
+    for k in range(j):
+        s.append(x[i])
+n = len(s)
+
+s.sort()
+if n%2 == 0:
+    Q21 = s[n//2]
+    Q22 = s[n//2 - 1]
+    Q2 = (Q21 + Q22) / 2
+else:
+    Q2 = s[n//2]
+
+LH = s[:n//2]
+if n%2==0:
+    UH = s[n//2:]
+else:
+    UH = s[n//2+1:]
+
+Q1_len = len(LH)
+Q3_len = len(UH)
+if Q1_len%2 == 0:
+    Q11 = LH[Q1_len//2]
+    Q12 = LH[Q1_len//2 - 1]
+    Q1 = (Q11 + Q12) / 2
+else:
+    Q1 = LH[Q1_len//2]
+
+if Q3_len%2 == 0:
+    Q31 = UH[Q3_len//2]
+    Q32 = UH[Q3_len//2 - 1]
+    Q3 = (Q31 + Q32) / 2
+else:
+    Q3 = UH[Q3_len//2]
+
+print(round(Q3 - Q1,1))
