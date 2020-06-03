@@ -100,4 +100,4 @@ int main()
 		free(s[i]);
 	free(s);
 	return 0;
-}s
+}

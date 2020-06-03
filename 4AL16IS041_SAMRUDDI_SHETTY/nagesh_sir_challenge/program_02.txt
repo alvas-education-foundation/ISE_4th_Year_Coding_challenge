@@ -1,0 +1,12 @@
+string = []
+while True:
+    s = input()
+    if s:
+        string.append(s.upper())
+    else:
+        break
+
+for sentence in string:
+    print(sentence)
+
+
