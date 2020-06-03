@@ -1,0 +1,410 @@
+1)
+
+Given an array, of size , reverse it.
+
+Example: If array, , after reversing it, the array should be, .
+
+Input Format
+
+The first line contains an integer, , denoting the size of the array. The next line contains  space-separated integers denoting the elements of the array.
+
+Constraints
+
+
+, where  is the  element of the array.
+
+Output Format
+
+The output is handled by the code given in the editor, which would print the array.
+
+Sample Input 0
+
+6
+16 13 7 2 1 12 
+Sample Output 0
+
+12 1 2 7 13 16 
+
+Solution:
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int num, *arr, i;
+    scanf("%d", &num);
+    arr = (int*) malloc(num * sizeof(int));
+    for(i = 0; i < num; i++) {
+        scanf("%d", arr + i);
+    }
+    
+    int* left_ptr = arr;
+    int* right_ptr;
+    int temp;
+    for(i = 0; i < num; i++) {
+        if(i == num - 1) {
+            right_ptr = (arr + i);
+        }
+    }
+    while(left_ptr < right_ptr) {
+        temp = *right_ptr;
+        *right_ptr = *left_ptr;
+        *left_ptr = temp;
+        right_ptr--;
+        left_ptr++;
+    }
+      
+    for(i = 0; i < num; i++) {
+        printf("%d ", *(arr + i));
+    }
+    free(arr);
+    return 0;
+}
+
+****************************************************************************************************************************************************************
+
+2)
+
+Strings are usually ordered in lexicographical order. That means they are ordered by comparing their leftmost different characters. For example,  because . Also  because . If one string is an exact prefix of the other it is lexicographically smaller, e.g., .
+
+Given an array of strings sorted in lexicographical order, print all of its permutations in strict lexicographical order. If two permutations look the same, only print one of them. See the 'note' below for an example.
+
+Complete the function next_permutation which generates the permutations in the described order.
+
+For example, . The six permutations in correct order are:
+
+ab bc cd
+ab cd bc
+bc ab cd
+bc cd ab
+cd ab bc
+cd bc ab
+Note: There may be two or more of the same string as elements of .
+For example, . Only one instance of a permutation where all elements match should be printed. In other words, if , then print either  or  but not both.
+
+A three element array having three discrete elements has six permutations as shown above. In this case, there are three matching pairs of permutations where  and  are switched. We only print the three visibly unique permutations:
+
+ab ab bc
+ab bc ab
+bc ab ab
+Input Format
+
+The first line of each test file contains a single integer , the length of the string array .
+
+Each of the next  lines contains a string .
+
+Constraints
+
+ contains only lowercase English letters.
+Output Format
+
+Print each permutation as a list of space-separated strings on a single line.
+
+Sample Input 0
+
+2
+ab
+cd
+Sample Output 0
+
+ab cd
+cd ab
+
+
+Solution:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void swap(char **s, int i, int j){
+    char * tmp = s[i];
+    s[i] = s[j];
+    s[j] = tmp;
+}
+
+void reverse(char **s, int start, int end){
+    while(start<end){
+        swap(s,start++,end--);
+    }
+}
+
+int next_permutation(int n, char **s)
+{
+    for(int i=n-2;i>-1;i--){
+        if(strcmp(s[i+1],s[i])>0){
+          
+            for(int j=n-1;j>i;j--){
+                if(strcmp(s[j],s[i])>0){
+                   
+                    swap(s,i,j);
+                    
+                    reverse(s,i+1,n-1);
+                    return 1;
+                }
+            }
+        }
+    }
+    return 0;
+}
+int main()
+{
+	char **s;
+	int n;
+	scanf("%d", &n);
+	s = calloc(n, sizeof(char*));
+	for (int i = 0; i < n; i++)
+	{
+		s[i] = calloc(11, sizeof(char));
+		scanf("%s", s[i]);
+	}
+	do
+	{
+		for (int i = 0; i < n; i++)
+			printf("%s%c", s[i], i == n - 1 ? '\n' : ' ');
+	} while (next_permutation(n, s));
+	for (int i = 0; i < n; i++)
+		free(s[i]);
+	free(s);
+	return 0;
+}
+
+***************************************************************************************************************************************************************
+
+
+3)
+In this challenge, we use regular expressions (RegEx) to remove instances of words that are repeated more than once, but retain the first occurrence of any case-insensitive repeated word. For example, the words love and to are repeated in the sentence I love Love to To tO code. Can you complete the code in the editor so it will turn I love Love to To tO code into I love to code?
+
+To solve this challenge, complete the following three lines:
+
+Write a RegEx that will match any repeated word.
+Complete the second compile argument so that the compiled RegEx is case-insensitive.
+Write the two necessary arguments for replaceAll such that each repeated word is replaced with the very first instance the word found in the sentence. It must be the exact first occurrence of the word, as the expected output is case-sensitive.
+Note: This challenge uses a custom checker; you will fail the challenge if you modify anything other than the three locations that the comments direct you to complete. To restore the editor's original stub code, create a new buffer by clicking on the branch icon in the top left of the editor.
+
+Input Format
+
+The following input is handled for you the given stub code:
+
+The first line contains an integer, , denoting the number of sentences.
+Each of the  subsequent lines contains a single sentence consisting of English alphabetic letters and whitespace characters.
+
+Constraints
+
+Each sentence consists of at most  English alphabetic letters and whitespaces.
+Output Format
+
+Stub code in the editor prints the sentence modified by the replaceAll line to stdout. The modified string must be a modified version of the initial sentence where all repeat occurrences of each word are removed.
+
+Sample Input
+
+5
+Goodbye bye bye world world world
+Sam went went to to to his business
+Reya is is the the best player in eye eye game
+in inthe
+Hello hello Ab aB
+Sample Output
+
+Goodbye bye world
+Sam went to his business
+Reya is the best player in eye game
+in inthe
+Hello Ab
+
+
+Solution:
+
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class DuplicateWords {
+
+    public static void main(String[] args) {
+
+        String regex = "\\b(\\w+)(\\W+\\1\\b)+";
+        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+
+        Scanner in = new Scanner(System.in);
+        int numSentences = Integer.parseInt(in.nextLine());
+        
+        while (numSentences-- > 0) {
+            String input = in.nextLine();
+            
+            Matcher m = p.matcher(input);
+            
+           
+            while (m.find()) {
+                input = input.replaceAll(m.group(), m.group(1));
+            }
+            
+            
+            System.out.println(input);
+        }
+        
+        in.close();
+    }
+}
+
+
+***************************************************************************************************************************************************************
+
+
+4)
+
+The factorial of the integer , written , is defined as:
+
+Calculate and print the factorial of a given integer.
+
+For example, if , we calculate  and get .
+
+Function Description
+
+Complete the extraLongFactorials function in the editor below. It should print the result and return.
+
+extraLongFactorials has the following parameter(s):
+
+n: an integer
+Note: Factorials of  can't be stored even in a  long long variable. Big integers must be used for such calculations. Languages like Java, Python, Ruby etc. can handle big integers, but we need to write additional code in C/C++ to handle huge values.
+
+We recommend solving this challenge using BigIntegers.
+
+Input Format
+
+Input consists of a single integer 
+
+Constraints
+
+
+Output Format
+
+Print the factorial of .
+
+Sample Input
+
+
+Sample Output
+
+
+Solution:
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+int main(){
+
+    int n,val[500],sz;
+    cin >> n;
+    val[0] = 1;
+    sz = 1;
+    for(int i = 2; i <= n; i++){
+
+        int cary = 0;
+        for(int j = 0; j < sz; j++){
+            int pod = val[j]*i+cary;
+            val[j] = pod%10;
+            cary = pod/10;
+        }
+        while(cary){
+            val[sz] = cary%10;
+            cary/=10;
+            sz++;
+        }
+    }
+    for(int i = sz-1; i>= 0; i--)cout << val[i];
+    cout << endl;
+    return 0;
+}
+
+***************************************************************************************************************************************************************
+
+
+5)
+
+Given the time in numerals we may convert it into words, as shown below:
+
+At , use o' clock. For , use past, and for  use to. Note the space between the apostrophe and clock in o' clock. Write a program which prints the time in words for the input given in the format described.
+
+Function Description
+
+Complete the timeInWords function in the editor below. It should return a time string as described.
+
+timeInWords has the following parameter(s):
+
+h: an integer representing hour of the day
+m: an integer representing minutes after the hour
+Input Format
+
+The first line contains , the hours portion The second line contains , the minutes portion
+
+Constraints
+
+Output Format
+
+Print the time in words as described.
+
+Sample Input 0
+
+5
+47
+Sample Output 0
+
+thirteen minutes to six
+Sample Input 1
+
+3
+00
+Sample Output 1
+
+three o' clock
+Sample Input 2
+
+7
+15
+Sample Output 2
+
+quarter past seven
+
+Solution:
+
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <limits.h>
+#include <stdbool.h>
+
+int main(){
+    int h; 
+    scanf("%d",&h);
+    int m; 
+    scanf("%d",&m);
+    char *count[]= {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "quater", "sixteen", "seventeen", "eighteen", "nineteen", "twenty", "twenty one", "twenty two", "twenty three", "twenty four", "twenty five", "twenty six", "twenty seven", "twenty eight", "twenty nine"};
+    
+    if(m==0)
+        printf("%s o' clock",count[h-1]);
+    else if(m>30){
+        if(m==59)           
+            printf("%s minute to %s",count[m-1],count[h]);
+        if(m==45)
+             printf("quarter to %s",count[h]);
+        else
+              printf("%s minutes to %s",count[60-m-1],count[h]);       
+    }
+    else if(m<30){
+        if(m==1)           
+            printf("%s minute past %s",count[m-1],count[h-1]);
+        if(m==15)
+             printf("quarter past %s",count[h-1]);
+        else
+             printf("%s minutes past %s",count[m-1],count[h-1]);
+    }
+    else
+        printf("half past %s",count[h-1]); 
+    return 0;
+}
