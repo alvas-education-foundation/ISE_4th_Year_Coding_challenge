@@ -1,0 +1,586 @@
+1)
+Huffman coding assigns variable length codewords to fixed length input characters based on their frequencies. More frequent characters are assigned shorter codewords and less frequent characters are assigned longer codewords. All edges along the path to a character contain a code digit. If they are on the left side of the tree, they will be a 0 (zero). If on the right, they'll be a 1 (one). Only the leaves will contain a letter and its frequency count. All other nodes will contain a null instead of a character, and the count of the frequency of all of it and its descendant characters.
+
+For instance, consider the string ABRACADABRA. There are a total of  characters in the string. This number should match the count in the ultimately determined root of the tree. Our frequencies are  and . The two smallest frequencies are for  and , both equal to , so we'll create a tree with them. The root node will contain the sum of the counts of its descendants, in this case . The left node will be the first character encountered, , and the right will contain . Next we have  items with a character count of : the tree we just created, the character  and the character . The tree came first, so it will go on the left of our new root node.
+
+Answer:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef struct node {
+    int freq;
+    char data;
+    node * left;
+    node * right;
+} node;
+
+struct deref:public binary_function<node*, node*, bool> {
+  	bool operator()(const node * a, const node * b)const {
+        return a->freq > b->freq;
+    }
+};
+
+typedef priority_queue<node *, vector<node*>, deref> spq;
+
+node * huffman_hidden(string s) {
+
+    spq pq;
+    vector<int>count(256,0);
+  
+    for(int i = 0; i < s.length(); i++ ) {
+        count[s[i]]++;
+    }
+    
+    for(int i=0; i < 256; i++) {
+        
+        node * n_node = new node;
+        n_node->left = NULL;
+        n_node->right = NULL;
+        n_node->data = (char)i;
+        n_node->freq = count[i];
+      
+        if( count[i] != 0 )
+        	pq.push(n_node);
+      
+    }
+    
+    while( pq.size() != 1 ) {
+      
+        node * left = pq.top();
+        pq.pop();
+        node * right = pq.top();
+        pq.pop();
+        node * comb = new node;
+        comb->freq = left->freq + right->freq;
+        comb->data = '\0';
+        comb->left = left;
+        comb->right = right;
+        pq.push(comb);
+      
+    }
+    
+    return pq.top();
+    
+}
+
+void print_codes_hidden(node * root, string code, map<char, string>&mp) {
+    
+  	if(root == NULL)
+        return;
+    
+  	if(root->data != '\0') {
+        mp[root->data] = code;
+    }
+  
+    print_codes_hidden(root->left, code+'0', mp);
+    print_codes_hidden(root->right, code+'1', mp);
+        
+}
+
+/* 
+The structure of the node is
+
+typedef struct node {
+
+	int freq;
+    char data;
+    node * left;
+    node * right;
+    
+} node;
+
+*/
+
+
+void decode_huff(node * root, string s) {
+        node*temp=root;
+       int i=0;
+        for(i=0;i<=s.size();i++)
+            {
+               if(temp->right==NULL && temp->left==NULL) 
+                {
+                cout<<temp->data;
+                  temp=root;
+            }
+            if(s[i]=='0')
+                temp=temp->left;
+            else if(s[i]=='1')
+                temp=temp->right;
+            }
+}
+
+int main() {
+  
+    string s;
+    std::cin >> s;
+  
+    node * tree = huffman_hidden(s);
+    string code = "";
+    map<char, string>mp;
+  
+    print_codes_hidden(tree, code, mp);
+    
+    string coded;
+  
+    for( int i = 0; i < s.length(); i++ ) {
+        coded += mp[s[i]];
+    }
+    
+    decode_huff(tree,coded);
+  
+    return 0;
+}
+
+***************************************************************************************************************************************************************
+
+2)
+A linked list is said to contain a cycle if any node is visited more than once while traversing the list.
+
+Complete the function provided for you in your editor. It has one parameter: a pointer to a Node object named  that points to the head of a linked list. Your function must return a boolean denoting whether or not there is a cycle in the list. If there is a cycle, return true; otherwise, return false.
+
+Answer :-
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class SinglyLinkedListNode {
+    public:
+        int data;
+        SinglyLinkedListNode *next;
+
+        SinglyLinkedListNode(int node_data) {
+            this->data = node_data;
+            this->next = nullptr;
+        }
+};
+
+class SinglyLinkedList {
+    public:
+        SinglyLinkedListNode *head;
+        SinglyLinkedListNode *tail;
+
+        SinglyLinkedList() {
+            this->head = nullptr;
+            this->tail = nullptr;
+        }
+
+        void insert_node(int node_data) {
+            SinglyLinkedListNode* node = new SinglyLinkedListNode(node_data);
+
+            if (!this->head) {
+                this->head = node;
+            } else {
+                this->tail->next = node;
+            }
+
+            this->tail = node;
+        }
+};
+
+void print_singly_linked_list(SinglyLinkedListNode* node, string sep, ofstream& fout) {
+    while (node) {
+        fout << node->data;
+
+        node = node->next;
+
+        if (node) {
+            fout << sep;
+        }
+    }
+}
+
+void free_singly_linked_list(SinglyLinkedListNode* node) {
+    while (node) {
+        SinglyLinkedListNode* temp = node;
+        node = node->next;
+
+        free(temp);
+    }
+}
+
+
+
+/*
+ * For your reference:
+ *
+ * SinglyLinkedListNode {
+ *     int data;
+ *     SinglyLinkedListNode* next;
+ * };
+ *
+ */
+
+bool has_cycle(SinglyLinkedListNode* head)
+{
+   
+    SinglyLinkedListNode* fast = head, *slow = head; 
+   while(fast!= NULL){ 
+     fast = fast->next->next; 
+     slow = slow->next; 
+     if(fast == slow){ 
+       return 1; 
+     } 
+   }return 0;
+}
+
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int tests;
+    cin >> tests;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int tests_itr = 0; tests_itr < tests; tests_itr++) {
+        int index;
+        cin >> index;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        SinglyLinkedList* llist = new SinglyLinkedList();
+
+        int llist_count;
+        cin >> llist_count;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        for (int i = 0; i < llist_count; i++) {
+            int llist_item;
+            cin >> llist_item;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            llist->insert_node(llist_item);
+        }
+      
+      	SinglyLinkedListNode* extra = new SinglyLinkedListNode(-1);
+      	SinglyLinkedListNode* temp = llist->head;
+      
+      	for (int i = 0; i < llist_count; i++) {
+            if (i == index) {
+          		extra = temp;
+            }
+          	
+          	if (i != llist_count-1) {
+          		temp = temp->next;
+            }
+        }
+      
+      	temp->next = extra;
+
+        bool result = has_cycle(llist->head);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}
+
+
+***************************************************************************************************************************************************************
+
+
+3)
+
+A binary tree is a tree which is characterized by one of the following properties:
+
+It can be empty (null).
+It contains a root node only.
+It contains a root node with a left subtree, a right subtree, or both. These subtrees are also binary trees.
+In-order traversal is performed as
+
+Traverse the left subtree.
+Visit root.
+Traverse the right subtree.
+For this in-order traversal, start from the left child of the root node and keep exploring the left subtree until you reach a leaf. When you reach a leaf, back up to its parent, check for a right child and visit it if there is one. If there is not a child, you've explored its left and right subtrees fully. If there is a right child, traverse its left subtree then its right in the same manner. Keep doing this until you have traversed the entire tree. You will only store the values of a node as you visit when one of the following is true:
+
+it is the first node visited, the first time visited
+it is a leaf, should only be visited once
+all of its subtrees have been explored, should only be visited once while this is true
+it is the root of the tree, the first time visited
+
+Answers :-
+
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+class Node {
+ int data;
+ public:
+ Node * children[2];
+ Node();
+ Node(int);
+ ~Node();
+ void setData(int);
+ int getData();
+};
+
+Node::Node(){
+ children[0] = NULL;
+ children[1] = NULL;
+}
+
+Node::Node(int _data){
+ data = _data;
+ children[0] = NULL;
+ children[1] = NULL;
+}
+
+Node::~Node(){
+ for(int i = 0; i < 2; i++){
+  if(children[i] != NULL){
+   delete(children[i]);
+  }
+  children[i] = NULL;
+ }
+}
+
+void Node::setData(int _data){
+ data = _data;
+}
+
+int Node::getData(){
+ return data;
+}
+
+class Tree {
+ Node * root;
+ void swapNodesLevel(Node **,int,int);
+ void printPreorder(Node *);
+ void printInOrder(Node *);
+ public:
+ Tree();
+ void addChildPair(int,int,int);
+ void print();
+ void swapNodes(int);
+};
+
+Tree::Tree(){
+ root = new Node(1);
+}
+
+void Tree::addChildPair(int left, int right, int pos){
+ vector<Node *> queue;
+ Node * ptr;
+ queue.push_back(root);
+ while(queue.size() > 0){
+  ptr = queue[0];
+  if(pos == 0){
+   if(left == -1){
+    ptr->children[0] = NULL;
+   } else {
+    ptr->children[0] = new Node(left);
+   }
+   if(right == -1){
+    ptr->children[1] = NULL;
+   } else {
+    ptr->children[1] = new Node(right);
+   }
+   break;
+  }
+  queue.erase(queue.begin());
+  for(int i = 0; i < 2; i++){
+   if(ptr->children[i] != NULL){
+    queue.push_back(ptr->children[i]);
+   }
+  }
+  pos--;
+ }
+ 
+}
+
+void Tree::print(){
+ printInOrder(root);
+ cout << endl;
+}
+
+void Tree::printPreorder(Node * ptr){
+ cout << ptr->getData() << " ";
+ if(ptr->children[0] != NULL){
+  printPreorder(ptr->children[0]);
+ }
+ if(ptr->children[1] != NULL){
+  printPreorder(ptr->children[1]);
+ }
+}
+
+void Tree::printInOrder(Node * ptr){
+ if(ptr->children[0] != NULL){
+  printInOrder(ptr->children[0]);
+ }
+ cout << ptr->getData() << " ";
+ if(ptr->children[1] != NULL){
+  printInOrder(ptr->children[1]);
+ }
+}
+
+void Tree::swapNodes(int depth){
+ swapNodesLevel(&root,depth,1);
+}
+
+void Tree::swapNodesLevel(Node ** ptr,int depth,int current){
+ if(current % depth == 0){
+  Node * temp = (*ptr)->children[0];
+  (*ptr)->children[0] = (*ptr)->children[1];
+  (*ptr)->children[1] = temp;
+ }
+ for(int i = 0; i < 2; i++){
+  if((*ptr)->children[i] != NULL){
+   swapNodesLevel(&((*ptr)->children[i]),depth,current+1);
+  }
+ }
+}
+
+int main() {
+ int nodes; cin >> nodes;
+ int a, b;
+ Tree * mytree = new Tree();
+ for(int i = 0; i < nodes; i++){
+  cin >> a >> b;
+  mytree->addChildPair(a,b,i);
+ }
+ cin >> a;
+ while(a--){
+  cin >> b;
+  mytree->swapNodes(b);
+  mytree->print();
+ }
+    return 0;
+}
+
+***************************************************************************************************************************************************************
+
+4)
+
+ A bracket is considered to be any one of the following characters: (, ), {, }, [, or ].
+
+Two brackets are considered to be a matched pair if the an opening bracket (i.e., (, [, or {) occurs to the left of a closing bracket (i.e., ), ], or }) of the exact same type. There are three types of matched pairs of brackets: [], {}, and ().
+
+A matching pair of brackets is not balanced if the set of brackets it encloses are not matched. For example, {[(])} is not balanced because the contents in between { and } are not balanced. The pair of square brackets encloses a single, unbalanced opening bracket, (, and the pair of parentheses encloses a single, unbalanced closing square bracket, ].
+
+By this logic, we say a sequence of brackets is balanced if the following conditions are met:
+
+It contains no unmatched brackets.
+The subset of brackets enclosed within the confines of a matched pair of brackets is also a matched pair of brackets.
+Given  strings of brackets, determine whether each sequence of brackets is balanced. If a string is balanced, return YES. Otherwise, return NO.
+
+Answers: 
+
+ #include <bits/stdc++.h>
+
+using namespace std;
+
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <bitset>
+#include <cstdio>
+#include <limits>
+#include <vector>
+#include <climits>
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+
+using namespace std;
+
+bool is_balanced(string expression) {
+    vector<char> s; 
+    for(int i = 0; i < expression.size(); i++) {
+        if(expression[i] == '{' || expression[i] == '[' || expression[i] == '(') {
+            s.push_back(expression[i]);
+        } else {
+            if(s.size() == 0) {
+                return false;
+            }
+            char c = s.back();
+            s.pop_back();
+            if(c == '{' && expression[i] != '}') {
+                return false;
+            }
+            if(c == '(' && expression[i] != ')') {
+                return false;
+            }
+            if(c == '[' && expression[i] != ']') {
+                return false;
+            }
+        }
+    }
+    if(s.size() == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+int main(){
+    int t;
+    cin >> t;
+    for(int a0 = 0; a0 < t; a0++){
+        string expression;
+        cin >> expression;
+        bool answer = is_balanced(expression);
+        if(answer)
+            cout << "YES\n";
+        else cout << "NO\n";
+    }
+    return 0;
+}
+
+***************************************************************************************************************************************************************
+
+5)
+
+For the purposes of this challenge, we define a binary tree to be a binary search tree with the following ordering requirements:
+
+The  value of every node in a node's left subtree is less than the data value of that node.
+The  value of every node in a node's right subtree is greater than the data value of that node.
+Given the root node of a binary tree, can you determine if it's also a binary search tree?
+
+Complete the function in your editor below, which has  parameter: a pointer to the root of a binary tree. It must return a boolean denoting whether or not the binary tree is a binary search tree. You may have to write one or more helper functions to complete this challenge.
+
+Answer:-
+
+The Node struct is defined as follows:
+	struct Node {
+		int data;
+		Node* left;
+		Node* right;
+	}
+*/
+vector<int> nodes;
+void inOrderTraversal(Node* node) {
+        if(node == NULL) {
+            return;
+        }
+        inOrderTraversal(node->left);
+        nodes.push_back(node->data);
+        inOrderTraversal(node->right);
+    }
+
+    bool checkBST(Node* root) {
+        inOrderTraversal(root);
+        for(int i = 1; i < nodes.size(); i++) {
+            if(nodes[i] <= nodes[i-1]) {
+                return false;
+            }
+        }
+        return true;
+    }
