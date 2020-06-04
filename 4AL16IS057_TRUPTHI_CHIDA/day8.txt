@@ -1,0 +1,433 @@
+Question 1)
+BST - LEAF NODES
+Binary Search Tree - Leaf Nodes
+ 
+Implement C program to find the number of leaf nodes in a BST
+Input and Output Format:
+Refer Sample Input and Output for formatting specifications.
+ 
+[All text in bold corresponds to input and the rest corresponds to output]
+
+Sample Input and Output:
+Enter the element to be inserted in the tree
+5
+Do you want to insert another element?
+yes
+Enter the element to be inserted in the tree
+7
+Do you want to insert another element?
+yes
+Enter the element to be inserted in the tree
+3
+Do you want to insert another element?
+yes
+Enter the element to be inserted in the tree
+1
+Do you want to insert another element?
+no
+The elements in the tree are 1 3 5 7
+The number of leaf nodes in the tree is 2
+
+Answers:-
+
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+struct tnode {
+	int data;
+	struct tnode * leftc;
+	struct tnode * rightc;
+};
+
+void insert(struct tnode **, int num);
+void inorder(struct tnode *);
+int getLeafCount(struct tnode* node);
+
+int main() {
+	struct tnode * root=NULL;
+	char ch[5];
+	int num;
+	do {
+		printf("Enter the element to be inserted in the tree\n");
+		scanf("%d",&num);
+		insert(&root, num);
+		printf("Do you want to insert another element?\n");
+		scanf("%s",ch);
+	}while(strcmp(ch,"yes")==0);
+
+	printf("The elements in the tree are");
+	inorder(root);
+	printf("\n");
+	printf("The number of leaf nodes in the tree is %d\n",getLeafCount(root));
+	return 0;
+}
+
+void insert(struct tnode ** s, int num) {
+	if((*s) == NULL) {
+		(*s) = (struct tnode *) malloc( sizeof (struct tnode));
+		(*s)->data = num;
+		(*s)->leftc = NULL;
+		(*s)->rightc = NULL;
+	}
+	else 	{
+		if(num < (*s)->data)
+		  insert(&( (*s)->leftc ), num);
+		else
+		  insert(&( (*s)->rightc ), num);
+	}
+}
+
+void inorder(struct tnode * s) {
+    if(s==NULL)
+    return;
+    inorder(s->leftc);
+    printf(" %d",s->data);
+    inorder(s->rightc);/*----------Fill your code here-----------*/
+}
+
+int getLeafCount(struct tnode* node) {
+   if(node==NULL)
+   {
+       return 0;
+   }/*----------Fill your code here-----------*/
+    if(node->rightc==NULL&&node->leftc==NULL)
+    return 1;
+    else
+    return getLeafCount(node->leftc)+getLeafCount(node->rightc);
+    
+}
+
+***************************************************************************************************************************************************************
+
+Question 2)
+BST - SIZEBinary Search Tree - Size
+ 
+Implement a C program to find the size of the BST.
+ 
+Input and Output Format:
+Refer Sample Input and Output for formatting specifications.
+ 
+[All text in bold corresponds to input and the rest corresponds to output]
+
+Sample Input and Output:
+ 
+Enter the element to be inserted in the tree
+5
+Do you want to insert another element?
+yes
+Enter the element to be inserted in the tree
+7
+Do you want to insert another element?
+yes
+Enter the element to be inserted in the tree
+3
+Do you want to insert another element?
+yes
+Enter the element to be inserted in the tree
+1
+Do you want to insert another element?
+no
+The elements in the tree are 1 3 5 7
+The size of the tree is 4
+
+Answers:
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+int count=0;
+struct tnode
+{
+	int data;
+	struct tnode * leftc;
+	struct tnode * rightc;
+};
+
+void insert(struct tnode **, int num);
+void inorder(struct tnode *);
+int findSize(struct tnode *);
+
+int main() {
+	struct tnode * root=NULL;
+	char ch[5];
+	int num;
+	do {
+		printf("Enter the element to be inserted in the tree\n");
+		scanf("%d",&num);
+		insert(&root, num);
+		printf("Do you want to insert another element?\n");
+		scanf("%s",ch);
+	}while(strcmp(ch,"yes")==0);
+
+	printf("The elements in the tree are");
+	inorder(root);
+	printf("\n");
+	printf("The size of the tree is %d\n",findSize(root));
+	return 0;
+}
+
+void insert(struct tnode ** s, int num) {
+	if((*s) == NULL) {
+		(*s) = (struct tnode *) malloc( sizeof (struct tnode));
+		(*s)->data = num;
+		(*s)->leftc = NULL;
+		(*s)->rightc = NULL;
+	}
+	else 	{
+		if(num < (*s)->data)
+		  insert(&( (*s)->leftc ), num);
+		else
+		  insert(&( (*s)->rightc ), num);
+	}
+}
+
+void inorder(struct tnode * s) {
+    if(s==NULL)
+    return;
+    inorder(s->leftc);
+    count++;
+    printf(" %d",s->data);
+    inorder(s->rightc);
+    /*----------Fill your code here-----------*/
+}
+
+int findSize(struct tnode * s) {
+    return count;
+    /*----------Fill your code here-----------*/
+}
+
+***************************************************************************************************************************************************************
+
+Question 3)
+ALGORITHM:PRIME NUMBER
+Prime Number
+Write a program to find whether the given number is prime or not.
+Input and Output Format:
+Refer sample input and output for formatting specifications.
+[All text in bold correspnds to input and the rest corresponds to output.]
+Sample Input and Output 1:
+Ente the number
+9997199971 is Prime Number
+Sample Input and Output 2:
+Enter the number
+288873
+288873 is not a Prime Number
+
+Answer:-
+
+#include<stdio.h>
+int main()
+{
+	int f=0,n,i;
+	printf("Enter the number\n");
+	scanf("%d",&n);
+	if(n==2)
+	{
+	    printf("%d is Prime Number",n);
+	    return 0;
+	}
+	else if(n%2==0)
+	
+	{
+	    printf("%d is not a Prime Number",n);
+	    return 0;
+	}
+	else
+	{
+	    for(i=3;i<n/2;i++)
+	    {
+	        if(n%i==0)
+	        {
+	        f=1;
+	        break;
+	        }
+	    }
+	}
+	if(f==1)
+	{
+	    printf("%d is not a Prime Number",n);
+	}
+	else
+	{
+	    printf("%d is Prime Number",n);
+	    return 0;
+	}
+	return 0;
+}
+
+***************************************************************************************************************************************************************
+
+Question 4)
+
+Its the first day for the students at school and the students enter the class and get seated at random places without any height order. So the students who are short and sitting back are not able to see the board since they sit behind taller students.
+
+ 
+
+Understanding this difficulty, the teacher decides to make the students sit in height order.
+
+ Suppose there are n students in the class. She makes all the students to stand in a line and compares the first student's height with the remaining (n-1) students. If the first student's height is greater than the ith student, then the taller person goes to the ith place and ith student comes to the first place. Again the new first student's height is compared with remaining students and if his height is greater than ith student the first student goes to ith place and ith place student comes to first place and this goes on till the end.
+This process continues for all the students. Finally the students are in height order.
+Write a program to perform selection sort on an array of n elements.
+
+Answer:-
+
+#include<stdio.h>
+int main()
+{
+    int n,i,a[100],j,l;
+	printf("Enter the total number of students in class\n");
+	scanf("%d",&n);
+	for(i=1;i<=n;i++)
+	{
+	    printf("Enter the height of student %d\n",i);
+	    scanf("%d",&a[i]);
+	}
+	printf("Student's height order before sorting:\n");
+	for(i=1;i<=n;i++)
+	{
+	    printf("%d ",a[i]);
+	}
+	for(i=1;i<=n;i++)
+	{
+	    for(j=i+1;j<=n;j++)
+	    {
+	    if(a[i]>a[j])
+	    {
+	        int t=a[i];
+	        a[i]=a[j];
+	        a[j]=t;
+	    }
+	    }
+	        printf("\nHeight order of students after iteration %d\n",i);
+	    for(l=1;l<=n;l++)
+	    {
+	    printf("%d ",a[l]);
+	    }
+	    }
+printf("\nAfter final comparison of all students, the height order becomes:\n");
+for(i=1;i<=n;i++)
+printf("%d ",a[i]);
+	return 0;
+}
+
+***************************************************************************************************************************************************************
+Question 5)
+
+Consider implementing a dynamically sized stack using an array.
+Create a structure
+struct stack
+
+{
+
+    int * a;
+
+    int top;
+
+    int maxSize;
+
+};
+ 
+The structure stack has a pointer 'a' to a dynamically allocated array (used to hold the contents of the stack), an integer 'maxSize' that holds the size of this array (i.e the maximum number of data that can be held in this array) and an integer 'top' which stores the array index of the top element in the stack
+Write a program to implement push and pop operation on stack and to display the contents of the stack. 
+In the initstack function intialize the value of top to -1 and initialize the value of maxSize.
+Print the message “Stack is full” in the push function when an attempt is made to push a data into a full stack.
+Print the message “Stack is empty” in the pop function and return the value -1000 when an attempt is made to pop data from an empty stack.
+
+Answer:-
+
+#include<stdio.h>
+#include<stdlib.h>
+struct stack {
+	int * a;
+	int top;
+	int maxSize;
+};
+void initstack(struct stack * p, int maxSize);
+void push(struct stack * p, int item);
+void display(struct stack p);
+int pop(struct stack * p);
+void printMenu();
+
+int main()  {
+	struct stack p;
+	int data,ch, data1, m;
+	printf("Enter the maximum size of the stack\n");
+	scanf("%d",&m);
+	initstack(&p,m);
+	do {
+	printMenu();	
+	printf("Enter your choice\n");
+	scanf("%d",&ch);
+	switch(ch) {
+	  case 1:
+		printf("Enter the element to be pushed\n");
+		scanf("%d",&data);
+		push(&p, data);
+		break;
+	  case 2:
+		data1 = pop(&p);
+		if(data1 != -1000)
+		printf("The popped element is %d\n",data1);
+		break;
+	  case 3:
+		printf("The contents of the stack are");
+		display(p);
+		printf("\n");
+		break;
+	  default:
+		return 0;
+	}
+	} while(1);
+	return 0;
+}
+
+void printMenu()
+{
+	printf("Choice 1 : Push\n");
+	printf("Choice 2 : Pop\n");
+	printf("Choice 3 : Display\n");
+	printf("Any other choice : Exit\n");
+}
+
+void initstack(struct stack * p, int maxSize) {
+    p->a=(int *)malloc(sizeof(int)*maxSize);
+p->top=-1;
+p->maxSize=maxSize;
+	//Fill in the code here
+ 
+}
+
+void push(struct stack * p, int item) {
+	if(p->top==p->maxSize-1)
+	{
+	    printf("Stack is full\n");
+	}//Fill in the code here
+else
+{       p->top++;
+	    p->a[p->top]=item;
+}
+}
+
+void display(struct stack p) {
+    int i;
+    if(p.top==-1)
+    {
+        printf(" {}");
+    }
+    else
+    {
+for(i=0;i<=p.top;i++)	
+ {
+     printf(" %d",p.a[i]);
+ }
+}
+}
+
+int pop(struct stack * p) {
+if(p->top==-1)
+{
+    printf("Stack is empty\n");
+   return -1000; //Fill in the code here
+}
+return p->a[p->top--];
+}
