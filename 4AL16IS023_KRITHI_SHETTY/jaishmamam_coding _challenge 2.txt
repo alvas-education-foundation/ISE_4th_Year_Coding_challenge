@@ -1,0 +1,45 @@
+1)
+
+def is_leap(n):
+
+    if n % 400 == 0:
+
+        return True
+
+    if n % 100 == 0:
+
+        return False
+
+    if n % 4 == 0:
+
+        return True
+
+    return False
+
+
+
+print is_leap(input())
+
+
+
+2)
+
+a=int(raw_input());
+
+b=int(raw_input());
+
+print a+b;
+
+print a-b;
+
+print a*b;
+
+
+
+3)
+
+value=int(input())
+
+for number in range(value) :
+
+    print(number+1, end="")
