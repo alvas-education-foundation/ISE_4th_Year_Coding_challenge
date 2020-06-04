@@ -1,0 +1,51 @@
+1. remove punctuation
+
+punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+
+my_str = input("Enter a string: ")
+
+
+no_punct = ""
+for char in my_str:
+   if char not in punctuations:
+       no_punct = no_punct + char
+
+
+print(no_punct)
+
+2.print hallow diamond shape
+
+
+
+
+def hollow_half_diamond(N): 
+       
+    for i in range( 1, N + 1): 
+        for j in range(1, i + 1): 
+              
+            
+            if i == j or j == 1: 
+                print("#", end =" ") 
+                  
+            
+            else: 
+                print(" ", end =" ") 
+        print() 
+      
+
+    for i in range(N - 1, 0, -1): 
+          
+        for j in range(1, i + 1): 
+              
+            if j == 1 or i == j: 
+                print("#", end =" ") 
+              
+            else: 
+                print(" ", end =" ") 
+          
+        print() 
+  
+# Driver Code 
+if __name__ == "__main__": 
+    N = 7
+    hollow_half_diamond( N ) 

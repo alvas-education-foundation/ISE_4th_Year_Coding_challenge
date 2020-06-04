@@ -1,0 +1,99 @@
+1)Python program to check if year is a leap year or not
+
+year = 2000
+
+# To get year (integer input) from the user
+# year = int(input("Enter a year: "))
+
+if (year % 4) == 0:
+   if (year % 100) == 0:
+       if (year % 400) == 0:
+           print("{0} is a leap year".format(year))
+       else:
+           print("{0} is not a leap year".format(year))
+   else:
+       print("{0} is a leap year".format(year))
+else:
+   print("{0} is not a leap year".format(year))
+
+2)python program to find the largest number among the three input numbers
+
+# change the values of num1, num2 and num3
+# for a different result
+num1 = 10
+num2 = 14
+num3 = 12
+
+# uncomment following lines to take three numbers from user
+#num1 = float(input("Enter first number: "))
+#num2 = float(input("Enter second number: "))
+#num3 = float(input("Enter third number: "))
+
+if (num1 >= num2) and (num1 >= num3):
+   largest = num1
+elif (num2 >= num1) and (num2 >= num3):
+   largest = num2
+else:
+   largest = num3
+
+print("The largest number is", largest)
+
+
+3)Program to check if a number is prime or not
+
+num = 407
+
+# To take input from the user
+#num = int(input("Enter a number: "))
+
+# prime numbers are greater than 1
+if num > 1:
+   # check for factors
+   for i in range(2,num):
+       if (num % i) == 0:
+           print(num,"is not a prime number")
+           print(i,"times",num//i,"is",num)
+           break
+   else:
+       print(num,"is a prime number")
+       
+# if input number is less than
+# or equal to 1, it is not prime
+else:
+   print(num,"is not a prime number")
+
+4)python program to display all the prime numbers within an interval
+
+lower = 900
+upper = 1000
+
+print("Prime numbers between", lower, "and", upper, "are:")
+
+for num in range(lower, upper + 1):
+   # all prime numbers are greater than 1
+   if num > 1:
+       for i in range(2, num):
+           if (num % i) == 0:
+               break
+       else:
+           print(num)
+
+5)Python program to find the factorial of a number provided by the user.
+
+# change the value for a different result
+num = 7
+
+# To take input from the user
+#num = int(input("Enter a number: "))
+
+factorial = 1
+
+# check if the number is negative, positive or zero
+if num < 0:
+   print("Sorry, factorial does not exist for negative numbers")
+elif num == 0:
+   print("The factorial of 0 is 1")
+else:
+   for i in range(1,num + 1):
+       factorial = factorial*i
+   print("The factorial of",num,"is",factorial)
