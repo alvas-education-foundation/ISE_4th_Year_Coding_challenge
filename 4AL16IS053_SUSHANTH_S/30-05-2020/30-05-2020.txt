@@ -1,0 +1,82 @@
+1.program to print half diamond star pattern
+
+
+def halfDiamondStar(N): 
+      
+     
+    for i in range(N): 
+  
+        for j in range(0, i + 1): 
+            print("*", end = "") 
+        print() 
+  
+ 
+    for i in range(1, N): 
+  
+        for j in range(i, N): 
+            print("*", end = "") 
+        print() 
+  
+
+N = 5;  
+  
+halfDiamondStar(N); 
+
+
+
+2.Python program to print a hollow 
+
+
+def printPattern( n) : 
+    k = 0
+    for i in range(1,n+1) :  
+      
+        
+        for j in range(i,n) : 
+            print(' ', end='') 
+          
+      
+        while (k != (2 * i - 1)) : 
+            if (k == 0 or k == 2 * i - 2) : 
+                print('#', end='') 
+            else : 
+                print(' ', end ='') 
+            k = k + 1
+        k = 0; 
+        print ("") 
+          
+   
+    for i in range(0, 2 * n -1) : 
+        print ('#', end = '') 
+  
+
+n = 6
+printPattern(n) 
+
+
+3. Hollow inverted pyramid/triangle pattern
+
+  
+def printPattern(n) : 
+      
+    for i in range(1,n+1) : 
+          
+       
+        for j in range(1,i) : 
+            print (" ",end="") 
+              
+       
+        for j in range(1,(n * 2 - (2 * i - 1))  
+                                       +1) : 
+            if (i == 1 or j == 1 or 
+               j == (n * 2 - (2 * i - 1))) : 
+                print ("#", end="")  
+            else : 
+                print(" ", end="")  
+                  
+        
+        print (""), 
+  
+
+n = 6
+printPattern(n) 

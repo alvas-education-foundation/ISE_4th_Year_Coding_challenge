@@ -1,0 +1,21 @@
+1)def is_leap(n):
+    if n % 400 == 0:
+        return True
+    if n % 100 == 0:
+        return False
+    if n % 4 == 0:
+        return True
+    return False
+
+print(is_leap(int(input())))
+
+2)a = int(input())
+  b = int(input())
+
+  print(a + b)
+  print(a - b)
+  print(a * b)
+
+3)from __future__ import print_function
+map(lambda x: print(x,end=''), range(1,input()+1))
+© 2020 GitHub, Inc.
