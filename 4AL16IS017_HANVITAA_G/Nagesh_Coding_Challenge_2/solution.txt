@@ -1,0 +1,66 @@
+1). Write a python program which accepts a sequence of comma separated 4 digit binary numbers as its input and then check whether they are divisible by 5 or not. 
+The numbers that are divisible by 5 are to be printed in a comma separated sequence.
+
+items = []
+num = [x for x in input().split(',')]
+for p in num:
+    x = int(p, 2)
+    if not x%5:
+        items.append(p)
+print(','.join(items))
+
+
+2).  Write a python program that accepts a sentence and calculate the number of letters and digits.
+
+s = input("Input a string")
+d=l=0
+for c in s:
+    if c.isdigit():
+        d=d+1
+    elif c.isalpha():
+        l=l+1
+    else:
+        pass
+print("Letters", l)
+print("Digits", d)
+
+
+3).  Write a python program to compute the frequency of the words from the input. The output should output after sorting the key alphanumerically. 
+
+
+import operator
+
+text_line = input("Type in: ")
+
+freq_dict = {}
+
+for i in text_line.split(' '):
+    if i.isalpha():
+        if i not in freq_dict:
+            freq_dict[i] = 1
+        elif i in freq_dict:
+            freq_dict[i] = freq_dict[i] + 1
+    else:
+        pass
+        
+
+sorted_freq_dict = sorted(freq_dict.items(), key = operator.itemgetter(0))
+print(sorted_freq_dict)
+
+for i in sorted_freq_dict:
+    print(i[0], i[1])
+
+
+4).  Define a class named Rectangle which can be constructed by a length and width. The Rectangle class has a method which can compute the area.
+
+
+class Rectangle():
+    def __init__(self, l, w):
+        self.length = l
+        self.width  = w
+
+    def rectangle_area(self):
+        return self.length*self.width
+
+newRectangle = Rectangle(12, 10)
+print(newRectangle.rectangle_area())

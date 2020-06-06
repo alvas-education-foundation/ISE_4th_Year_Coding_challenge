@@ -1,0 +1,51 @@
+1)Sum of natural numbers up to num
+
+num = 16
+
+if num < 0:
+   print("Enter a positive number")
+else:
+   sum = 0
+   # use while loop to iterate until zero
+   while(num > 0):
+       sum += num
+       num -= 1
+   print("The sum is", sum)
+
+2)Display the powers of 2 using anonymous function
+
+terms = 10
+
+# Uncomment code below to take input from the user
+# terms = int(input("How many terms? "))
+
+# use anonymous function
+result = list(map(lambda x: 2 ** x, range(terms)))
+
+print("The total terms are:",terms)
+for i in range(terms):
+   print("2 raised to power",i,"is",result[i])
+
+3)Take a list of numbers
+my_list = [12, 65, 54, 39, 102, 339, 221,]
+
+# use anonymous function to filter
+result = list(filter(lambda x: (x % 13 == 0), my_list))
+
+# display the result
+print("Numbers divisible by 13 are",result)
+
+
+4)Python program to convert decimal into other number systems
+dec = 344
+
+print("The decimal value of", dec, "is:")
+print(bin(dec), "in binary.")
+print(oct(dec), "in octal.")
+print(hex(dec), "in hexadecimal.")
+
+
+5)Program to find the ASCII value of the given character
+
+c = 'p'
+print("The ASCII value of '" + c + "' is", ord(c))
