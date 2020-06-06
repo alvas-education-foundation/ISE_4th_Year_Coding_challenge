@@ -1,0 +1,73 @@
+Write a program to sort an array of 0's, 1's and 2's
+
+  Function Specification:
+
+  void sort(int a[], int n);
+
+Input and Output Format:
+
+Refer sample input and output for formatting specifications.
+
+[All text in bold corresponds to input and the rest corresponds to output.]
+
+Sample Input and Output 1:
+
+Enter the number of elements:
+5
+Enter the elements:
+0
+1
+0
+2
+1
+Array after sorting
+0
+0
+1
+1
+2
+
+ #include<stdio.h>
+
+int main()
+{
+
+int a[50],i,j,temp,n;
+
+printf("Enter the number of elements:\n");
+
+scanf("%d",&n);
+
+printf("Enter the elements:\n");
+
+for(i=0;i<n;i++)
+scanf("\n%d",&a[i]);
+    
+for(i=0;i<n;i++)
+{
+        
+for(j=i+1;j<n;j++){
+            
+if(a[i]>a[j]){
+               
+ temp=a[i];
+             
+   a[i]=a[j];
+                
+a[j]=temp;
+            
+}  
+        
+}
+   
+ }
+     
+   printf("Array after sorting\n");
+        
+for(i=0;i<n;i++)
+
+printf("%d\n",a[i]);
+
+return 0;
+
+}
