@@ -1,0 +1,83 @@
+
+1. convert kilometers to miles 
+
+kilometers = float(input("Enter value in kilometers: "))
+
+conv_fac = 0.621371
+
+miles = kilometers * conv_fac
+print('%0.2f kilometers is equal to %0.2f miles' %(kilometers,miles))
+
+op:	Enter value in kilometers: 3.5
+	3.50 kilometers is equal to 2.17 miles
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+2. Python Program to convert temperature in celsius to fahrenheit
+
+celsius = 37.5
+
+fahrenheit = (celsius * 1.8) + 32
+print('%0.1f degree Celsius is equal to %0.1f degree Fahrenheit' %(celsius,fahrenheit))
+
+op: 37.5 degree Celsius is equal to 99.5 degree Fahrenheit
+
+--------------------------------------------------------------------------------------------------------------------------
+
+3. check whether a number entered by the user is positive, negative or zero
+
+if num >= 0:
+   if num == 0:
+       print("Zero")
+   else:
+       print("Positive number")
+else:
+   print("Negative number")
+
+op:	Enter a number: 2
+	Positive number
+
+	Enter a number: 0
+	Zero
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+4. Python program to check if the input number is odd or even.
+
+num = int(input("Enter a number: "))
+
+if (num % 2) == 0:
+   print("{0} is Even".format(num))
+else:
+   print("{0} is Odd".format(num))
+
+op:	Enter a number: 43
+	43 is Odd
+
+	Enter a number: 18
+	18 is Even
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+5. Python program to check if year is a leap year or not
+
+year = 2000
+
+if (year % 4) == 0:
+   if (year % 100) == 0:
+       if (year % 400) == 0:
+           print("{0} is a leap year".format(year))
+       else:
+           print("{0} is not a leap year".format(year))
+   else:
+       print("{0} is a leap year".format(year))
+else:
+   print("{0} is not a leap year".format(year))
+
+op:	2000 is a leap year
+
+
+--------------------------------------------------------------------------------------------------------------------------
