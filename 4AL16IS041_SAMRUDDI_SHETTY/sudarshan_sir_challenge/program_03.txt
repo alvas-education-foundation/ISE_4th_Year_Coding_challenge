@@ -1,0 +1,20 @@
+3)
+from utils import Utils
+from stats import Stats
+	
+input()
+tokens = input().split()
+N = len(tokens)
+points = list(map(int, tokens))
+points.sort()
+
+Q1 = Stats.Q1(points)
+Q2 = Stats.Q2(points)
+Q3 = Stats.Q3(points)
+
+print(Utils.scale(Q1,0))
+print(Utils.scale(Q2,0))
+print(Utils.scale(Q3,0))
+
+
+
