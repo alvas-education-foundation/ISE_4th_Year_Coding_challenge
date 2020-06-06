@@ -1,0 +1,110 @@
+1.Program to convert char to String
+
+class CharToStringDemo
+{
+   public static void main(String args[])
+   {
+     
+      char ch = 'a';
+      String str = Character.toString(ch);
+      System.out.println("String is: "+str);
+ 
+      String str2 = String.valueOf(ch);Program to convert char to String
+      System.out.println("String is: "+str2);
+   }
+}
+
+
+2.Pallindrome
+
+import java.util.Scanner;
+class PalindromeCheck
+{
+    //My Method to check
+    public static boolean isPal(String s)
+    {   // if length is 0 or 1 then String is palindrome
+        if(s.length() == 0 || s.length() == 1)
+            return true; 
+        if(s.charAt(0) == s.charAt(s.length()-1))
+        
+        return isPal(s.substring(1, s.length()-1));
+
+      
+        return false;
+    }
+
+    public static void main(String[]args)
+    {
+    	
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the String for check:");
+        String string = scanner.nextLine();
+        
+        if(isPal(string))
+            System.out.println(string + " is a palindrome");
+        else
+            System.out.println(string + " is not a palindrome");
+    }
+}
+
+3.Java program to sum the elements of an array
+
+class SumOfArray{
+   public static void main(String args[]){
+      int[] array = {10, 20, 30, 40, 50, 10};
+      int sum = 0;
+      //Advanced for loop
+      for( int num : array) {
+          sum = sum+num;
+      }
+      System.out.println("Sum of array elements is:"+sum);
+   }
+}
+
+4.Multi Thredaing
+class Count extends Thread
+{
+   Count()
+   {
+     super("my extending thread");
+     System.out.println("my thread created" + this);
+     start();
+   }
+   public void run()
+   {
+     try
+     {
+        for (int i=0 ;i<10;i++)
+        {
+           System.out.println("Printing the count " + i);
+           Thread.sleep(1000);
+        }
+     }
+     catch(InterruptedException e)
+     {
+        System.out.println("my thread interrupted");
+     }
+     System.out.println("My thread run is over" );
+   }
+}
+class ExtendingExample
+{
+   public static void main(String args[])
+   {
+      Count cnt = new Count();
+      try
+      {
+         while(cnt.isAlive())
+         {
+           System.out.println("Main thread will be alive till the child thread is live");
+           Thread.sleep(1500);
+         }
+      }
+      catch(InterruptedException e)
+      {
+        System.out.println("Main thread interrupted");
+      }
+      System.out.println("Main thread's run is over" );
+   }
+}
+
