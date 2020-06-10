@@ -1,0 +1,169 @@
+1. Swap case problem
+
+Solution:
+def swap_case(s):
+
+    temp = []
+    l = list(s)
+
+    for i in l:
+        j = ""
+        if i.islower():
+            j = i.upper()
+        elif i.isupper():
+            j = i.lower()
+        else:
+            temp.append(i)
+        temp.append(j)
+    
+    r = ''.join(temp)
+    
+    return r
+
+s = input()
+result = swap_case(s)
+print(result)
+3. Calculate no of upper-case and no of lower-case letters in the string
+
+Solution:
+def string_test(s):
+    d={"Upper_Case":0, "Lower_Case":0}
+    for c in s:
+        if c.isupper():
+           d["Upper_Case"]+=1
+        elif c.islower():
+           d["Lower_Case"]+=1
+        else:
+           pass
+    print ("Original String : ", s)
+    print ("No. of Upper case characters : ", d["Upper_Case"])
+    print ("No. of Lower case Characters : ", d["Lower_Case"])
+
+string_test('Moodbidri_Mangalore')
+
+4. A valid postal code  have to fullfil both below requirements:
+
+ 1. P must be a number in the range from 100000 to 999999 inclusive.
+ 2. P must not contain more than one alternating repetitive digit pair.
+Alternating repetitive digits are digits which repeat immediately after the next digit. In other words, an alternating repetitive digit pair is formed by two equal digits that have just a single digit between them.
+
+For example:
+
+121426 # Here, 1 is an alternating repetitive digit.
+523563 # Here, NO digit is an alternating repetitive digit.
+552523 # Here, both 2 and 5 are alternating repetitive digits.
+Your task is to provide two regular expressions regex_integer_in_range and regex_alternating_repetitive_digit_pair. Where:
+
+regex_integer_in_range should match only integers range from 100000 to 99999 inclusive
+
+regex_alternating_repetitive_digit_pair should find alternating repetitive digits pairs in a given string.
+
+Both these regular expressions will be used by the provided code template to check if the input string  is a valid postal code using the following expression:
+
+(bool(re.match(regex_integer_in_range, P)) 
+and len(re.findall(regex_alternating_repetitive_digit_pair, P)) < 2)
+Input Format
+
+Locked stub code in the editor reads a single string denoting  from stdin and uses provided expression and your regular expressions to validate if  is a valid postal code.
+
+Output Format
+
+You are not responsible for printing anything to stdout. Locked stub code in the editor does that.
+
+Sample Input 0
+
+110000
+Sample Output 0
+
+False
+Explanation 0
+
+1 1 0000 : (0, 0) and (0, 0) are two alternating digit pairs. Hence, it is an invalid postal code.
+
+Note:
+A score of  will be awarded for using 'if' conditions in your code.
+You have to pass all the testcases to get a positive score.
+
+Solution:
+p_code = input().strip()
+digit = p_code.isdigit()
+in_range = digit and 100000 <= int(p_code) <= 999999
+repetitive_digit = digit and sum([p_code[i]==p_code[i+2] for i in range(0,4)]) > 1
+print(in_range and not repetitive_digit)
+
+5. Palindromes are strings that read the same from the left or right, for example madam or 0110.
+
+You will be given a string representation of a number and a maximum number of changes you can make. Alter the string, one digit at a time, to create the string representation of the largest number possible given the limit to the number of changes. The length of the string may not be altered, so you must consider 's left of all higher digits in your tests. For example  is valid,  is not.
+
+Given a string representing the starting number and a maximum number of changes allowed, create the largest palindromic string of digits possible or the string -1 if it's impossible to create a palindrome under the contstraints.
+
+Solution:
+
+#!/bin/python3
+import math
+import os
+import random
+import re
+import sys
+
+def highestValuePalindrome(s, n, k):
+    s=list(s)
+    if n<=k:
+        return '9'*n
+    mink=[0]*(n//2+1)
+    for i in range(n//2-1,-1,-1):
+        if s[i]!=s[n-1-i]:
+            mink[i]=mink[i+1]+1
+        else:
+            mink[i]=mink[i+1]
+    if mink[0]>k:
+        return '-1'
+    i=0
+    while i<n//2 and k>mink[i]:
+        if s[i]=='9':
+            if s[n-1-i]!='9':
+                s[n-1-i]='9'
+                k-=1
+        elif s[n-1-i]=='9':
+            s[i]='9'
+            k-=1
+        elif k-2>=mink[i+1]:
+            s[i]=s[n-1-i]='9'
+            k-=2
+        else:
+            if s[i]!=s[n-1-i]:
+                s[i]=s[n-1-i]=max(s[n-1-i],s[i])
+                k-=1
+        i+=1
+    if i<n//2:
+        for j in range(i,n//2):
+            if s[j]>s[n-1-j]:
+                s[n-1-j]=s[j]
+            else:
+                s[j]=s[n-1-j]
+    elif n%2:
+        if k>0:
+            s[n//2]='9'
+    return ''.join(s)
+
+s='12321'
+n=5
+k=1
+ans= highestValuePalindrome(s, n, k)
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nk = input().split()
+
+    n = int(nk[0])
+
+    k = int(nk[1])
+
+    s = input()
+
+    result = highestValuePalindrome(s, n, k)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
