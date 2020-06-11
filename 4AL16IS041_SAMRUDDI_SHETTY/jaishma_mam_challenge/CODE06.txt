@@ -1,0 +1,13 @@
+3)
+from __future__ import print_function
+if __name__ == '__main__':
+    n = int(raw_input())
+    list = []
+    num = 1
+    string = "" 
+    for x in range(n):
+        list.append(num)
+        num += 1
+    for x in list:
+        string += str(x)
+    print(string)
