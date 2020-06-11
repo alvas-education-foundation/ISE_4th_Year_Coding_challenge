@@ -1,6 +1,4 @@
-1)
-
-          X=input("")
+ X=input("")
 	n = int(x)
 	if n % 2 == 1:
 	    print("Weird")
@@ -10,4 +8,3 @@
 	    print("Weird")
 	else:
 	    print("Not Weird")
-
