@@ -1,0 +1,57 @@
+ 
+ 
+1. Consider a list (list = []). You can perform the following commands: 1. insert i e: Insert integer e  at position i. 2. print: Print the list. 3. remove e: Delete the first occurrence of integer e . 4. append e: Insert integer  e at the end of the list. 5. sort: Sort the list. 6. pop: Pop the last element from the list. 7. reverse: Reverse the list. Initialize your list and read in the value of n followed by  n lines of commands where each command will be of the  7 types listed above. Iterate through each command in order and perform the corresponding operation on your list. 
+ 
+Input Format The first line contains an integer, n , denoting the number of commands. Each line i of the n  subsequent lines contains one of the commands described above. 
+ 
+Constraints  The elements added to the list must be integers. 
+ 
+Output Format For each command of type print, print the list on a new line. 
+ 
+Sample Input 0 12 insert 0 5 insert 1 10 insert 0 6 print remove 6 append 9 append 1 
+sort print pop reverse print 
+ 
+Sample Output 0 [6, 5, 10] [1, 5, 9, 10] [9, 5, 1] 
+ 
+Solution: 
+ 
+arr = [] for i in range(int(raw_input())):     s = raw_input().split()     for i in range(1,len(s)):         s[i] = int(s[i])              if s[0] == "append":         arr.append(s[1])     elif s[0] == "extend":             arr.extend(s[1:])     elif s[0] == "insert":         arr.insert(s[1],s[2])     elif s[0] == "remove":         arr.remove(s[1])     elif s[0] == "pop":         arr.pop()     elif s[0] == "index":         print arr.index(s[1])     elif s[0] == "count":         print arr.count(s[1])     elif s[0] == "sort":         arr.sort()     elif s[0] == "reverse":         arr.reverse()     elif s[0] == "print":         print arr ****************************************************************************** 
+
+
+2. Given an integer, n, and n space-separated integers as input, create a tuple, t, of those n integers. Then compute and print the result of hash(t). Note: hash() is one of the functions in the __builtins__ module, so it need not be imported. 
+ 
+Input Format The first line contains an integer, n , denoting the number of elements in the tuple. The second line contains n space-separated integers describing the elements in tuple t. 
+ 
+Output Format Print the result of hash(t). 
+ 
+Sample Input 0 2 1 2 
+ 
+Sample Output 0 3713081631934410656 
+ 
+Solution: 
+ 
+n = input() str = input() 
+ 
+lst = str.split() lst = map(int, lst) 
+ 
+t = tuple(lst) print(hash(t)) 
+ 
+****************************************************************************** 
+
+ 
+3. You have a record of N students. Each record contains the student's name, and their percent marks in Maths, Physics and Chemistry. The marks can be floating values. The user enters some integer N followed by the names and marks for N students. You are required to save the record in a dictionary data type. The 
+user then enters a student's name. Output the average percentage marks obtained by that student, correct to two decimal places. 
+ 
+Input Format The first line contains the integer N, the number of students. The next N lines contains the name and marks obtained by that student separated by a space. The final line contains the name of a particular student previously listed. 
+ 
+Constraints  2<=N<=10  0<=MARKS<=100 
+ 
+Output Format Print one line: The average of the marks obtained by the particular student correct to 2 decimal places. 
+ 
+Sample Input 0 3 Krishna 67 68 69 Arjun 70 98 63 Malika 52 56 60 Malika 
+ 
+Sample Output 0 56.00 
+ 
+Solution: 
+ 
+N = int(raw_input()) results = {} for i in range(N):     a = raw_input().split(' ')     results[a[0]] = [float(x) for x in a[1:]] student = raw_input() print "%.2f" %(sum(results[student])/len(results[student])) 

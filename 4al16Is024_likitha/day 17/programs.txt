@@ -1,0 +1,80 @@
+1)# Sum of natural numbers up to num
+
+num = 16
+
+if num < 0:
+   print("Enter a positive number")
+else:
+   sum = 0
+   # use while loop to iterate until zero
+   while(num > 0):
+       sum += num
+       num -= 1
+   print("The sum is", sum)
+
+2)# Display the powers of 2 using anonymous function
+
+terms = 10
+
+# Uncomment code below to take input from the user
+# terms = int(input("How many terms? "))
+
+# use anonymous function
+result = list(map(lambda x: 2 ** x, range(terms)))
+
+print("The total terms are:",terms)
+for i in range(terms):
+   print("2 raised to power",i,"is",result[i])
+
+
+3)# Take a list of numbers
+my_list = [12, 65, 54, 39, 102, 339, 221,]
+
+# use anonymous function to filter
+result = list(filter(lambda x: (x % 13 == 0), my_list))
+
+# display the result
+print("Numbers divisible by 13 are",result)
+
+4)# Python program to find H.C.F of two numbers
+
+# define a function
+def compute_hcf(x, y):
+
+# choose the smaller number
+    if x > y:
+        smaller = y
+    else:
+        smaller = x
+    for i in range(1, smaller+1):
+        if((x % i == 0) and (y % i == 0)):
+            hcf = i 
+    return hcf
+
+num1 = 54 
+num2 = 24
+
+print("The H.C.F. is", compute_hcf(num1, num2))
+
+5)# Python Program to find the L.C.M. of two input number
+
+def compute_lcm(x, y):
+
+   # choose the greater number
+   if x > y:
+       greater = x
+   else:
+       greater = y
+
+   while(True):
+       if((greater % x == 0) and (greater % y == 0)):
+           lcm = greater
+           break
+       greater += 1
+
+   return lcm
+
+num1 = 54
+num2 = 24
+
+print("The L.C.M. is", compute_lcm(num1, num2))
