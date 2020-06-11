@@ -1,0 +1,77 @@
+1)
+def isInterleaved(A, B, C):  
+  
+    # Find lengths of the two strings  
+    M = len(A) 
+    N = len(B)  
+  
+  
+    IL = [[False] * (N + 1) for i in range(M + 1)]  
+   
+    if ((M + N) != len(C)):  
+        return False
+  
+  
+    for i in range(0, M + 1):  
+        for j in range(0, N + 1): 
+              
+         
+            if (i == 0 and j == 0):  
+                IL[i][j] = True
+  
+           
+            elif (i == 0):  
+                if (B[j - 1] == C[j - 1]):  
+                    IL[i][j] = IL[i][j - 1]  
+              
+            # B is empty  
+            elif (j == 0):  
+                if (A[i - 1] == C[i - 1]):  
+                    IL[i][j] = IL[i - 1][j]  
+              
+          
+            elif (A[i - 1] == C[i + j - 1] and
+                  B[j - 1] != C[i + j - 1]):  
+                IL[i][j] = IL[i - 1][j]  
+  
+           
+            elif (A[i - 1] != C[i + j - 1] and 
+                  B[j - 1] == C[i + j - 1]):  
+                IL[i][j] = IL[i][j - 1]  
+  
+     
+            elif (A[i - 1] == C[i + j - 1] and 
+                  B[j - 1] == C[i + j - 1]):  
+                IL[i][j] = (IL[i - 1][j] or IL[i][j - 1])  
+          
+    return IL[M][N]  
+
+
+2)
+NO_OF_CHARS = 256
+
+def getCharCountArray(string): 
+    count = [0] * NO_OF_CHARS 
+    for i in string: 
+        count[ord(i)]+= 1
+    return count 
+
+def firstNonRepeating(string): 
+    count = getCharCountArray(string) 
+    index = -1
+    k = 0
+  
+    for i in string: 
+        if count[ord(i)] == 1: 
+            index = k 
+            break
+        k += 1
+  
+    return index 
+   
+string = "alvasandalvas"
+index = firstNonRepeating(string) 
+if index == 1: 
+    print("Either all characters are repeating or string is empty")
+else: 
+    print ("First non-repeating character is " + string[index]) 
