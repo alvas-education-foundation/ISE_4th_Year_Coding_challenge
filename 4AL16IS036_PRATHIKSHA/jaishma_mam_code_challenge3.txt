@@ -34,4 +34,3 @@ if __name__ == '__main__':
     for x in list:
         string += str(x)
     print(string)
-© 2020 GitHub, Inc.
