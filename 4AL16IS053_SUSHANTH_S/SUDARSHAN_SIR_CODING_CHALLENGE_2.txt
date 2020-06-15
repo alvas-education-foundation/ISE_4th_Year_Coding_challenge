@@ -1,0 +1,117 @@
+1).
+
+Solution:
+n = int(input().strip())
+X = [int(x) for x in input().strip().split()]
+mean = sum(X) / n
+variance = sum([((x - mean) ** 2) for x in X]) / n
+stddev = variance ** 0.5
+print("{0:0.1f}".format(stddev))
+***************************************************************************
+
+2).
+
+
+Solution:
+#!/bin/python3
+import math
+import os
+import random
+import re
+import sys
+# Complete the divisibleSumPairs function below.
+def divisibleSumPairs(n, k, ar):
+ sum_lst = list()
+ res = list()
+ comb_list = (list(combinations(ar, 2)))
+ for i in comb_list:
+ sum_lst.append(i[0] + i[1])
+ for i in sum_lst:
+ if (i % k) == 0:
+ res.append(i)
+ return (len(res))
+if __name__ == '__main__':
+ fptr = open(os.environ['OUTPUT_PATH'], 'w')
+ nk = input().split()
+ n = int(nk[0])
+ k = int(nk[1])
+ ar = list(map(int, input().rstrip().split()))
+ result = divisibleSumPairs(n, k, ar)
+ fptr.write(str(result) + '\n')
+ fptr.close()
+
+
+3.
+Solution:
+#!/bin/python3
+import math
+import os
+import random
+import re
+import sys
+def diagonalDifference(arr):
+ # Write your code here
+ n = int(input().strip())
+dSumLeft = 0
+dSumRight = 0
+for i in range(n):
+ matrixRow = list(map(int,input().strip().split(' ')))
+ dSumLeft += int(matrixRow[i])
+ dSumRight += int(matrixRow[n-i-1])
+print(abs(dSumLeft - dSumRight))
+if __name__ == '__main__':
+ fptr = open(os.environ['OUTPUT_PATH'], 'w')
+ n = int(input().strip())
+ arr = []
+ for _ in range(n):
+ arr.append(list(map(int, input().rstrip().split())))
+ result = diagonalDifference(arr)
+ fptr.write(str(result) + '\n')
+ fptr.close()
+
+4.
+
+Solution:
+N= input()
+num = map(int,raw_input().split())
+val=[0]*1001
+for i in num:
+ val[i]+=1
+counter = 0
+val=val[::-1]
+ans =[]
+for i in val:
+ if i>0:
+ counter += i
+ ans.append(counter)
+ans = ans[::-1]
+for i in ans:
+ print i
+
+
+5.
+
+
+
+Solution:
+#!/bin/python3
+import math
+import os
+import random
+import re
+import sys
+def pickingNumbers(a):
+ # Write your code here
+ freq = [0 for i in range(101)]
+ max_pair = 0
+ for n in a:
+ freq[n] += 1
+ max_pair = max(max_pair, max((freq[n] + freq[n-1]), (freq[n] + freq[n+1])))
+ return max_pair
+if __name__ == '__main__':
+ fptr = open(os.environ['OUTPUT_PATH'], 'w')
+ n = int(input().strip())
+ a = list(map(int, input().rstrip().split()))
+ result = pickingNumbers(a)
+ fptr.write(str(result) + '\n')
+ fptr.close()
