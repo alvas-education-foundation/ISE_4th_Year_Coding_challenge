@@ -1,0 +1,70 @@
+TASK 1:
+Consider a list (list = []). You can perform the following commands:
+1. insert i e: Insert integer e at position i.
+2. print: Print the list.
+3. remove e: Delete the first occurrence of integer e .
+4. append e: Insert integer e at the end of the list.
+5. sort: Sort the list.
+6. pop: Pop the last element from the list.
+7. reverse: Reverse the list.
+Initialize your list and read in the value of n followed by n lines of commands
+where each command will be of the 7 types listed above. Iterate through each
+command in order and perform the corresponding operation on your list
+
+arr = []
+for i in range(int(raw_input())):
+ s = raw_input().split()
+ for i in range(1,len(s)):
+ s[i] = int(s[i])
+
+ if s[0] == "append":
+ arr.append(s[1])
+ elif s[0] == "extend":
+ arr.extend(s[1:])
+ elif s[0] == "insert":
+ arr.insert(s[1],s[2])
+ elif s[0] == "remove":
+ arr.remove(s[1])
+ elif s[0] == "pop":
+ arr.pop()
+ elif s[0] == "index":
+ print arr.index(s[1])
+ elif s[0] == "count":
+ print arr.count(s[1])
+ elif s[0] == "sort":
+ arr.sort()
+ elif s[0] == "reverse":
+ arr.reverse()
+ elif s[0] == "print":
+ print arr
+******************************************************************************
+TASK 2:
+Given an integer, n, and n space-separated integers as input, create a tuple, t, of
+those n integers. Then compute and print the result of hash(t).
+Note: hash() is one of the functions in the __builtins__ module, so it need not be
+imported.
+
+Solution:
+n = input()
+str = input()
+lst = str.split()
+lst = map(int, lst)
+t = tuple(lst)
+print(hash(t))
+******************************************************************************
+TASK 3:
+You have a record of N students. Each record contains the student's name, and
+their percent marks in Maths, Physics and Chemistry. The marks can be floating
+values. The user enters some integer N followed by the names and marks
+for N students. You are required to save the record in a dictionary data type. The 
+user then enters a student's name. Output the average percentage marks obtained by
+that student, correct to two decimal places.
+
+Solution:
+N = int(raw_input())
+results = {}
+for i in range(N):
+ a = raw_input().split(' ')
+ results[a[0]] = [float(x) for x in a[1:]]
+student = raw_input()
+print "%.2f" %(sum(results[student])/len(results[student]))
