@@ -1,0 +1,132 @@
+1).Given an array, X of N integers, calculate and print the standard deviation. Your
+answer should be in decimal form, rounded to a scale of 1 decimal place. An
+error margin of +0.1 or -0.1 will be tolerated for the standard deviation.
+
+Solution:
+n = int(input().strip())
+X = [int(x) for x in input().strip().split()]
+mean = sum(X) / n
+variance = sum([((x - mean) ** 2) for x in X]) / n
+stddev = variance ** 0.5
+print("{0:0.1f}".format(stddev))
+***************************************************************************
+
+2).
+You are given an array of integers, a, a[]= {1,2,3,4,,5,6….k} and a positive
+integer, k. Find and print the number of pairs(i, j) where i<j and a[i]+ a[j] is
+divisible by k.
+
+Solution:
+#!/bin/python3
+import math
+import os
+import random
+import re
+import sys
+# Complete the divisibleSumPairs function below.
+def divisibleSumPairs(n, k, ar):
+ sum_lst = list()
+ res = list()
+ comb_list = (list(combinations(ar, 2)))
+ for i in comb_list:
+ sum_lst.append(i[0] + i[1])
+ for i in sum_lst:
+ if (i % k) == 0:
+ res.append(i)
+ return (len(res))
+if __name__ == '__main__':
+ fptr = open(os.environ['OUTPUT_PATH'], 'w')
+ nk = input().split()
+ n = int(nk[0])
+ k = int(nk[1])
+ ar = list(map(int, input().rstrip().split()))
+ result = divisibleSumPairs(n, k, ar)
+ fptr.write(str(result) + '\n')
+ fptr.close()
+***************************************************************************
+Activity 3:
+Given a square matrix, calculate the absolute difference between the sums of its
+diagonals. The function must return an integer representing the absolute
+diagonal difference.
+
+Solution:
+#!/bin/python3
+import math
+import os
+import random
+import re
+import sys
+def diagonalDifference(arr):
+ # Write your code here
+ n = int(input().strip())
+dSumLeft = 0
+dSumRight = 0
+for i in range(n):
+ matrixRow = list(map(int,input().strip().split(' ')))
+ dSumLeft += int(matrixRow[i])
+ dSumRight += int(matrixRow[n-i-1])
+print(abs(dSumLeft - dSumRight))
+if __name__ == '__main__':
+ fptr = open(os.environ['OUTPUT_PATH'], 'w')
+ n = int(input().strip())
+ arr = []
+ for _ in range(n):
+ arr.append(list(map(int, input().rstrip().split())))
+ result = diagonalDifference(arr)
+ fptr.write(str(result) + '\n')
+ fptr.close()
+***************************************************************************
+Activity 4:
+You are given a number of sticks of varying lengths. You will iteratively cut the
+sticks into smaller sticks, discarding the shortest pieces until there are none left.
+At each iteration you will determine the length of the shortest stick remaining,
+cut that length from each of the longer sticks and then discard all the pieces of
+that shortest length. When all the remaining sticks are the same length, they
+cannot be shortened so discard them.
+Given the lengths of n sticks, print the number of sticks that are left before each
+iteration until there are none left.
+
+Solution:
+N= input()
+num = map(int,raw_input().split())
+val=[0]*1001
+for i in num:
+ val[i]+=1
+counter = 0
+val=val[::-1]
+ans =[]
+for i in val:
+ if i>0:
+ counter += i
+ ans.append(counter)
+ans = ans[::-1]
+for i in ans:
+ print i
+****************************************************************
+Activity 5:
+Given an array of integers, find and print the maximum number of integers you
+can select from the array such that the absolute difference between any two of
+the chosen integers is less than or equal to 1.
+
+Solution:
+#!/bin/python3
+import math
+import os
+import random
+import re
+import sys
+def pickingNumbers(a):
+ # Write your code here
+ freq = [0 for i in range(101)]
+ max_pair = 0
+ for n in a:
+ freq[n] += 1
+ max_pair = max(max_pair, max((freq[n] + freq[n-1]), (freq[n] + freq[n+1])))
+ return max_pair
+if __name__ == '__main__':
+ fptr = open(os.environ['OUTPUT_PATH'], 'w')
+ n = int(input().strip())
+ a = list(map(int, input().rstrip().split()))
+ result = pickingNumbers(a)
+ fptr.write(str(result) + '\n')
+ fptr.close()
