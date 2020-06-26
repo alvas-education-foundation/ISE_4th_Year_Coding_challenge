@@ -1,0 +1,52 @@
+1).
+
+items = []
+for i in range(100, 401):
+    s = str(i)
+    if (int(s[0])%2==0) and (int(s[1])%2==0) and (int(s[2])%2==0):
+        items.append(s)
+print( ",".join(items))
+
+
+2).
+
+
+
+value = input("Enter value: ")
+
+n1 = value * 1
+n2 = value * 2
+n3 = value * 3
+n4 = value * 4
+
+total = int(n1) + int(n2) + int(n3) + int(n4)
+print(total)
+
+3).
+
+
+import re
+passwords = input("Type in: ")
+passwords = passwords.split(",")
+accepted_pass = []
+for i in passwords:
+    
+    if len(i) < 6 or len(i) > 12:
+        continue
+
+    elif not re.search("([a-z])+", i):
+        continue
+
+    elif not re.search("([A-Z])+", i):
+        continue
+
+    elif not re.search("([0-9])+", i):
+        continue
+
+    elif not re.search("([!@$%^&])+", i):
+        continue
+
+    else:
+        accepted_pass.append(i)
+
+print((" ").join(accepted_pass))
