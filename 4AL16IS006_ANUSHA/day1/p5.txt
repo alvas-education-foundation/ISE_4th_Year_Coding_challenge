@@ -1,3 +1,6 @@
+
+NAME:	ANUSHA	           USN:	4AL16IS006
+
 Write a program to devise and implement a O(log n) algorithm to compute x^n
 
 Function Specification:

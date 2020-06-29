@@ -1,3 +1,6 @@
+
+NAME:	ANUSHA	           USN:	4AL16IS006
+
 # Get three test score
 round1 = int(raw_input("Enter score for round 1: "))
 

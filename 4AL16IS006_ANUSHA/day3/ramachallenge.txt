@@ -1,3 +1,6 @@
+
+NAME:	ANUSHA	           USN:	4AL16IS006
+
 Two friends Reema and Rita decide to play cards. But Reema doesn't know to play the cards. So Rita decides to teach her how to play cards. Rita distributes 13 cards to each other which are in unsorted order and teaches her how to make set with the cards without considering the symbols.
 Rita first takes two cards and checks which card has the lesser number and the card with the least number is put first and larger at second. 
 She takes third card and checks it with second card. If the third card number is less than the second card she inserts the third card at the second position and checks newly inserted second card with the first card. If the newly inserted second card number is less than the first card, she inserts the second card at the first place and this goes on till all the cards get sorted.
