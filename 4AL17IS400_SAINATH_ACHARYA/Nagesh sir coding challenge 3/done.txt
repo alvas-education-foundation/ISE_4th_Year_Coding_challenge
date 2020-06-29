@@ -32,25 +32,27 @@ Write a python program to check the validity of password input by users.
 
 
 import re
-p= input("Input your password : ")
-x = True
-while x:  
-    if (len(p)<6 or len(p)>12):
-        break
-    elif not re.search("[a-z]",p):
-        break
-    elif not re.search("[0-9]",p):
-        break
-    elif not re.search("[A-Z]",p):
-        break
-    elif not re.search("[$#@]",p):
-        break
-    elif re.search("\s",p):
-        break
-    else:
-        print("Valid Password")
-        x=False
-        break
+passwords = input("Type in: ")
+passwords = passwords.split(",")
+accepted_pass = []
+for i in passwords:
+    
+    if len(i) < 6 or len(i) > 12:
+        continue
 
-if x:
-    print("Not a Valid Password")
+    elif not re.search("([a-z])+", i):
+        continue
+
+    elif not re.search("([A-Z])+", i):
+        continue
+
+    elif not re.search("([0-9])+", i):
+        continue
+
+    elif not re.search("([!@$%^&])+", i):
+        continue
+
+    else:
+        accepted_pass.append(i)
+
+print((" ").join(accepted_pass))
