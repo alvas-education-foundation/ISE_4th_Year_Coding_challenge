@@ -9,7 +9,7 @@ mean = sum(X) / n
 variance = sum([((x - mean) ** 2) for x in X]) / n
 stddev = variance ** 0.5
 print("{0:0.1f}".format(stddev))
-***************************************************************************
+======================================================================================
 
 Activity 2:
 You are given an array of integers, a, a[]= {1,2,3,4,,5,6….k} and a positive
@@ -43,7 +43,7 @@ if __name__ == '__main__':
  result = divisibleSumPairs(n, k, ar)
  fptr.write(str(result) + '\n')
  fptr.close()
-***************************************************************************
+===========================================================
 Activity 3:
 Given a square matrix, calculate the absolute difference between the sums of its
 diagonals. The function must return an integer representing the absolute
@@ -75,7 +75,7 @@ if __name__ == '__main__':
  result = diagonalDifference(arr)
  fptr.write(str(result) + '\n')
  fptr.close()
-***************************************************************************
+=============================================================================
 Activity 4:
 You are given a number of sticks of varying lengths. You will iteratively cut the
 sticks into smaller sticks, discarding the shortest pieces until there are none left.
