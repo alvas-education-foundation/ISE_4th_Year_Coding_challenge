@@ -1,0 +1,51 @@
+1]
+
+import numpy as np
+from scipy import stats
+
+size = int(input())
+numbers = list(map(int, input().split()))
+print(np.mean(numbers))
+print(np.median(numbers))
+print(int(stats.mode(numbers)[0]))
+
+2]
+
+N = map(int,input().split())
+X = list(map(int, input().strip().split(' ')))
+W = list(map(int, input().strip().split(' ')))
+sum_X = sum([a*b for a,b in zip(X,W)])
+print(round((sum_X/sum(W)),1))
+
+3]
+
+n = int(input())
+x = sorted(list(map(int, input().split())))
+from statistics import median
+print(int(median(x[:n//2])))
+print(int(median(x)))
+print(int(median(x[(n+1)//2:])))
+
+4]
+
+import statistics as st
+
+n = int(input())
+data = list(map(int, input().split()))
+freq = list(map(int, input().split()))
+
+s = []
+for i in range(n):
+    s += [data[i]] * freq[i]
+N = sum(freq)
+s.sort()
+
+if n%2 != 0:
+    q1 = st.median(s[:N//2])
+    q3 = st.median(s[N//2+1:])
+else:
+    q1 = st.median(s[:N//2])
+    q3 = st.median(s[N//2:])
+
+ir = round(float(q3-q1), 1)
+print(ir)

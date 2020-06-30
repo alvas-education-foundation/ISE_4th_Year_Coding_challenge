@@ -1,0 +1,58 @@
+NAME:	ANUSHA	           USN:	4AL16IS006
+
+Write a program to devise and implement a constant time algorithm to compute the sum of first n natural numbers.
+
+
+Function Specification:
+int sum(int n);
+
+Input and Output Format:
+
+Refer sample input and output for formatting specifications.
+
+[All text in bold corresponds to input and the rest corresponds to output.]
+
+Sample Input and Output 1:
+
+Enter the count of natural numbers
+10
+The sum of first 10 natural numbers is 55
+
+
+Sample Input and Output 2:
+
+Enter the count of natural numbers
+12
+The sum of first 12 natural numbers is 78
+
+
+Problem Requirements:
+C
+Keyword	Min Count	Max Count
+for	0	0
+Keyword	Min Count	Max Count
+sum	1	-
+Keyword	Min Count	Max Count
+while ....	0	0
+
+Program:
+#include<stdio.h>
+int m;
+int rec(int n);
+int main()
+{
+    int n;
+    printf("Enter the count of natural numbers\n");
+    scanf("%d",&n);
+    m=rec(n);
+    printf("The sum of first %d natural numbers is %d",n,m);
+    return 0;
+}
+int rec(int n)
+{
+    m=m+n;
+    if(n==0)
+        return m;
+    else
+        return rec(n-1);
+}

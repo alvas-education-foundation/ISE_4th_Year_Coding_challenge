@@ -1,0 +1,18 @@
+------------------------------------------------------------------------------------------------------
+                              Coding Challenge :  19-06-2020
+------------------------------------------------------------------------------------------------------
+QUESTION: 01
+
+Using whatever programming techniques you know, write the cleanest possible function you can think 
+of to print a singly linked list in reverse. The format for the node should be a struct containing 
+an integer value, val, and a next pointer to the following node.
+
+------------------------------------------------------------------------------------------------------
+QUESTION: 02
+
+Write a program that takes an integer and displays the English name of that value.
+
+You should support both positive and negative numbers, in the range supported by a 32-bit integer 
+(approximately -2 billion to 2 billion).
+
+------------------------------------------------------------------------------------------------------
