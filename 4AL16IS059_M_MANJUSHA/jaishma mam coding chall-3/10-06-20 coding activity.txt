@@ -1,0 +1,99 @@
+Jaishma mam coding challenge-3
+
+1.Consider a list (list = []). You can perform the following commands:
+            1.	insert i e: Insert integer e  at position i.
+            2.	print: Print the list.
+            3.	remove e: Delete the first occurrence of integer e .
+            4.	append e: Insert integer  e at the end of the list.
+            5.	sort: Sort the list.
+            6.	pop: Pop the last element from the list.
+            7.	reverse: Reverse the list.
+Initialize your list and read in the value of n followed by  n lines of commands where each command will be of the  7 types listed above.
+Iterate through each command in order and perform the corresponding operation on your list.
+
+
+
+def lines_from_stdin(n):
+    n = int(n)
+    for i in range(n):
+        yield input().rstrip('\n').split()
+
+def matching_lines(lines, patterns):
+    for line in lines:
+        for pattern in patterns:
+            if pattern in line:
+                yield line
+
+def matching_lines_from_stdin(pattern, n):
+    lines = lines_from_stdin(n)
+    matching = matching_lines(lines, pattern)
+    yield from matching
+
+def map_list_commands(n):
+    answer = list()
+    funcs = dir(list) + ['print']
+    matching = matching_lines_from_stdin(funcs, n)
+    for vals in matching:
+        func = vals[0]
+        if func in dir(list):
+            try:
+                val1, val2 = int(vals[1]), int(vals[2])
+                method = getattr(answer, func)(val1, val2)
+            except IndexError:
+                try:
+                    val1 = int(vals[1])
+                    method = getattr(answer, func)(val1)
+                except IndexError:
+                    method = getattr(answer, func)()
+        elif func == 'print':
+            print(answer)
+
+if __name__ == '__main__':
+    N = int(input())
+    map_list_commands(N)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+2.Given an integer,n , and n space-separated integers as input, create a tuple, t, of those n integers. Then compute and print the result of hash(t).
+Note: hash() is one of the functions in the __builtins__ module, so it need not be imported.
+
+
+
+if __name__ == '__main__':
+
+
+    n = int(input())
+
+
+    integer_list = map(int, input().split())
+
+
+    tup = ()
+
+
+    for x in integer_list:
+
+
+        tup+=(x,)
+
+
+    print(hash(tup))
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+3. You have a record of N students. Each record contains the student's name, and their percent marks in Maths, Physics and Chemistry. The marks can be floating values. 
+The user enters some integer N followed by the names and marks for N students. You are required to save the record in a dictionary data type. 
+The user then enters a student's name. Output the average percentage marks obtained by that student, correct to two decimal places.
+
+
+n = int(input())
+
+student_marks = {}
+
+for _ in range(n):
+    name, *line = input().split()
+    scores = list(map(float, line))
+    student_marks[name] = scores
+query_name = input()
+
+print("{0:.2f}".format(round(sum(student_marks[query_name]) / len(student_marks[query_name]), 2)))
