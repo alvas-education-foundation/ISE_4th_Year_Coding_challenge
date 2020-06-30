@@ -1,6 +1,7 @@
-Implement a C program to find the maximum depth or height of a BST
 
- 
+NAME:	ANUSHA	           USN:	4AL16IS006
+
+Implement a C program to find the maximum depth or height of a BST
 
 Input and Output Format:
 
