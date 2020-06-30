@@ -1,3 +1,6 @@
+
+NAME:	ANUSHA	           USN:	4AL16IS006
+
 import cmath
 
 a = 1

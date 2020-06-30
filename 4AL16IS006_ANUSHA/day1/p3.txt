@@ -1,3 +1,6 @@
+
+NAME:	ANUSHA	           USN:	4AL16IS006
+
 def binarySearch(arr, l, r, x): 
   
     while l <= r: 
