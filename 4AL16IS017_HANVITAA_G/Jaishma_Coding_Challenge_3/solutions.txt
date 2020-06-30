@@ -1,0 +1,36 @@
+1)
+def is_leap(n):
+    if n % 400 == 0:
+        return True
+    if n % 100 == 0:
+        return False
+    if n % 4 == 0:
+        return True
+    return False
+
+print(is_leap(int(input())))
+
+2)
+a = int(input())                         
+b = int(input())
+if 1<=a<=10**10 and 1<=b<=10**10:         
+sum = a+b
+difference = a-b
+product = a*b
+print (sum)                              
+print (difference)                     
+print (product) 
+
+3)
+from __future__ import print_function
+if __name__ == '__main__':
+    n = int(raw_input())
+    list = []
+    num = 1
+    string = "" 
+    for x in range(n):
+        list.append(num)
+        num += 1
+    for x in list:
+        string += str(x)
+    print(string)

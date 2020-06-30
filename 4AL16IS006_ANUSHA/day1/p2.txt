@@ -1,0 +1,168 @@
+
+NAME:	ANUSHA	           USN:	4AL16IS006
+
+
+Implement a C program to find the size of the BST.
+
+ 
+
+Input and Output Format:
+
+Refer Sample Input and Output for formatting specifications.
+
+ 
+
+[All text in bold corresponds to input and the rest corresponds to output]
+
+
+
+Sample Input and Output:
+
+ 
+
+Enter the element to be inserted in the tree
+
+5
+
+Do you want to insert another element?
+
+yes
+
+Enter the element to be inserted in the tree
+
+7
+
+Do you want to insert another element?
+
+yes
+
+Enter the element to be inserted in the tree
+
+3
+
+Do you want to insert another element?
+
+yes
+
+Enter the element to be inserted in the tree
+
+1
+
+Do you want to insert another element?
+
+no
+
+The elements in the tree are 1 3 5 7
+
+The size of the tree is 4
+
+#include<stdio.h>
+
+#include<stdlib.h>
+
+#include<string.h>
+
+int count=0;
+
+struct tnode
+{
+	
+int data;
+	
+struct tnode * leftc;
+	
+struct tnode * rightc;
+
+};
+
+
+void insert(struct tnode **, int num);
+
+void inorder(struct tnode *);
+
+int findSize(struct tnode *);
+
+
+int main() {
+	
+struct tnode * root=NULL;
+	
+char ch[5];
+	int num;
+	
+do {
+		
+printf("Enter the element to be inserted in the tree\n");
+	
+	scanf("%d",&num);
+		
+insert(&root, num);
+		
+printf("Do you want to insert another element?\n");
+		
+scanf("%s",ch);
+	}while(strcmp(ch,"yes")==0);
+
+
+	printf("The elements in the tree are");
+	
+inorder(root);
+	
+printf("\n");
+	
+printf("The size of the tree is %d\n",findSize(root));
+	
+return 0;
+}
+
+
+void insert(struct tnode ** s, int num)
+ {
+	
+if((*s) == NULL)
+ {
+		
+(*s) = (struct tnode *) malloc( sizeof (struct tnode));
+		
+(*s)->data = num;
+		
+(*s)->leftc = NULL;
+		
+(*s)->rightc = NULL;
+	
+}
+	
+else 	{
+		
+if(num < (*s)->data)
+		
+  insert(&( (*s)->leftc ), num);
+		
+else
+		  
+insert(&( (*s)->rightc ), num);
+	}
+}
+
+
+void inorder(struct tnode * s) 
+{
+    if(s==NULL)
+      
+  return;
+   
+ inorder(s->leftc);
+   
+     count++;
+   
+ printf("%d",s->data);
+    
+inorder(s->rightc);
+
+}
+
+
+int findSize(struct tnode * s) 
+{
+   return count;
+}

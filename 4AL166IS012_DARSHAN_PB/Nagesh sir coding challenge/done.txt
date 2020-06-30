@@ -1,0 +1,68 @@
+1)
+
+a=[]
+
+for i in range(2000, 3201):
+
+    if (i%7==0) and (i%5!=0):
+        
+
+	a.append(str(i))
+
+
+print(','.join(a))
+
+
+
+
+
+2)
+
+string = []
+
+while True:
+
+    s = input()
+
+    if s:
+
+        string.append(s.upper())
+
+    else:
+
+        break
+
+
+
+for sentence in string:
+
+    print(sentence)
+
+
+
+
+
+3)
+string=input("Enter string:")
+
+c1=0
+
+c2=0
+
+for i in string:
+
+      if(i.islower()):
+
+            c1=c1+1
+
+      elif(i.isupper()):
+
+            c2=c2+1
+
+print("The number of lowercase characters is:")
+
+print(c1)
+
+print("The number of uppercase characters is:")
+
+print(c2)
