@@ -1,3 +1,6 @@
+
+NAME:	ANUSHA	           USN:	4AL16IS006
+
 Mathematicians love all sorts of odd properties of numbers. For instance, they consider 945 to be an interesting number, since it is the first odd number for which the sum of its divisors is larger than the number itself.
 
 To search for interesting numbers,Write a program that scans a range of numbers and determines the number that has the largest number of divisors in the range.
