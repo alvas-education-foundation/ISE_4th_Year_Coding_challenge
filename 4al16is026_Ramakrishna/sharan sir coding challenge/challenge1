@@ -1,0 +1,128 @@
+1. Write a Program in Java to check whether a number is an Armstrong Number or not. 
+
+import java.util.Scanner;
+public class ArmstrongNumber {
+   public static void main(String args[]) {
+      int number = 153;
+      int check, rem, sum = 0;
+      System.out.println("Enter the number to be verified:");
+      Scanner sc = new Scanner(System.in);
+      number = sc.nextInt();
+      check = number;
+      while(check != 0) {
+         rem = check % 10;
+         sum = sum + (rem * rem * rem);
+         check = check / 10;
+      }
+      if(sum == number)
+         System.out.println("Given number is an armstrong number.");
+      else
+         System.out.println("Given number is not an armstrong number.");
+   }
+}
+
+2. Write a Java program to find the second most frequent character in a given string.
+
+public static char nMostCommon(String str, int n) {
+    HashMap<Character,Integer> counter = new HashMap<>();
+    for(char c: str.toCharArray()) {
+        counter.putIfAbsent(c, 0);
+        counter.put(c, counter.get(c) + 1);
+    }
+    if (counter.size() < n) {
+        throw new IllegalArgumentException("Not enough different characters.");
+    }
+    return counter.entrySet().stream()
+        .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()))
+        .collect(Collectors.toList())
+        .get(n - 1)
+        .getKey();
+}
+
+public static void main(String[] args) {
+    System.out.println(nMostCommon("bananassss", 2));
+}
+
+3. Write a Java program to find the length of the longest consecutive elements sequence from a given unsorted array of integers.
+
+
+import java.io.*; 
+import java.util.*; 
+
+class ArrayElements 
+{ 
+
+   static int findLongestConseqSubseq(int arr[],int n) 
+   { 
+      HashSet<Integer> S = new HashSet<Integer>(); 
+      int ans = 0; 
+
+      
+      for (int i=0; i<n; ++i) 
+         S.add(arr[i]); 
+
+    
+      for (int i=0; i<n; ++i) 
+      { 
+        
+         if (!S.contains(arr[i]-1)) 
+         { 
+            
+            int j = arr[i]; 
+            while (S.contains(j)) 
+               j++; 
+
+         
+            if (ans<j-arr[i]) 
+               ans = j-arr[i]; 
+         } 
+      } 
+      return ans; 
+   } 
+
+   public static void main(String args[]) 
+   { 
+      int arr[] = {1, 9, 3, 10, 4, 20, 2}; 
+      int n = arr.length; 
+      System.out.println("Length of the Longest consecutive subsequence is " + 
+                  findLongestConseqSubseq(arr,n)); 
+   } 
+} 
+
+4. Write a Java program to segregate all 0s on left side and all 1s on right side of a given array of 0s and 1s.
+
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args)
+    {
+        int arr[] = new int[]{ 0, 0, 1, 1, 0, 1, 1, 1,0 };
+        int result[];
+        System.out.println("Original Array ");
+        System.out.println(Arrays.toString(arr));
+
+        int n = arr.length;
+ 
+        result = separate_0_1(arr, n);
+        System.out.println("New Array ");
+        System.out.println(Arrays.toString(result));
+      }
+    
+    static int [] separate_0_1(int arr[], int n)
+     {
+        int count = 0;   
+     
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == 0)
+                count++;
+        }
+ 
+        for (int i = 0; i < count; i++)
+            arr[i] = 0;
+ 
+        for (int i = count; i < n; i++)
+            arr[i] = 1;
+    
+         return arr;
+     }       
+   }

@@ -1,0 +1,53 @@
+Challenge-1: 
+ 
+Write a python program, which will find all such numbers between 1000 and 3000 (both included) such that each digit of the number is an even number. The numbers obtained should be printed in a comma-separated sequence on a single line. 
+ 
+Solution: 
+ 
+values=[] for x in range(1000,3000):     s=str(x)     if (int(s[0]) %2 == 0) and (int(s[1]) %2 == 0) and (int(s[2]) %2 == 0) and (int(s[3]) %2 == 0):         values.append(s) print "-".join(values) 
+ 
+****************************************************************************** 
+ 
+Challenge-2: 
+ 
+Write a python program that computes the value of a+aa+aaa+aaaa with a given digit as the value of a. Suppose the following input is supplied to the program: 9 Then, the output should be: 11106 
+ 
+Solution: 
+ 
+value = input("Enter value: ") 
+ 
+n1 = value * 1 n2 = value * 2 n3 = value * 3 
+n4 = value * 4 
+ 
+total = int(n1) + int(n2) + int(n3) + int(n4) print(total) 
+ 
+****************************************************************************** 
+ 
+Challenge-3: 
+ 
+A website requires the users to input username and password to register. Write a python program to check the validity of password input by users. Following are the criteria for checking the password: 1. At least 1 letter between [a-z] 2. At least 1 number between [0-9] 1. At least 1 letter between [A-Z] 3. At least 1 character from [$#@] 4. Minimum length of transaction password: 6 5. Maximum length of transaction password: 12 Your program should accept a sequence of comma separated passwords and will check them according to the above criteria. Passwords that match the criteria are to be printed, each separated by a comma. Example If the following passwords are given as input to the program: ABd1234@1,a F1#,2w3E*,2We3345 Then, the output of the program should be: ABd1234@1 
+ 
+Solution: 
+ 
+import re 
+ 
+passwords = input("Type in: ") passwords = passwords.split(",") 
+ 
+accepted_pass = [] 
+for i in passwords:          if len(i) < 6 or len(i) > 12:         continue 
+ 
+    elif not re.search("([a-z])+", i):         continue 
+ 
+    elif not re.search("([A-Z])+", i):         continue 
+ 
+    elif not re.search("([0-9])+", i):         continue 
+ 
+    elif not re.search("([!@$%^&])+", i):         continue 
+ 
+    else:         accepted_pass.append(i) 
+ 
+print((" ").join(accepted_pass)) 
+ 
+****************************************************************************** 
+ 
+ 

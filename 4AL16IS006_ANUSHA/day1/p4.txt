@@ -1,3 +1,5 @@
+NAME:	ANUSHA	           USN:	4AL16IS006
+
 Write a program to devise and implement a constant time algorithm to compute the sum of first n natural numbers.
 
 

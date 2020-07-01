@@ -1,8 +1,7 @@
+
+NAME:	ANUSHA	           USN:	4AL16IS006
+
 Implement a C program to print the nodes in a BST in level order.
-
-
- 
-
 Input and Output Format:
 
 Refer Sample Input and Output for formatting specifications.
