@@ -1,0 +1,60 @@
+1. There's a staircase with N steps, and you can climb 1 or 2 steps at a time. Given N, write a function that returns the number of unique ways you can climb the staircase. The order of the steps matters. 
+For example, if N is 4, then there are 5 unique ways: 
+1, 1, 1, 1 
+2, 1, 1 
+1, 2, 1 
+1, 1, 2 
+2, 2 
+What if, instead of being able to climb 1 or 2 steps at a time, you could climb any number from a set of positive integers X? For example, if X = {1, 3, 5}, you could climb 1, 3, or 5 steps at a time. Generalize your function to take in X. 
+Solution: 
+def fib(n):      
+if n <= 1:          
+p-return n      
+return fib(n-1) + fib(n-2)    
+def countWays(s):      
+return fib(s + 1)    
+s = 4 print ("Number of ways = ")  
+print (countWays(s))  
+ 
+****************************************************************************** 
+2. How do you check if two rectangles overlap with each other. 
+Solution: 
+# Python program to check if rectangles overlap  
+class Point:      
+def __init__(self, x, y):          
+self.x = x          
+self.y = y     
+def doOverlap(l1, r1, l2, r2):        
+# If one rectangle is on left side of other      
+if(l1.x >= r2.x or l2.x >= r1.x):          
+return False        
+# If one rectangle is above other      
+if(l1.y <= r2.y or l2.y <= r1.y):          
+return False     
+return True    
+# Driver Code  
+if __name__ == "__main__":      
+l1 = Point(0, 10)      
+r1 = Point(10, 0)      
+l2 = Point(5, 5)      
+r2 = Point(15, 0)         
+if(doOverlap(l1, r1, l2, r2)):          
+print("Rectangles Overlap")      
+else:          
+print("Rectangles Don't Overlap")     
+ 
+3. How to Find Missing Number on Integer Array of 1 to 100 
+Solution: 
+# a represents the array  # 
+n : Number of elements in array a  
+def getMissingNo(a, n):   
+i, total = 0, 1 
+for i in range(2, n + 2):    
+total += i    
+total -= a[i - 2]   
+return total  
+ 
+# Driver Code  
+arr = [1, 2, 3, 5]  print(getMissingNo(arr, len(arr)))  
+ 
+****************************************************************************** 

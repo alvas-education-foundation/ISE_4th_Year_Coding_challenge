@@ -1,3 +1,6 @@
+
+NAME:	ANUSHA	           USN:	4AL16IS006
+
 def arrayMultiply(array, c):
     return [element*c for element in array]
 
