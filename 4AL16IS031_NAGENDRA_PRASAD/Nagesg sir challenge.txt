@@ -1,0 +1,46 @@
+1)
+items = []
+num = [x for x in input().split(',')]
+for p in num:
+    x = int(p, 2)
+    if not x%5:
+        items.append(p)
+print(','.join(items))
+
+2)
+s = input("Input a string")
+d=l=0
+for c in s:
+    if c.isdigit():
+        d=d+1
+    elif c.isalpha():
+        l=l+1
+    else:
+        pass
+print("Letters", l)
+print("Digits", d)
+
+
+3)
+freq = {}  
+line = raw_input()
+for word in line.split():
+    freq[word] = freq.get(word,0)+1
+
+words = freq.keys()
+words.sort()
+
+for w in words:
+    print "%s:%d" % (w,freq[w])
+
+4)
+class Rectangle():
+    def __init__(self, l, w):
+        self.length = l
+        self.width  = w
+
+    def rectangle_area(self):
+        return self.length*self.width
+
+newRectangle = Rectangle(12, 10)
+print(newRectangle.rectangle_area())
