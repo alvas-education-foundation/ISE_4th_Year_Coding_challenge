@@ -1,0 +1,44 @@
+PYTHON PROGRAM 
+ 
+TASK 1: Given a list iterate it and count the occurrence of each element and create a dictionary to show the count of each element Expected Output: 
+Original list  [11, 45, 8, 11, 23, 45, 23, 45, 89] 
+Printing count of each item   {11: 2, 45: 3, 8: 1, 23: 2, 89: 1} 
+Solution: sampleList = [11, 45, 8, 11, 23, 45, 23, 45, 89] print("Original list ", sampleList) 
+ 
+countDict = dict() for item in sampleList: if(item in countDict):       
+countDict[item] += 1    
+else:       
+countDict[item] = 1    
+print("Printing count of each item  ",countDict) 
+*************************************************************************** 
+
+TASK 2: Given a following two sets find the intersection and remove those elements from the first set Expected Output: 
+First Set  {65, 42, 78, 83, 23, 57, 29} 
+Second Set  {67, 73, 43, 48, 83, 57, 29} 
+ 
+Intersection is  {57, 83, 29} 
+First Set after removing common element  {65, 42, 78, 23} 
+Solution: 
+firstSet  = {23, 42, 65, 57, 78, 83, 29} 
+secondSet = {57, 83, 29, 67, 73, 43, 48} 
+ 
+print("First Set ", firstSet) print("Second Set ", secondSet) 
+ 
+intersection = firstSet.intersection(secondSet) 
+print("Intersection is ", intersection) for item in intersection: firstSet.remove(item) 
+ 
+print("First Set after removing common element ", firstSet) 
+*************************************************************************** 
+
+TASK 3: Given a dictionary get all values from the dictionary and add it in a list but don’t add duplicates Given: 
+speed ={'jan':47, 'feb':52, 'march':47, 'April':44, 'May':52, 'June':53, 'july':54 
+Solution: speed  ={'jan':47, 'feb':52, 'march':47, 'April':44, 'May':52, 'June':53,           'july':54, 'Aug':44, 'Sept':54}  
+ 
+print("Dictionary's values - ", speed.values()) 
+ 
+speedList = list() for item in speed.values(): 
+if item not in speedList:       
+speedList.append(item) 
+print("unique list", speedList) 
+
+*************************************************************************** 

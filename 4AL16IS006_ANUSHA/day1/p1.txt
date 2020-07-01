@@ -1,4 +1,7 @@
-mplement a C program to find whether a given Binary Search Tree is height balanced.
+ 
+NAME:	ANUSHA	           USN:	4AL16IS006
+
+implement a C program to find whether a given Binary Search Tree is height balanced.
 
  
 
