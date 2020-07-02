@@ -1,0 +1,104 @@
+
+
+
+
+2). Given an integer, and find the super digit of the integer.
+If x has only 1 digit, then its super digit is x.
+Otherwise, the super digit of x is equal to the super digit of the sum of the digits of x.
+You are given two numbers n  and k. The number p  is created by concatenating the string n*k   times.
+The superDigit has the following parameter(s):
+n: a string representation of an integer
+k: an integer, the times to concatenate n to make p
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<string> split_string(string);
+int num1(long long int z)
+{
+    if(z<=9)
+    {
+        return z;
+    }
+    long long int sum=0;
+    long long int m=0;
+
+    while(z!=0)
+    {
+        
+        m=z%10;
+        sum=sum+m;
+        z=z/10;
+
+
+    }
+    return num1(sum);
+
+}
+
+int superDigit(string n, int k) {
+long long int sum=0;
+long long int m;
+   for(int i=0; i<n.size(); i++){
+        sum += n[i] - '0';
+    }
+
+    return num1(sum*k);
+
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    string nk_temp;
+    getline(cin, nk_temp);
+
+    vector<string> nk = split_string(nk_temp);
+
+    string n = nk[0];
+
+    int k = stoi(nk[1]);
+
+    int result = superDigit(n, k);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
+
+vector<string> split_string(string input_string) {
+    string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
+        return x == y and x == ' ';
+    });
+
+    input_string.erase(new_end, input_string.end());
+
+    while (input_string[input_string.length() - 1] == ' ') {
+        input_string.pop_back();
+    }
+
+    vector<string> splits;
+    char delimiter = ' ';
+
+    size_t i = 0;
+    size_t pos = input_string.find(delimiter);
+
+    while (pos != string::npos) {
+        splits.push_back(input_string.substr(i, pos - i));
+
+        i = pos + 1;
+        pos = input_string.find(delimiter, i);
+    }
+
+    splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
+
+    return splits;
+}
+
+
+
