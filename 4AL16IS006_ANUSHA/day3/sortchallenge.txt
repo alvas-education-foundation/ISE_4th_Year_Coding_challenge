@@ -1,3 +1,6 @@
+
+NAME:	ANUSHA	           USN:	4AL16IS006
+
 In a class room the teacher decides to shuffle all the students so that each student collaborates with other students too and she also checks that board is visible to all students. In a bench n number of students can be seated. She calls the students and makes them stand in a line.
 
 She checks first two person and if the first person is taller than the second person he is put in second place and second in first, i.e., their positions are swapped. After swapping, the teacher checks second and third person height and if the second person is taller than third person their positions are swapped. She repeats this till the end. She finds that the last student is the tallest student after completing one iteration.

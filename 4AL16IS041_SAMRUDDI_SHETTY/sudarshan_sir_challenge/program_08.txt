@@ -1,0 +1,49 @@
+4). Brie’s Drawing teacher asks her class to open their books to a page number. 
+Brie can either start turning pages from the front of the book or from the back of the book. She always turns pages one at a time. 
+When she opens the book, page 1 is always on the right side: When she flips page 1, she sees pages 2 and 3.
+ Each page except the last page will always be printed on both sides. 
+The last page may only be printed on the front, given the length of the book. 
+If the book is n pages long, and she wants to turn to page p, what is the minimum number of pages she will turn? 
+She can start at the beginning or the end of the book.
+Given n and p, find and print the minimum number of pages Brie must turn in order to arrive at page p.
+
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int flips_count(int n, int p) 
+{
+    if (p % 2 == 0)
+    {
+        p = p + 1;
+    }
+
+    int page_num = 1;
+    std::vector<int> right_page_number;
+    for (int i = 0; i <= n/2; ++i)
+    {
+        right_page_number.push_back(page_num);
+        page_num += 2;
+    }
+
+    auto index = std::find(right_page_number.begin(), right_page_number.end(), p);
+
+    int num_of_flips_from_front = std::distance(right_page_number.begin(), index);
+	int num_of_flips_from_back = (n/2) - std::distance(right_page_number.begin(), index);
+
+    int min_flips = std::min(num_of_flips_from_front, num_of_flips_from_back);
+
+    return min_flips;
+}
+
+int main()
+{
+    int n, p;
+    std::cin >> n; 
+    std::cin >> p;
+
+    int result = flips_count(n, p);
+    std::cout << result << "\n";
+    return 0;
+}

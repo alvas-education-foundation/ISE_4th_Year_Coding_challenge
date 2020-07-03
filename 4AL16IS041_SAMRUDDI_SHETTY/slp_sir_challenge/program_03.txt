@@ -1,0 +1,23 @@
+1). Using whatever programming techniques you know, write the cleanest possible function you can think 
+of to print a singly linked list in reverse. The format for the node should be a struct containing 
+an integer value, val, and a next pointer to the following node.
+
+
+
+#include <stdio.h>
+
+struct node
+{
+    int val;
+    struct node* next;
+};
+
+void print_reverse( struct node* list )
+{
+    if ( list != 0 )
+    {
+        print_reverse( list->next );
+        printf( "%d\n", list->val );
+    }
+}
+   
