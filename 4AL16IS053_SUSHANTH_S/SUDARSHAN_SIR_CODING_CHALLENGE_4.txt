@@ -1,0 +1,174 @@
+1).
+
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <limits.h>
+#include <stdbool.h>
+
+int main(){
+    int d1; 
+    int m1; 
+    int y1; 
+    scanf("%d %d %d",&d1,&m1,&y1);
+    int d2; 
+    int m2; 
+    int y2; 
+    scanf("%d %d %d",&d2,&m2,&y2);
+    if(y2==y1){
+        if(m2==m1){
+            if(d1<d2)
+            printf("0");
+            else
+            printf("%d",15*(d1-d2));
+        }
+        else{
+             if(m1<m2)
+            printf("0");
+            else
+            printf("%d",500*(m1-m2));
+        }
+    }
+    else{
+         if(y1<y2)
+            printf("0");
+        else
+        printf("%d",10000*(y1-y2));
+    }
+    return 0;
+}
+A
+
+2.
+
+class GFG { 
+  
+    static boolean isPrime(int n) 
+    { 
+        // Corner case 
+        if (n <= 1) 
+            return false; 
+  
+        // Check from 2 to n-1 
+        for (int i = 2; i < n; i++) 
+            if (n % i == 0) 
+                return false; 
+  
+        return true; 
+    } 
+  
+    // Driver Program 
+    public static void main(String args[]) 
+    { 
+        if (isPrime(11)) 
+            System.out.println(" true"); 
+        else
+            System.out.println(" false"); 
+        if (isPrime(15)) 
+            System.out.println(" true"); 
+        else
+            System.out.println(" false"); 
+    } 
+} 
+
+
+3.
+
+
+import java.util.*;
+import java.io.*;
+class Node{
+    Node left,right;
+    int data;
+    Node(int data){
+        this.data=data;
+        left=right=null;
+    }
+}
+class Solution{
+ public static int getHeight(Node root){
+      //Write your code here
+        return root == null ? -1 : 1 + Math.max(getHeight(root.left), getHeight(root.right));
+    }
+ public static Node insert(Node root,int data){
+        if(root==null){
+            return new Node(data);
+        }
+        else{
+            Node cur;
+            if(data<=root.data){
+                cur=insert(root.left,data);
+                root.left=cur;
+            }
+            else{
+                cur=insert(root.right,data);
+                root.right=cur;
+            }
+            return root;
+        }
+    }
+    public static void main(String args[]){
+            Scanner sc=new Scanner(System.in);
+            int T=sc.nextInt();
+            Node root=null;
+            while(T-->0){
+                int data=sc.nextInt();
+                root=insert(root,data);
+            }
+            int height=getHeight(root);
+            System.out.println(height);
+        } 
+}
+
+
+4.
+
+mport java.util.Scanner;
+
+public class Solution {
+    private static int[] array;
+
+    private static void bubbleSort() {
+        int n = array.length;
+        
+        // number of swaps for all array iterations
+        int totalSwaps = 0; 
+
+        for (int i = 0; i < n; i++) {
+            // number of swaps for current array iteration
+            int numSwaps = 0;
+            
+            for (int j = 0; j < array.length - 1; j++) {
+                if (array[j] > array[j + 1]) {
+                    int tmp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = tmp;
+                    numSwaps++; 
+                    totalSwaps++;
+                }
+            }
+
+            if (numSwaps == 0) {
+                System.out.printf("Array is sorted in %d swaps.\n", totalSwaps);
+                System.out.printf("First Element: %d\n", array[0]);
+                System.out.printf("Last Element: %d\n", array[n - 1]);
+                
+                break;
+            }
+        }
+    }
+    
+    public static void main(String[] args){
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        array = new int[n];
+        for (int i = 0; i < n; i++) {
+            array[i] = in.nextInt();
+        }
+        in.close();
+
+        bubbleSort();
+    }
+}

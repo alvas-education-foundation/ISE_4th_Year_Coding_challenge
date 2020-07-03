@@ -1,0 +1,220 @@
+1)
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int k, count = 0;
+
+void powsum(int n, int i) {
+    if (n == 0) count++;
+	if (n < 0) return;
+	
+    int n2 = 0;
+    for (int j = i; n2 >= 0; ++j) {
+        n2 = n - (int)pow(j, k);
+        powsum(n2, j + 1);
+    }
+    
+    return;
+}
+
+int main() {
+	int r;
+    cin >> r >> k;
+    powsum(r, 1);
+    cout << count;
+}
+
+
+
+2)
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<string> split_string(string);
+int num1(long long int z)
+{
+    if(z<=9)
+    {
+        return z;
+    }
+    long long int sum=0;
+    long long int m=0;
+
+    while(z!=0)
+    {
+        
+        m=z%10;
+        sum=sum+m;
+        z=z/10;
+
+
+    }
+    return num1(sum);
+
+}
+
+int superDigit(string n, int k) {
+long long int sum=0;
+long long int m;
+   for(int i=0; i<n.size(); i++){
+        sum += n[i] - '0';
+    }
+
+    return num1(sum*k);
+
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    string nk_temp;
+    getline(cin, nk_temp);
+
+    vector<string> nk = split_string(nk_temp);
+
+    string n = nk[0];
+
+    int k = stoi(nk[1]);
+
+    int result = superDigit(n, k);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
+
+vector<string> split_string(string input_string) {
+    string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
+        return x == y and x == ' ';
+    });
+
+    input_string.erase(new_end, input_string.end());
+
+    while (input_string[input_string.length() - 1] == ' ') {
+        input_string.pop_back();
+    }
+
+    vector<string> splits;
+    char delimiter = ' ';
+
+    size_t i = 0;
+    size_t pos = input_string.find(delimiter);
+
+    while (pos != string::npos) {
+        splits.push_back(input_string.substr(i, pos - i));
+
+        i = pos + 1;
+        pos = input_string.find(delimiter, i);
+    }
+
+    splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
+
+    return splits;
+}
+
+
+
+3)
+
+ 
+
+
+using namespace std; 
+  
+void print24(string str) 
+{ 
+    int h1 = (int)str[1] - '0'; 
+    int h2 = (int)str[0] - '0'; 
+    int hh = (h2 * 10 + h1 % 10); 
+ 
+    if (str[8] == 'A') 
+    { 
+        if (hh == 12) 
+        { 
+            cout << "00"; 
+            for (int i=2; i <= 7; i++) 
+                cout << str[i]; 
+        } 
+        else
+        { 
+            for (int i=0; i <= 7; i++) 
+                cout << str[i]; 
+        } 
+    } 
+
+    else
+    { 
+        if (hh == 12) 
+        { 
+            cout << "12"; 
+            for (int i=2; i <= 7; i++) 
+                cout << str[i]; 
+        } 
+        else
+        { 
+            hh = hh + 12; 
+            cout << hh; 
+            for (int i=2; i <= 7; i++) 
+                cout << str[i]; 
+        } 
+    } 
+} 
+
+int main() 
+{ 
+   string str = "07:05:45PM"; 
+   print24(str); 
+   return 0; 
+} 
+
+
+4)
+
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int flips_count(int n, int p) 
+{
+    if (p % 2 == 0)
+    {
+        p = p + 1;
+    }
+
+    int page_num = 1;
+    std::vector<int> right_page_number;
+    for (int i = 0; i <= n/2; ++i)
+    {
+        right_page_number.push_back(page_num);
+        page_num += 2;
+    }
+
+    auto index = std::find(right_page_number.begin(), right_page_number.end(), p);
+
+    int num_of_flips_from_front = std::distance(right_page_number.begin(), index);
+	int num_of_flips_from_back = (n/2) - std::distance(right_page_number.begin(), index);
+
+    int min_flips = std::min(num_of_flips_from_front, num_of_flips_from_back);
+
+    return min_flips;
+}
+
+int main()
+{
+    int n, p;
+    std::cin >> n; 
+    std::cin >> p;
+
+    int result = flips_count(n, p);
+    std::cout << result << "\n";
+    return 0;
+}
